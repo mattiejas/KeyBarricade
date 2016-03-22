@@ -1,3 +1,6 @@
+# ( ͡° ͜ʖ ͡°)
+May lenny guide you.
+
 # KeyBarricade
 Best game evah.
 
