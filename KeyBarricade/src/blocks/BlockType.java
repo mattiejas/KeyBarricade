@@ -11,4 +11,8 @@ public abstract class BlockType {
     public void setSprite(Sprite s) {
         this.image = ResourceLoader.getSprite(s);
     }
+    
+    public BufferedImage getSprite() {
+        return this.image;
+    }
 }
