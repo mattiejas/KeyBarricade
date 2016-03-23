@@ -1,17 +1,14 @@
-# ( ͡° ͜ʖ ͡°)
-May lenny guide you.
-
 # KeyBarricade
-Best game evah.
+Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak. De speler moet lopen naar een eindveld. Dat is het doel. In het doolhof zijn vaste muren en barricades. De barricade kan je openen met een passende sleutel. De speler moet daarom ook eerst een sleutel pakken. De sleutel kun je meerdere keren gebruiken maar je kan slechts één sleutel in je “zak” hebben. Als de speler een sleutel oppakt verdwijnt deze uit het doolhof. Hij zit dan namelijk in je “zak” en kun je dit niet meer op het speelveld neerleggen en of terugzetten. Als je een sleutel probeert die niet past, krijg je een melding. Past hij wel dan verdwijnt de barricade. Je kunt de speler verplaatsen door het gebruik van de pijltjestoetsen. 
 
-# Interesting reads
-1. http://blog.nuclex-games.com/tutorials/cxx/game-state-management/
+***
 
-# Interesting vids (cuz it aint a read)
-1. https://www.youtube.com/watch?v=OCcZUO4Zf6o
+###### Interesting sources
++ UML of a [GameState design](http://blog.nuclex-games.com/tutorials/cxx/game-state-management/)
++ Video about creating a [GameStateManager](https://www.youtube.com/watch?v=OCcZUO4Zf6o)
 
-# Questions (maar dan zijn de vragen in het Nederlands)
-1. Moeten we interfaces zoals KeyListener en JPanel implementeren in onze design diagram?
+###### Questions (maar dan zijn de vragen in het Nederlands)
++ Moeten we interfaces zoals KeyListener en JPanel implementeren in onze design diagram?
 
-# Reminders (because we will forget)
-1. Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
+###### Reminders (because we will forget)
++ Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
