@@ -6,6 +6,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 ###### Interesting sources
 + UML of a [GameState design](http://blog.nuclex-games.com/tutorials/cxx/game-state-management/)
 + Video about creating a [GameStateManager](https://www.youtube.com/watch?v=OCcZUO4Zf6o)
++ Video that explains [stacks](https://www.youtube.com/watch?v=8TMBjfS8wY0)
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
 + Moeten we interfaces zoals KeyListener en JPanel implementeren in onze design diagram?
