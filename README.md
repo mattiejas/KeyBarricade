@@ -9,7 +9,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + Video that explains [stacks](https://www.youtube.com/watch?v=8TMBjfS8wY0)
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
-+ Moeten we interfaces zoals KeyListener en JPanel implementeren in onze design diagram?
++ Moeten we interfaces zoals KeyListener, actionListener en JPanel implementeren in onze design diagram?
 
 ###### Reminders (because we will forget)
 + Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
