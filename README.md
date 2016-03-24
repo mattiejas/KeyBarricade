@@ -10,6 +10,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
 + Moeten we interfaces zoals KeyListener, actionListener en JPanel implementeren in onze design diagram?
++ Hoe moeten we de Game.WITH en Game>HEIGHT modelleren?
 
 ###### Reminders (because we will forget)
 + Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
