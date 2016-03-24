@@ -4,8 +4,11 @@ import assets.ResourceLoader;
 import gamestates.GameState;
 import gamestates.MenuState;
 import gamestates.PlayState;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
@@ -30,6 +33,8 @@ public class Game extends JPanel implements KeyListener {
         setFocusable(true);
         requestFocus();
         addKeyListener(this);
+        
+        init();
     }
 
     private void init() {
@@ -39,15 +44,19 @@ public class Game extends JPanel implements KeyListener {
         states.add(new MenuState());
         states.add(new PlayState());
         currentState = states.get(0);
-
-        //img = new BufferedImage(0, 0, 0, BufferedImage.TYPE_INT_RGB);
-        g = (Graphics2D) img.getGraphics();
     }
 
-    private void render() {
-        
+    private void render(Graphics2D g) {
+        g.setColor(Color.MAGENTA);
+        g.fillRect(0, 0, 800, 480);
     }
 
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        render((Graphics2D) g);
+    }
+    
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println(e.getKeyCode());
