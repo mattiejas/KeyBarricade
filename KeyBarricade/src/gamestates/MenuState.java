@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.ImageObserver;
 import main.Game;
 
 public class MenuState extends GameState {
