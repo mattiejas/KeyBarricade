@@ -3,11 +3,16 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import main.Map;
 
 public class PlayState extends GameState {
+    
+    private Map map;
 
     public PlayState(GameStateHandler handler) {
         super(handler);
+        
+        map = new Map();
     }
 
     @Override
