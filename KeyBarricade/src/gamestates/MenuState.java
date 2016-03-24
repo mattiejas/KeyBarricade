@@ -3,6 +3,7 @@ package gamestates;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 
 public class MenuState extends GameState {
 
@@ -18,7 +19,7 @@ public class MenuState extends GameState {
         g.setColor(Color.BLACK);
         g.fillRect(0, 0, 800, 480);
         g.setColor(Color.WHITE);
-        g.drawString("hoi", 200, 200);
+        g.drawString("MENU", 200, 200);
     }
 
     @Override
@@ -33,7 +34,12 @@ public class MenuState extends GameState {
 
     @Override
     public void keyPressed(int k) {
-        
+        if (k == KeyEvent.VK_ENTER) {
+            handler.setState(PLAYSTATE);
+        System.out.println("if");
+        }
+        System.out.println("not if");
+        System.out.println(handler.getState());
     }
 
     @Override
