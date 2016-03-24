@@ -38,7 +38,7 @@ public class ResourceLoader {
         switch (s) {
             default:
                 return null;
-            case WALL:
+            case GROUND:
                 return image.getSubimage(0, 0, 16, 16);
         }
     }

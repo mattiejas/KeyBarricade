@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
+import main.Game;
 
 public class MenuState extends GameState {
 
@@ -17,7 +19,7 @@ public class MenuState extends GameState {
         g.setFont(font);
         
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, 800, 480);
+        g.fillRect(0, 0, Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
         g.setColor(Color.WHITE);
         g.drawString("MENU", 200, 200);
     }
@@ -36,10 +38,7 @@ public class MenuState extends GameState {
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
             handler.setState(PLAYSTATE);
-        System.out.println("if");
         }
-        System.out.println("not if");
-        System.out.println(handler.getState());
     }
 
     @Override

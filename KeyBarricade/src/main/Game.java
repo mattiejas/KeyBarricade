@@ -1,28 +1,24 @@
 package main;
 
 import assets.ResourceLoader;
-import gamestates.GameState;
 import gamestates.GameStateHandler;
-import gamestates.MenuState;
-import gamestates.PlayState;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
 
     private final Dimension WINDOW_SIZE;
-    private final int WINDOW_WIDTH = 800, WINDOW_HEIGHT = 480;
+    public static final int BLOCKSIZE = 16;
+    public static final int SCALE = 4;
+    public static final int WINDOW_WIDTH = 10 * BLOCKSIZE * SCALE, WINDOW_HEIGHT =  10 * BLOCKSIZE * SCALE;
 
     private GameStateHandler handler;
     
@@ -91,7 +87,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     private void startGame() {
         init();
         
-        t = new Timer(1000, this);
+        t = new Timer(100, this);
         t.start();
     }
 }
