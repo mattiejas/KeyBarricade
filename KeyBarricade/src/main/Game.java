@@ -48,7 +48,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     }
 
     private void render(Graphics2D g) {
-        System.out.println("Test");
         repaint();
         
         g.setColor(Color.MAGENTA);

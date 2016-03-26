@@ -1,9 +1,7 @@
 package gamestates;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
-import main.Game;
 import main.Map;
 
 public class PlayState extends GameState {
