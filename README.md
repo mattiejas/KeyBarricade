@@ -14,3 +14,4 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 
 ###### Reminders (because we will forget)
 + Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
++ ResourceLoader komt op meerdere plekken terug in diverse klassen, hiervoor moeten we nog een dependency toevoegen.
