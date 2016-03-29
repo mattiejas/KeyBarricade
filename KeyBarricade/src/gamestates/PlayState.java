@@ -27,11 +27,6 @@ public class PlayState extends GameState {
     }
 
     @Override
-    public void update() {
-        map.update();
-    }
-
-    @Override
     public void keyPressed(int k) {
 
     }

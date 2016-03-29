@@ -39,12 +39,15 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         handler.init();
     }
 
-    private void update() {
-        handler.update();
-    }
-
     private void render(Graphics2D g) {
+<<<<<<< HEAD
         repaint();
+=======
+
+        g.setColor(Color.MAGENTA);
+        g.fillRect(0, 0, 800, 480);
+
+>>>>>>> origin/master
         handler.render(g);
     }
 
@@ -72,13 +75,13 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.update();
-        this.paintComponent(g);
+        repaint();
     }
 
     private void startGame() {
-        this.addKeyListener(this);
         this.init();
+        this.addKeyListener(this);
+        
 
         t = new Timer(100, this);
         t.start();

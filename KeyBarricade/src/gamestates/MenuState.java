@@ -29,11 +29,6 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void update() {
-        
-    }
-
-    @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
             handler.setState(PLAYSTATE);
