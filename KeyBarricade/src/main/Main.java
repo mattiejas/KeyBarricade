@@ -8,7 +8,7 @@ public class Main {
         JFrame frame = new JFrame();
 
         frame.setTitle("KeyBarricade");
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         frame.add(new Game());
