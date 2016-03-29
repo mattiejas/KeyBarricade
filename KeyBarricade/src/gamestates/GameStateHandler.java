@@ -18,11 +18,7 @@ public class GameStateHandler {
     public void init() {
         currentState.init();
     }
-
-    public void update() {
-        currentState.update();
-    }
-
+    
     public void render(Graphics2D g) {
         currentState.render(g);
     }
