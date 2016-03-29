@@ -75,7 +75,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         this.addKeyListener(this);
         
 
-        t = new Timer(100, this);
+        t = new Timer(10, this);
         t.start();
     }
 }
