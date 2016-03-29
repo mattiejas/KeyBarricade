@@ -25,6 +25,7 @@ public class GameStateHandler {
 
     public void setState(int gameState) {
         currentState = states.get(gameState);
+        this.init();
     }
 
     public GameState getState() {

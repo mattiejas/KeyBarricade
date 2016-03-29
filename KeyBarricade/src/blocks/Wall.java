@@ -1,4 +1,4 @@
-package blocks;
+    package blocks;
 
 import assets.ResourceLoader;
 import assets.Sprite;

@@ -11,7 +11,6 @@ public abstract class GameState {
     
     public GameState(GameStateHandler handler) {
         this.handler = handler;
-        init();
     }
     
     public abstract void init();
