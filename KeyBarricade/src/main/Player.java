@@ -29,14 +29,12 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
-        g.fillRect(x, y, WIDTH, HEIGHT);
+        g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
     }
 
     public void move(int k) {
         if (k == KeyEvent.VK_W) {
-            //for (int i = 0; i < BLOCKSIZE * SCALE; i++) {
-                y--;
-            //}
+            y -= BLOCKSIZE * SCALE;
         }
 
         if (k == KeyEvent.VK_S) {
@@ -49,6 +47,10 @@ public class Player {
 
         if (k == KeyEvent.VK_D) {
             x += BLOCKSIZE * SCALE;
+        }
+        
+        if (x == 9 && y == 9) {
+            System.out.println("lol");
         }
     }
 

@@ -1,20 +1,21 @@
 package main;
 
+import java.util.Random;
+
 public class Level {
 
-    private char[][] level;
+    private int[][] level;
     private Difficulty difficulty;
-
-    private final char G = 'g';
-    private final char K = 'k';
-    private final char W = 'w';
-    private final char B = 'b';
+    private Random r;
 
     public Level(Difficulty diff) {
         this.difficulty = diff;
+        this.level = new int[10][10];
     }
 
     public void init() {
+        r = new Random();
+        
         switch (difficulty) {
             case EASY:
                 generateEasy();
@@ -32,18 +33,32 @@ public class Level {
     }
 
     private void generateEasy() {
-        level = new char[][]{
-            {G, G, G, G, G, G, G, G, G, W},
-            {G, G, G, G, K, G, G, G, G, G},
-            {G, G, G, G, G, G, G, G, G, G},
-            {G, G, G, G, G, K, G, G, G, G},
-            {G, G, G, G, B, G, G, G, G, G},
-            {G, G, G, G, G, G, G, G, G, G},
-            {G, G, G, G, G, G, W, W, G, G},
-            {G, G, G, G, G, G, W, W, G, G},
-            {G, G, G, G, G, G, G, G, G, G},
-            {G, G, G, G, G, G, G, G, G, G}
-        };
+//        level = new char[][]{
+//            {G, G, G, G, G, G, G, G, G, W},
+//            {G, G, G, G, K, G, G, G, G, G},
+//            {G, G, G, G, G, G, G, G, G, G},
+//            {G, G, G, G, G, K, G, G, G, G},
+//            {G, G, G, G, B, G, G, G, G, G},
+//            {G, G, G, G, G, G, G, G, G, G},
+//            {G, G, G, G, G, G, W, W, G, G},
+//            {G, G, G, G, G, G, W, W, G, G},
+//            {G, G, G, G, G, G, G, G, G, G},
+//            {G, G, G, G, G, G, G, G, G, G}
+//        };
+        int keyCount = 0;
+        for (int x = 0; x < level.length; x++) {
+            for (int y = 0; y < level[x].length; y++) {
+                int random = r.nextInt(4);
+                if (random == 3) {
+                    keyCount++;
+                    if (keyCount >= 4) {
+                        random = 0;
+                    }
+                }
+                level[x][y] = random;
+                System.out.println(level[x][y]);
+            }
+        }
     }
 
     private void generateNormal() {
@@ -58,7 +73,7 @@ public class Level {
 
     }
 
-    public char[][] getLevel() {
+    public int[][] getLevel() {
         return level;
     }
 }

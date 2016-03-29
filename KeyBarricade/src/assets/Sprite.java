@@ -6,6 +6,8 @@ public enum Sprite {
     WALL,
     KEY,
     GROUND,
+    START,
+    FINISH,
 
     PLAYER_UP,
     PLAYER_DOWN,

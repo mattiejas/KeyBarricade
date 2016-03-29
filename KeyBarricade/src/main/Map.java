@@ -12,10 +12,15 @@ public class Map {
 
     private int width, height;
     private Tile[][] tiles;
-    private char[][] generatedLevel;
+    private int[][] generatedLevel;
 
     private Player player;
     private Level level;
+
+    private final int GROUND = 0;
+    private final int WALL = 1;
+    private final int BARRICADE = 2;
+    private final int KEY = 3;
 
     public Map(int width, int height) {
         level = new Level(Difficulty.EASY);
@@ -37,18 +42,20 @@ public class Map {
         int i = 0;
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
-                if (generatedLevel[y][x] == 'g') {
+                if (generatedLevel[y][x] == GROUND) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground());
                 }
-                if (generatedLevel[y][x] == 'k') {
+                if (generatedLevel[y][x] == KEY) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Key(100));
                 }
-                if (generatedLevel[y][x] == 'w') {
+                if (generatedLevel[y][x] == WALL) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Wall());
                 }
-                if (generatedLevel[y][x] == 'b') {
+                if (generatedLevel[y][x] == BARRICADE) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Barricade(100));
                 }
+                tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(true, false));
+                tiles[9][9] = new Tile(9 * Game.BLOCKSIZE * Game.SCALE, 9 * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(false, true));
             }
         }
 
@@ -62,7 +69,7 @@ public class Map {
                 tiles[x][y].render(g);
             }
         }
-        
+
         player.render(g);
     }
 
