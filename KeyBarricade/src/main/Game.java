@@ -40,14 +40,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     }
 
     private void render(Graphics2D g) {
-<<<<<<< HEAD
-        repaint();
-=======
-
-        g.setColor(Color.MAGENTA);
-        g.fillRect(0, 0, 800, 480);
-
->>>>>>> origin/master
         handler.render(g);
     }
 
