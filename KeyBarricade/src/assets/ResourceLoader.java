@@ -43,11 +43,16 @@ public class ResourceLoader {
                 return null;
             case GROUND:
                 return image.getSubimage(0, 0, 16, 16);
+            case KEY:
+                return image.getSubimage(64, 0, 16, 16);
+            case WALL:
+                return image.getSubimage(80, 0, 16, 16);
+            case BARRICADE:
+                return image.getSubimage(96, 0, 16, 16);
         }
     }
-    
+
     public static Font getFont() {
         return FONT;
     }
 }
-

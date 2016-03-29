@@ -17,7 +17,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     public static final int BLOCKSIZE = 16;
     public static final int SCALE = 4;
-    public static final int WINDOW_WIDTH = 10 * BLOCKSIZE * SCALE, WINDOW_HEIGHT = 10 * BLOCKSIZE * SCALE;
+    public static final int WINDOW_WIDTH = 640, WINDOW_HEIGHT = 640;
 
     private GameStateHandler handler;
 
