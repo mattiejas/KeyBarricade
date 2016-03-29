@@ -15,44 +15,40 @@ import javax.swing.Timer;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
 
-    private final Dimension WINDOW_SIZE;
     public static final int BLOCKSIZE = 16;
     public static final int SCALE = 4;
-    public static final int WINDOW_WIDTH = 10 * BLOCKSIZE * SCALE, WINDOW_HEIGHT =  10 * BLOCKSIZE * SCALE;
+    public static final int WINDOW_WIDTH = 10 * BLOCKSIZE * SCALE, WINDOW_HEIGHT = 10 * BLOCKSIZE * SCALE;
 
     private GameStateHandler handler;
-    
+
     private Graphics2D g;
     private Timer t;
-    
-    public Game() {
-        WINDOW_SIZE = new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT);
-        setPreferredSize(WINDOW_SIZE);
 
+    public Game() {
+        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
         setFocusable(true);
         requestFocus();
-        addKeyListener(this);
-        
-        startGame();
+
+        this.startGame();
     }
 
     private void init() {
         ResourceLoader.init();
-        
+
         handler = new GameStateHandler();
         handler.init();
     }
-    
+
     private void update() {
         handler.update();
     }
 
     private void render(Graphics2D g) {
         repaint();
-        
+
         g.setColor(Color.MAGENTA);
         g.fillRect(0, 0, 800, 480);
-        
+
         handler.render(g);
     }
 
@@ -62,7 +58,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         this.g = (Graphics2D) g;
         this.render(this.g);
     }
-    
+
     @Override
     public void keyPressed(KeyEvent e) {
         handler.keyPressed(e.getKeyCode());
@@ -80,13 +76,14 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        update();
+        this.update();
         this.paintComponent(g);
     }
 
     private void startGame() {
-        init();
-        
+        this.addKeyListener(this);
+        this.init();
+
         t = new Timer(100, this);
         t.start();
     }

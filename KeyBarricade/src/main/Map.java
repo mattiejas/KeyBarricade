@@ -25,12 +25,10 @@ public class Map {
                 tiles.add(new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground()));
             }
         }
-        System.out.println("Grootte van map");
-        System.out.println(width + ", " + height);
     }
 
     public void update() {
-        System.out.println("Update map");
+        
     }
 
     public void render(Graphics2D g) {
