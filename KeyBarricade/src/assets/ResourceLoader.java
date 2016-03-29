@@ -13,6 +13,7 @@ import javax.imageio.ImageIO;
 public class ResourceLoader {
 
     private static BufferedImage image;
+    private static final Font FONT = new Font("Joystix Monospace", Font.PLAIN, 18);
 
     public static void init() {
         loadSpriteSheet();
@@ -31,7 +32,9 @@ public class ResourceLoader {
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
         try {
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("./assets/font.ttf")));
-        } catch (FontFormatException | IOException e) { e.printStackTrace(); }
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static BufferedImage getSprite(Sprite s) {
@@ -42,4 +45,9 @@ public class ResourceLoader {
                 return image.getSubimage(0, 0, 16, 16);
         }
     }
+    
+    public static Font getFont() {
+        return FONT;
+    }
 }
+

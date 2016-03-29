@@ -1,11 +1,12 @@
 package gamestates;
 
+import assets.ResourceLoader;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import main.Map;
 
 public class PlayState extends GameState {
-    
+
     private Map map;
 
     public PlayState(GameStateHandler handler) {
@@ -14,9 +15,7 @@ public class PlayState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
-        Font font = new Font("Joystix Monospace", Font.PLAIN, 18);
-        g.setFont(font);
-        
+        g.setFont(ResourceLoader.getFont());
         map.render(g);
     }
 
