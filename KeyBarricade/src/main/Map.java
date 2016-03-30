@@ -49,10 +49,12 @@ public class Map {
                 tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(true, false));
                 tiles[9][9] = new Tile(9 * Game.BLOCKSIZE * Game.SCALE, 9 * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(false, true));
             }
-        }
 
+            
+        }
         player = new Player(this);
         player.init();
+
     }
 
     public void render(Graphics2D g) {
@@ -71,8 +73,7 @@ public class Map {
 
     public boolean playerAllowedToMoveUp() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
-                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getSolid() 
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getSolid()
                     && player.getPositionY() > 0;
         } catch (Exception e) {
             return false;
@@ -81,8 +82,7 @@ public class Map {
 
     public boolean playerAllowedToMoveDown() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
-                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getSolid()
                     && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
         } catch (Exception e) {
             return false;
@@ -91,8 +91,7 @@ public class Map {
 
     public boolean playerAllowedToMoveLeft() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1]
-                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
                     && player.getPositionX() > 0;
         } catch (Exception e) {
             return false;
@@ -101,8 +100,7 @@ public class Map {
 
     public boolean playerAllowedToMoveRight() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1]
-                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
                     && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
         } catch (Exception e) {
             return false;
