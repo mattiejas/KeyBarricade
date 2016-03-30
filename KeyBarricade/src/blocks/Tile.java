@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import main.Player;
 
-public class Tile extends Rectangle {
+public class Tile {
 
     private int width, height;
     private int x, y;
@@ -16,8 +16,6 @@ public class Tile extends Rectangle {
         this.width = width;
         this.height = height;
         this.block = block;
-        
-        setBounds(x, y, width, height);
     }
 
     public void render(Graphics2D g) {
@@ -36,11 +34,7 @@ public class Tile extends Rectangle {
         return block;
     }
     
-    public boolean getIntersects(Player player) {
-        if (block.getSolid()) {
-            this.intersects(player);
-            return true;
-        } else
-            return false;
+    public boolean getSolid() {
+        return block.getSolid();
     }
 }

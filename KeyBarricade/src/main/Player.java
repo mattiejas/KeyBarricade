@@ -15,15 +15,16 @@ public class Player extends Rectangle {
     private final int WIDTH = Game.BLOCKSIZE * Game.SCALE, HEIGHT = Game.BLOCKSIZE * Game.SCALE;
     private int x, y;
 
-    private boolean up, down, left, right;
     private BufferedImage image;
     private Map map;
 
-    public Player() {
+    public Player(Map map) {
         this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
-
+        this.map = map;
         this.x = 0;
         this.y = 0;
+
+        setBounds(x, y, WIDTH, HEIGHT);
     }
 
     public void init() {
@@ -33,6 +34,24 @@ public class Player extends Rectangle {
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
         g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+    }
+
+    public void keyPressed(int k) {
+        if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
+            moveUp();
+        }
+        if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
+            moveDown();
+        }
+        if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) {
+            moveLeft();
+        }
+        if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {
+            moveRight();
+        }
+        if (k == KeyEvent.VK_SPACE) {
+            grabKey();
+        }
     }
 
     private void moveUp() {
@@ -69,28 +88,6 @@ public class Player extends Rectangle {
 
     public int getPositionY() {
         return y;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
-    public void keyPressed(int k) {
-        if (k == KeyEvent.VK_W) {
-            moveUp();
-        }
-        if (k == KeyEvent.VK_S) {
-            moveDown();
-        }
-        if (k == KeyEvent.VK_A) {
-            moveLeft();
-        }
-        if (k == KeyEvent.VK_D) {
-            moveRight();
-        }
-        if (k == KeyEvent.VK_SPACE) {
-            grabKey();
-        }
     }
 
 }

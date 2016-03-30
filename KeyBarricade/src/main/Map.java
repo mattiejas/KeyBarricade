@@ -59,9 +59,8 @@ public class Map {
             }
         }
 
-        player = new Player();
+        player = new Player(this);
         player.init();
-        player.setMap(this);
     }
 
     public void render(Graphics2D g) {
@@ -80,7 +79,8 @@ public class Map {
 
     public boolean playerAllowedToMoveUp() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getIntersects(player)
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getSolid() 
                     && player.getPositionY() > 0;
         } catch (Exception e) {
             return false;
@@ -89,7 +89,8 @@ public class Map {
 
     public boolean playerAllowedToMoveDown() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getIntersects(player)
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getSolid()
                     && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
         } catch (Exception e) {
             return false;
@@ -98,7 +99,8 @@ public class Map {
 
     public boolean playerAllowedToMoveLeft() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getIntersects(player)
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
                     && player.getPositionX() > 0;
         } catch (Exception e) {
             return false;
@@ -107,7 +109,8 @@ public class Map {
 
     public boolean playerAllowedToMoveRight() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getIntersects(player)
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
                     && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
         } catch (Exception e) {
             return false;
