@@ -50,10 +50,12 @@ public class Map {
                 tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(true, false));
                 tiles[9][9] = new Tile(9 * Game.BLOCKSIZE * Game.SCALE, 9 * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(false, true));
             }
-        }
 
+            
+        }
         player = new Player(this);
         player.init();
+
     }
 
     public void render(Graphics2D g) {

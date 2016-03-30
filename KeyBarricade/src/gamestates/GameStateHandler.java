@@ -6,6 +6,7 @@ import java.util.ArrayList;
 public class GameStateHandler {
 
     private GameState currentState;
+    private GameState previousState;
     private ArrayList<GameState> states;
 
     public GameStateHandler() {
@@ -24,8 +25,13 @@ public class GameStateHandler {
     }
 
     public void setState(int gameState) {
+        previousState = currentState;
         currentState = states.get(gameState);
         this.init();
+    }
+    
+    public void setPreviousState(){
+        currentState = previousState;
     }
 
     public GameState getState() {
