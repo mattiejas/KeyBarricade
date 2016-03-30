@@ -1,5 +1,7 @@
 package blocks;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import main.Game;
 
@@ -19,6 +21,13 @@ public class Tile {
 
     public void render(Graphics2D g) {
         g.drawImage(block.getSprite(), x, y, width, height, null);
+        
+        if (block.getPoints() > 0) {
+            Font font = new Font("Joystix Monospace", Font.PLAIN, 12);
+            g.setFont(font);
+            g.setColor(Color.WHITE);
+            g.drawString(block.getPoints() + "", x + 2, y + Game.BLOCKSIZE * Game.SCALE - 2);
+        }
     }
 
     public int getPositionX() {
