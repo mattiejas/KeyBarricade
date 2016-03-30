@@ -1,8 +1,6 @@
 package blocks;
 
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import main.Player;
 
 public class Tile {
 

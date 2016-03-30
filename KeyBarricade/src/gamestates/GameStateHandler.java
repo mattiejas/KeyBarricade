@@ -35,10 +35,10 @@ public class GameStateHandler {
     public void keyPressed(int k) {
         currentState.keyPressed(k);
     }
-    public void keyReleased(int k) {
-        currentState.keyReleased(k);
-    }
     public void keyTyped(int k) {
         currentState.keyTyped(k);
     }
+    public void keyReleased(int k) {
+        currentState.keyReleased(k);
+    }    
 }

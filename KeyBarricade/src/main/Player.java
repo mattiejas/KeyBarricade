@@ -10,9 +10,9 @@ import java.awt.image.BufferedImage;
 import static main.Game.BLOCKSIZE;
 import static main.Game.SCALE;
 
-public class Player extends Rectangle {
+public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE, HEIGHT = Game.BLOCKSIZE * Game.SCALE;
+    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE,HEIGHT = Game.BLOCKSIZE * Game.SCALE;
     private int x, y;
 
     private BufferedImage image;
@@ -23,8 +23,6 @@ public class Player extends Rectangle {
         this.map = map;
         this.x = 0;
         this.y = 0;
-
-        setBounds(x, y, WIDTH, HEIGHT);
     }
 
     public void init() {

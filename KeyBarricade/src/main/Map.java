@@ -6,7 +6,6 @@ import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 
 public class Map {
 
@@ -24,8 +23,6 @@ public class Map {
 
     public Map(int width, int height) {
         level = new Level(Difficulty.EASY);
-
-        //tiles = new ArrayList<>();
         tiles = new Tile[10][10];
         this.width = width;
         this.height = height;
@@ -34,11 +31,6 @@ public class Map {
     public void init() {
         level.init();
         generatedLevel = level.getLevel();
-//        for (int x = 0; x < width / 32; x++) {
-//            for (int y = 0; y < height / 32; y++) {
-//                tiles.add(new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground()));
-//            }
-//        }
         int i = 0;
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
@@ -115,9 +107,5 @@ public class Map {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public Player getPlayer() {
-        return player;
     }
 }
