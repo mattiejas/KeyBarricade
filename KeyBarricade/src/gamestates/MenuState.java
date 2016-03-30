@@ -36,9 +36,9 @@ public class MenuState extends GameState {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 10; x++) {
                 if (i == 1 && (x == 8 || x == 9)) {
-                    g.drawImage(ResourceLoader.getSprite(Sprite.KEY), x * Game.BLOCKSIZE * Game.SCALE, i * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+                    g.drawImage(ResourceLoader.getSprite(Sprite.KEY), x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
                 } else {
-                    g.drawImage(ResourceLoader.getSprite(Sprite.GROUND), x * Game.BLOCKSIZE * Game.SCALE, i * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+                    g.drawImage(ResourceLoader.getSprite(Sprite.GROUND), x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
                 }
             }
         }

@@ -14,7 +14,7 @@ import static main.Game.SCALE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE, HEIGHT = Game.BLOCKSIZE * Game.SCALE;
+    private final int WIDTH = Game.BLOCKSIZE , HEIGHT = Game.BLOCKSIZE ;
     private int x, y;
 
     private Key inventory;
@@ -35,7 +35,7 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
-        g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+        g.drawImage(image, x, y, Game.BLOCKSIZE , Game.BLOCKSIZE , null);
     }
 
     public void keyPressed(int k) {

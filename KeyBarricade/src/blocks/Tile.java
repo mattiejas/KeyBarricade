@@ -26,7 +26,7 @@ public class Tile {
             Font font = new Font("Joystix Monospace", Font.PLAIN, 12);
             g.setFont(font);
             g.setColor(Color.WHITE);
-            g.drawString(block.getPoints() + "", x + 2, y + Game.BLOCKSIZE * Game.SCALE - 2);
+            g.drawString(block.getPoints() + "", x + 2, y + Game.BLOCKSIZE - 2);
         }
     }
 
