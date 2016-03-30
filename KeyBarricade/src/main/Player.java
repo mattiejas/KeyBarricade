@@ -2,6 +2,9 @@ package main;
 
 import assets.ResourceLoader;
 import assets.Sprite;
+import blocks.Ground;
+import blocks.Key;
+import blocks.Tile;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -11,8 +14,10 @@ import static main.Game.SCALE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE,HEIGHT = Game.BLOCKSIZE * Game.SCALE;
+    private final int WIDTH = Game.BLOCKSIZE, HEIGHT = Game.BLOCKSIZE;
     private int x, y;
+
+    private Key inventory;
 
     private BufferedImage image;
     private Map map;
@@ -30,7 +35,7 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
-        g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+        g.drawImage(image, x, y, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
     }
 
     public void keyPressed(int k) {
@@ -46,41 +51,42 @@ public class Player {
         if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {
             moveRight();
         }
-        if (k == KeyEvent.VK_SPACE) {
-            grabKey();
-        }
     }
 
     private void moveUp() {
         if (map.playerAllowedToMoveUp()) {
-            y -= BLOCKSIZE * SCALE;
+            y -= BLOCKSIZE;
         }
     }
 
     private void moveDown() {
         if (map.playerAllowedToMoveDown()) {
-            y += BLOCKSIZE * SCALE;
+            y += BLOCKSIZE;
         }
     }
 
     private void moveLeft() {
         if (map.playerAllowedToMoveLeft()) {
-            x -= BLOCKSIZE * SCALE;
+            x -= BLOCKSIZE;
         }
     }
 
     private void moveRight() {
         if (map.playerAllowedToMoveRight()) {
-            x += BLOCKSIZE * SCALE;
+            x += BLOCKSIZE;
         }
     }
 
-    private void useKey() {
-        
+    public void useKey() {
+        System.out.println("Used your key!");
+        map.replaceTile(x, y + 1, new Ground());
     }
-    
-    private void grabKey() {
+
+    public void grabKey(Key key) {
+        this.inventory = key;
         System.out.println("Grabbed a key!");
+        map.replaceTile(x, y, new Ground());
+        //map.loadLevel();
     }
 
     public int getPositionX() {

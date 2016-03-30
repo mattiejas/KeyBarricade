@@ -1,4 +1,4 @@
-    package blocks;
+package blocks;
 
 import assets.ResourceLoader;
 import assets.Sprite;
@@ -9,5 +9,4 @@ public final class Wall extends BlockType {
         this.isSolid = true;
         this.image = ResourceLoader.getSprite(Sprite.WALL);
     }
-
 }
