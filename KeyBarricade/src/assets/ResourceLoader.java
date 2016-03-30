@@ -68,6 +68,7 @@ public class ResourceLoader {
         int rand = r.nextInt(4);
         
         switch(rand) {
+            default: 
             case 0:
                 return image.getSubimage(0, 0, 16, 16);
             case 1:
@@ -76,8 +77,6 @@ public class ResourceLoader {
                 return image.getSubimage(32, 0, 16, 16);
             case 3:
                 return image.getSubimage(48, 0, 16, 16);
-            default: 
-                return null;
         }
     }
 }

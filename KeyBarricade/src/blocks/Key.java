@@ -5,16 +5,14 @@ import assets.Sprite;
 
 public class Key extends BlockType {
 
-    private final int POINTS;
-
     public Key(int points) {
         this.image = ResourceLoader.getSprite(Sprite.KEY);
-        this.POINTS = points;
+        this.points = points;
         this.isSolid = false;
     }
 
     public void openBarricade(Barricade b) {
-        if (POINTS == b.getPoints()) {
+        if (points == b.getPoints()) {
             b.unlock();
         } else {
             this.showWarning();
@@ -23,14 +21,10 @@ public class Key extends BlockType {
 
     public void disappear() {
         this.isSolid = false;
-        this.setSprite(Sprite.WALL);
+        this.setSprite(Sprite.GROUND);
     }
 
     private void showWarning() {
 
-    }
-    
-    public int getPoints() {
-        return POINTS;
     }
 }

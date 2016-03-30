@@ -24,5 +24,4 @@ public class Ground extends BlockType {
         this.IS_START = start;
         this.IS_FINISH = finish;
     }
-
 }
