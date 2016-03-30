@@ -30,6 +30,7 @@ public class PlayState extends GameState {
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ESCAPE) {
             handler.setState(MENUSTATE);
+            
         } else {
             map.keyPressed(k);
         }
