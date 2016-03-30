@@ -5,9 +5,8 @@ import blocks.Ground;
 import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
-import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
+import java.awt.event.KeyEvent;
 
 public class Map {
 
@@ -62,6 +61,7 @@ public class Map {
 
         player = new Player();
         player.init();
+        player.setMap(this);
     }
 
     public void render(Graphics2D g) {
@@ -76,5 +76,45 @@ public class Map {
 
     public void keyPressed(int k) {
         player.keyPressed(k);
+    }
+
+    public boolean playerAllowedToMoveUp() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getIntersects(player)
+                    && player.getPositionY() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveDown() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getIntersects(player)
+                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveLeft() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getIntersects(player)
+                    && player.getPositionX() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveRight() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getIntersects(player)
+                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 }

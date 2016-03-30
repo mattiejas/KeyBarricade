@@ -5,14 +5,19 @@ import assets.Sprite;
 import java.awt.image.BufferedImage;
 
 public abstract class BlockType {
+
     protected boolean isSolid;
     protected BufferedImage image;
-    
+
     public void setSprite(Sprite s) {
         this.image = ResourceLoader.getSprite(s);
     }
-    
+
     public BufferedImage getSprite() {
         return this.image;
+    }
+
+    public boolean getSolid() {
+        return isSolid;
     }
 }
