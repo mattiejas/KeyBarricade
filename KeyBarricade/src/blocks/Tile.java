@@ -1,6 +1,7 @@
 package blocks;
 
 import java.awt.Graphics2D;
+import main.Game;
 
 public class Tile {
 
@@ -31,7 +32,7 @@ public class Tile {
     public BlockType getBlockType() {
         return block;
     }
-    
+
     public boolean getSolid() {
         return block.getSolid();
     }
