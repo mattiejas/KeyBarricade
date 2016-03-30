@@ -31,31 +31,44 @@ public class Player {
         g.setColor(Color.MAGENTA);
         g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
     }
-
-    public void move(int k) {
+    
+    public void keyPressed(int k){
         if (k == KeyEvent.VK_W) {
-            y -= BLOCKSIZE * SCALE;
+            moveUp();
         }
-
         if (k == KeyEvent.VK_S) {
-            y += BLOCKSIZE * SCALE;
+            moveDown();
         }
-
         if (k == KeyEvent.VK_A) {
-            x -= BLOCKSIZE * SCALE;
+            moveLeft();
         }
-
         if (k == KeyEvent.VK_D) {
-            x += BLOCKSIZE * SCALE;
+            moveRight();
         }
         
-        if (x == 9 && y == 9) {
-            System.out.println("lol");
+        if(k == KeyEvent.VK_SPACE){
+            grabKey();
         }
+    }
+    
+    public void moveUp(){
+        y -= BLOCKSIZE * SCALE;
+    }
+    
+    public void moveDown(){
+        y += BLOCKSIZE * SCALE;
+    }
+    
+    public void moveLeft(){
+        x -= BLOCKSIZE * SCALE;
+    }
+    
+    public void moveRight(){
+        x += BLOCKSIZE * SCALE;
     }
 
     public void grabKey() {
-
+        System.out.println("Grabbed a key!");
     }
 
     public int getPositionX() {

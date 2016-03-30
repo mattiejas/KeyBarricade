@@ -5,8 +5,20 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Game;
+import assets.ResourceLoader;
+import assets.Sprite;
 
 public class MenuState extends GameState {
+    
+    private String[] options;
+    private String title;
+
+    private int currentSelection;
+    
+    private Font titleFont;
+    private Font titleFont2;
+    private Font optionFont;
+    private Font optionFont2;
 
     public MenuState(GameStateHandler handler) {
         super(handler);
@@ -14,24 +26,76 @@ public class MenuState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
-        Font font = new Font("Joystix Monospace", Font.PLAIN, 18);
-        g.setFont(font);
-        
+        for(int i = 0; i < 10; i++){
+            for(int x = 0; x < 10; x++){
+                if(i == 1 && (x == 8 || x == 9)){
+                    g.drawImage(ResourceLoader.getSprite(Sprite.KEY), x * 64, i * 64, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+                }else{
+                    g.drawImage(ResourceLoader.getSprite(Sprite.GROUND), x * 64, i * 64, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
+                }
+            }
+        }
+        g.setFont(titleFont2);
         g.setColor(Color.BLACK);
-        g.fillRect(0, 0, Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
-        g.setColor(Color.WHITE);
-        g.drawString("MENU", 200, 200);
+        g.drawString(title, 7, 120);
+        
+        g.setFont(titleFont);
+        g.setColor(Color.CYAN);
+        g.drawString(title, 11, 125);
+        
+        for(int i = 0; i < options.length; i++){
+            if(i == currentSelection){
+                g.setColor(Color.BLACK);
+                g.setFont(optionFont2);
+                g.drawString(options[i], Game.WINDOW_WIDTH / 2 - 65, (i + 7) * 45 + 3);
+                
+                g.setColor(Color.CYAN);
+                g.setFont(optionFont);
+                g.drawString(options[i], Game.WINDOW_WIDTH / 2 - 65 - 4, (i + 7) * 45 + 3 - 5);
+            }else{
+                g.setFont(optionFont);
+                g.drawString(options[i], Game.WINDOW_WIDTH / 2 - 65, (i + 7) * 45 + 3);
+            }
+        }
     }
 
     @Override
     public void init() {
-        
+        options = new String[]{"Start","Help","Exit"};
+        title = "KeyBarricade";
+        currentSelection = 0;
+        titleFont = new Font("Joystix Monospace", Font.PLAIN, 50);
+        titleFont2 = new Font("Joystix Monospace", Font.PLAIN, 51);
+        optionFont = new Font("Joystix Monospace", Font.PLAIN, 35);
+        optionFont2 = new Font("Joystix Monospace", Font.PLAIN, 36);
     }
 
     @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ENTER) {
-            handler.setState(PLAYSTATE);
+            switch (currentSelection) {
+                case 0:
+                    handler.setState(PLAYSTATE);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    System.exit(0);
+                default:
+                    break;
+            }
+        }else if(k == KeyEvent.VK_S){
+            if(currentSelection < options.length - 1){
+                currentSelection++;
+            }else{
+                currentSelection = 0;
+            }
+        }else if(k == KeyEvent.VK_W){
+            if(currentSelection > 0){
+                currentSelection--;
+            }else{
+                currentSelection = options.length - 1;
+            }
         }
     }
 

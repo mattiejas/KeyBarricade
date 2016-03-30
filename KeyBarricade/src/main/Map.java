@@ -5,6 +5,7 @@ import blocks.Ground;
 import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
+import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -74,6 +75,6 @@ public class Map {
     }
 
     public void keyPressed(int k) {
-        player.move(k);
+        player.keyPressed(k);
     }
 }
