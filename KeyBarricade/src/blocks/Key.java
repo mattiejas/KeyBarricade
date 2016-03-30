@@ -21,7 +21,7 @@ public class Key extends BlockType {
 
     public void disappear() {
         this.isSolid = false;
-        this.setSprite(Sprite.WALL);
+        this.setSprite(Sprite.GROUND);
     }
 
     private void showWarning() {

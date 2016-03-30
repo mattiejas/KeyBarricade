@@ -2,6 +2,7 @@ package main;
 
 import assets.ResourceLoader;
 import assets.Sprite;
+import blocks.Ground;
 import blocks.Key;
 import blocks.Tile;
 import java.awt.Color;
@@ -77,14 +78,14 @@ public class Player {
     }
 
     private void useKey() {
-
+        
     }
 
-    private void grabKey(Tile tile) {
-        Key key;
-        //this.inventory = key;
-
-        System.out.println("Grabbed a key!");
+    public void grabKey(Key key) {
+            this.inventory = key;
+            System.out.println("Grabbed a key!");
+            map.replaceTile(x, y, new Ground());
+            //map.loadLevel();
     }
 
     public int getPositionX() {

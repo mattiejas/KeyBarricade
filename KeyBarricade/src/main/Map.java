@@ -1,6 +1,7 @@
 package main;
 
 import blocks.Barricade;
+import blocks.BlockType;
 import blocks.Ground;
 import blocks.Key;
 import blocks.Tile;
@@ -17,6 +18,8 @@ public class Map {
     private Player player;
     private Level level;
 
+    private Graphics2D g;
+    
     private final int GROUND = 0;
     private final int WALL = 1;
     private final int BARRICADE = 2;
@@ -33,6 +36,12 @@ public class Map {
         level.init();
         generatedLevel = level.getLevel();
         int i = 0;
+        loadLevel();
+        player = new Player(this);
+        player.init();
+    }
+
+    public void loadLevel() {
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
                 if (generatedLevel[y][x] == GROUND) {
@@ -50,27 +59,29 @@ public class Map {
                 tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(true, false));
                 tiles[9][9] = new Tile(9 * Game.BLOCKSIZE * Game.SCALE, 9 * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(false, true));
             }
-
-            
         }
-        player = new Player(this);
-        player.init();
-
     }
 
     public void render(Graphics2D g) {
+        this.g = g;
         for (int x = 0; x < tiles.length; x++) {
             for (int y = 0; y < tiles[x].length; y++) {
                 tiles[x][y].render(g);
             }
         }
-
+        
         player.render(g);
     }
 
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_SPACE) {
-            //player.grabKey(tiles[player.getPositionX()][player.getPositionY()]);
+            BlockType block = tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getBlockType();
+            System.out.println(block);
+            if (block instanceof Key) {
+                Key key = (Key) block;
+                player.grabKey(key);
+                System.out.println(key);
+            }
         } else {
             player.keyPressed(k);
         }
@@ -96,7 +107,7 @@ public class Map {
 
     public boolean playerAllowedToMoveLeft() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
                     && player.getPositionX() > 0;
         } catch (Exception e) {
             return false;
@@ -105,10 +116,17 @@ public class Map {
 
     public boolean playerAllowedToMoveRight() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
-                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE) + 1][player.getPositionY() / (Game.BLOCKSIZE)].getSolid()
+                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public void replaceTile(int x, int y, BlockType block) {
+        x = x / (Game.BLOCKSIZE);
+        y = y / (Game.BLOCKSIZE);
+        tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, block);
+        this.render(g);
     }
 }
