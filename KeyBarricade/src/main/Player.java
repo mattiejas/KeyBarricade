@@ -4,7 +4,6 @@ import assets.ResourceLoader;
 import assets.Sprite;
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import static main.Game.BLOCKSIZE;
@@ -76,6 +75,10 @@ public class Player {
         }
     }
 
+    private void useKey() {
+        
+    }
+    
     private void grabKey() {
         System.out.println("Grabbed a key!");
     }
