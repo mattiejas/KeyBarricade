@@ -77,8 +77,9 @@ public class Player {
         }
     }
 
-    private void useKey() {
-
+    public void useKey() {
+        System.out.println("Used your key!");
+        map.replaceTile(x, y + 1, new Ground());
     }
 
     public void grabKey(Key key) {
