@@ -2,6 +2,8 @@ package main;
 
 import assets.ResourceLoader;
 import assets.Sprite;
+import blocks.Key;
+import blocks.Tile;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
@@ -11,8 +13,10 @@ import static main.Game.SCALE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE,HEIGHT = Game.BLOCKSIZE * Game.SCALE;
+    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE, HEIGHT = Game.BLOCKSIZE * Game.SCALE;
     private int x, y;
+
+    private Key inventory;
 
     private BufferedImage image;
     private Map map;
@@ -46,9 +50,6 @@ public class Player {
         if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {
             moveRight();
         }
-        if (k == KeyEvent.VK_SPACE) {
-            grabKey();
-        }
     }
 
     private void moveUp() {
@@ -76,10 +77,13 @@ public class Player {
     }
 
     private void useKey() {
-        
+
     }
-    
-    private void grabKey() {
+
+    private void grabKey(Tile tile) {
+        Key key;
+        //this.inventory = key;
+
         System.out.println("Grabbed a key!");
     }
 
