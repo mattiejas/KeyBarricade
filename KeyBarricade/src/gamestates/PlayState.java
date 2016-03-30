@@ -3,6 +3,7 @@ package gamestates;
 import assets.ResourceLoader;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import main.Game;
 import main.Map;
 import main.Player;
@@ -29,12 +30,19 @@ public class PlayState extends GameState {
 
     @Override
     public void keyPressed(int k) {
-        map.keyPressed(k);
+        if (k == KeyEvent.VK_ESCAPE) {
+            handler.setState(MENUSTATE);
+        } else {
+            map.keyPressed(k);
+        }
     }
 
     @Override
-    public void keyReleased(int k) {}
+    public void keyReleased(int k) {
+    }
+
     @Override
-    public void keyTyped(int k) {}
+    public void keyTyped(int k) {
+    }
 
 }
