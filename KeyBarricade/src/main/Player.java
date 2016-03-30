@@ -11,14 +11,15 @@ import static main.Game.SCALE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE, HEIGHT = Game.BLOCKSIZE * Game.SCALE;
+    private final int WIDTH = Game.BLOCKSIZE * Game.SCALE,HEIGHT = Game.BLOCKSIZE * Game.SCALE;
     private int x, y;
 
     private BufferedImage image;
+    private Map map;
 
-    public Player() {
+    public Player(Map map) {
         this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
-
+        this.map = map;
         this.x = 0;
         this.y = 0;
     }
@@ -31,43 +32,54 @@ public class Player {
         g.setColor(Color.MAGENTA);
         g.drawImage(image, x, y, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, null);
     }
-    
-    public void keyPressed(int k){
-        if (k == KeyEvent.VK_W) {
+
+    public void keyPressed(int k) {
+        if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
             moveUp();
         }
-        if (k == KeyEvent.VK_S) {
+        if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
             moveDown();
         }
-        if (k == KeyEvent.VK_A) {
+        if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) {
             moveLeft();
         }
-        if (k == KeyEvent.VK_D) {
+        if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {
             moveRight();
         }
-        
-        if(k == KeyEvent.VK_SPACE){
+        if (k == KeyEvent.VK_SPACE) {
             grabKey();
         }
     }
-    
-    public void moveUp(){
-        y -= BLOCKSIZE * SCALE;
-    }
-    
-    public void moveDown(){
-        y += BLOCKSIZE * SCALE;
-    }
-    
-    public void moveLeft(){
-        x -= BLOCKSIZE * SCALE;
-    }
-    
-    public void moveRight(){
-        x += BLOCKSIZE * SCALE;
+
+    private void moveUp() {
+        if (map.playerAllowedToMoveUp()) {
+            y -= BLOCKSIZE * SCALE;
+        }
     }
 
-    public void grabKey() {
+    private void moveDown() {
+        if (map.playerAllowedToMoveDown()) {
+            y += BLOCKSIZE * SCALE;
+        }
+    }
+
+    private void moveLeft() {
+        if (map.playerAllowedToMoveLeft()) {
+            x -= BLOCKSIZE * SCALE;
+        }
+    }
+
+    private void moveRight() {
+        if (map.playerAllowedToMoveRight()) {
+            x += BLOCKSIZE * SCALE;
+        }
+    }
+
+    private void useKey() {
+        
+    }
+    
+    private void grabKey() {
         System.out.println("Grabbed a key!");
     }
 

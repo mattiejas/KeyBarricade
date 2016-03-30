@@ -1,12 +1,10 @@
 package gamestates;
 
 import assets.ResourceLoader;
-import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Game;
 import main.Map;
-import main.Player;
 
 public class PlayState extends GameState {
 

@@ -5,9 +5,7 @@ import blocks.Ground;
 import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
-import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics2D;
-import java.util.ArrayList;
 
 public class Map {
 
@@ -25,8 +23,6 @@ public class Map {
 
     public Map(int width, int height) {
         level = new Level(Difficulty.EASY);
-
-        //tiles = new ArrayList<>();
         tiles = new Tile[10][10];
         this.width = width;
         this.height = height;
@@ -35,11 +31,6 @@ public class Map {
     public void init() {
         level.init();
         generatedLevel = level.getLevel();
-//        for (int x = 0; x < width / 32; x++) {
-//            for (int y = 0; y < height / 32; y++) {
-//                tiles.add(new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground()));
-//            }
-//        }
         int i = 0;
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
@@ -60,7 +51,7 @@ public class Map {
             }
         }
 
-        player = new Player();
+        player = new Player(this);
         player.init();
     }
 
@@ -76,5 +67,45 @@ public class Map {
 
     public void keyPressed(int k) {
         player.keyPressed(k);
+    }
+
+    public boolean playerAllowedToMoveUp() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getSolid() 
+                    && player.getPositionY() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveDown() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getSolid()
+                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveLeft() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) - 1]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+                    && player.getPositionX() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public boolean playerAllowedToMoveRight() {
+        try {
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE) + 1]
+                         [player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

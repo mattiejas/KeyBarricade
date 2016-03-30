@@ -29,4 +29,8 @@ public class Key extends BlockType {
     private void showWarning() {
 
     }
+    
+    public int getPoints() {
+        return POINTS;
+    }
 }
