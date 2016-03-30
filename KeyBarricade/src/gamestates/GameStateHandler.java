@@ -13,6 +13,7 @@ public class GameStateHandler {
         states = new ArrayList<>();
         states.add(new MenuState(this));
         states.add(new PlayState(this));
+        states.add(new HelpState(this));
         currentState = states.get(0);
     }
 
@@ -25,7 +26,9 @@ public class GameStateHandler {
     }
 
     public void setState(int gameState) {
-        previousState = currentState;
+        if(currentState instanceof PlayState){
+            previousState = currentState;
+        }
         currentState = states.get(gameState);
         this.init();
     }
