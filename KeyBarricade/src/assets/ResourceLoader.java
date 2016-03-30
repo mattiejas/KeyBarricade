@@ -6,6 +6,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -42,7 +43,7 @@ public class ResourceLoader {
             default:
                 return null;
             case GROUND:
-                return image.getSubimage(0, 0, 16, 16);
+                return getGround();
             case KEY:
                 return image.getSubimage(64, 0, 16, 16);
             case WALL:
@@ -60,5 +61,23 @@ public class ResourceLoader {
 
     public static Font getFont() {
         return FONT;
+    }
+    
+    private static BufferedImage getGround() {
+        Random r = new Random();
+        int rand = r.nextInt(4);
+        
+        switch(rand) {
+            case 0:
+                return image.getSubimage(0, 0, 16, 16);
+            case 1:
+                return image.getSubimage(16, 0, 16, 16);
+            case 2:
+                return image.getSubimage(32, 0, 16, 16);
+            case 3:
+                return image.getSubimage(48, 0, 16, 16);
+            default: 
+                return null;
+        }
     }
 }
