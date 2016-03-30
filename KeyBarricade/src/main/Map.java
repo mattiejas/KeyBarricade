@@ -45,19 +45,19 @@ public class Map {
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
                 if (generatedLevel[y][x] == GROUND) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground());
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE , y * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , new Ground());
                 }
                 if (generatedLevel[y][x] == KEY) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Key(100));
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE , y * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , new Key(100));
                 }
                 if (generatedLevel[y][x] == WALL) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Wall());
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE , y * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , new Wall());
                 }
                 if (generatedLevel[y][x] == BARRICADE) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE * Game.SCALE, y * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Barricade(100));
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE , y * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , new Barricade(100));
                 }
-                tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(true, false));
-                tiles[9][9] = new Tile(9 * Game.BLOCKSIZE * Game.SCALE, 9 * Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, Game.BLOCKSIZE * Game.SCALE, new Ground(false, true));
+                tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE , Game.BLOCKSIZE , new Ground(true, false));
+                tiles[9][9] = new Tile(9 * Game.BLOCKSIZE , 9 * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , new Ground(false, true));
             }
         }
     }
@@ -75,7 +75,7 @@ public class Map {
 
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_SPACE) {
-            BlockType block = tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getBlockType();
+            BlockType block = tiles[player.getPositionX() / (Game.BLOCKSIZE )][player.getPositionY() / (Game.BLOCKSIZE )].getBlockType();
             System.out.println(block);
             if (block instanceof Key) {
                 Key key = (Key) block;
@@ -89,7 +89,7 @@ public class Map {
 
     public boolean playerAllowedToMoveUp() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) - 1].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE )][player.getPositionY() / (Game.BLOCKSIZE ) - 1].getSolid()
                     && player.getPositionY() > 0;
         } catch (Exception e) {
             return false;
@@ -98,8 +98,8 @@ public class Map {
 
     public boolean playerAllowedToMoveDown() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE * Game.SCALE)][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE) + 1].getSolid()
-                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE * Game.SCALE;
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE )][player.getPositionY() / (Game.BLOCKSIZE ) + 1].getSolid()
+                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCKSIZE ;
         } catch (Exception e) {
             return false;
         }
@@ -107,7 +107,7 @@ public class Map {
 
     public boolean playerAllowedToMoveLeft() {
         try {
-            return !tiles[player.getPositionX() / (Game.BLOCKSIZE) - 1][player.getPositionY() / (Game.BLOCKSIZE * Game.SCALE)].getSolid()
+            return !tiles[player.getPositionX() / (Game.BLOCKSIZE) - 1][player.getPositionY() / (Game.BLOCKSIZE )].getSolid()
                     && player.getPositionX() > 0;
         } catch (Exception e) {
             return false;
