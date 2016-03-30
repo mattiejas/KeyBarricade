@@ -39,17 +39,34 @@ public class Level {
 
     private void generateEasy() {
         int keyCount = 0;
-        int[] randomKeyReplacement = { GROUND, WALL, BARRICADE };
+        int wallCount = 0;
+        int BarricadeCount = 0;
+        
+        int keyLimit = 3;
+        int wallLimit = 10;
+        int barricadeLimit = 10;
         
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[i].length; j++) {
                 int random = r.nextInt(4);
                 if (random == KEY) {
                     keyCount++;
-                    if (keyCount > KEY) {
-                        random = randomKeyReplacement[r.nextInt(randomKeyReplacement.length)];
+                    if (keyCount > keyLimit) {
+                        random = replaceBlockType(KEY);
                     }
                 }
+                if (random == WALL) {
+                    wallCount++;
+                    if(wallCount > wallLimit) {
+                        random = GROUND;
+                    }
+                }
+                if (random == BARRICADE) {
+                    BarricadeCount++;
+                    if(BarricadeCount > barricadeLimit) {
+                        random = GROUND;
+                    }
+                }                
                 level[i][j] = random;
             }
         }
@@ -64,9 +81,17 @@ public class Level {
     }
 
     private void generateImpossible() {
-
     }
 
+    private int replaceBlockType(int blockType) {
+        int random = r.nextInt(4);
+        if (random == blockType) {
+            return replaceBlockType(blockType);
+        } else {
+            return random;
+        }
+    }
+    
     public int[][] getLevel() {
         return level;
     }
