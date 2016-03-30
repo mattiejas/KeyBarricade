@@ -14,7 +14,7 @@ import static main.Game.SCALE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE , HEIGHT = Game.BLOCKSIZE ;
+    private final int WIDTH = Game.BLOCKSIZE, HEIGHT = Game.BLOCKSIZE;
     private int x, y;
 
     private Key inventory;
@@ -35,7 +35,7 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
-        g.drawImage(image, x, y, Game.BLOCKSIZE , Game.BLOCKSIZE , null);
+        g.drawImage(image, x, y, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
     }
 
     public void keyPressed(int k) {
@@ -55,37 +55,37 @@ public class Player {
 
     private void moveUp() {
         if (map.playerAllowedToMoveUp()) {
-            y -= BLOCKSIZE * SCALE;
+            y -= BLOCKSIZE;
         }
     }
 
     private void moveDown() {
         if (map.playerAllowedToMoveDown()) {
-            y += BLOCKSIZE * SCALE;
+            y += BLOCKSIZE;
         }
     }
 
     private void moveLeft() {
         if (map.playerAllowedToMoveLeft()) {
-            x -= BLOCKSIZE * SCALE;
+            x -= BLOCKSIZE;
         }
     }
 
     private void moveRight() {
         if (map.playerAllowedToMoveRight()) {
-            x += BLOCKSIZE * SCALE;
+            x += BLOCKSIZE;
         }
     }
 
     private void useKey() {
-        
+
     }
 
     public void grabKey(Key key) {
-            this.inventory = key;
-            System.out.println("Grabbed a key!");
-            map.replaceTile(x, y, new Ground());
-            //map.loadLevel();
+        this.inventory = key;
+        System.out.println("Grabbed a key!");
+        map.replaceTile(x, y, new Ground());
+        //map.loadLevel();
     }
 
     public int getPositionX() {
