@@ -15,3 +15,14 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 ###### Reminders (because we will forget)
 + Analysis Diagram: Associatie van TypeBlock aanpassen met een multiplciteit van 1.
 + ResourceLoader komt op meerdere plekken terug in diverse klassen, hiervoor moeten we nog een dependency toevoegen.
++ Random char genereren:
+  import java.util.Random;
+
+    //...
+
+    Random r = new Random();
+
+    String alphabet = "123xyz";
+    for (int i = 0; i < 50; i++) {
+        System.out.println(alphabet.charAt(r.nextInt(alphabet.length())));
+    } // prints 50 random characters from alphabet
