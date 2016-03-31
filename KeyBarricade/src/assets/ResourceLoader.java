@@ -50,6 +50,8 @@ public class ResourceLoader {
                 return image.getSubimage(0, 0, 32, 32);
             case BARRICADE:
                 return image.getSubimage(32, 0, 32, 32);
+            case BARRICADE_UNLOCKED:
+                return image.getSubimage(32, 32, 32, 32);
             case START:
                 return image.getSubimage(0, 64, 32, 32);
             case FINISH:
