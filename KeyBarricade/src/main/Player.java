@@ -41,7 +41,7 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
-        g.drawImage(image, x, y, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+        g.drawImage(image, x - 11, y - 22, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
     }
 
     public void keyPressed(int k) {
