@@ -35,7 +35,6 @@ public class Map {
     public void init() {
         level.init();
         generatedLevel = level.getLevel();
-        int i = 0;
         loadLevel();
         player = new Player(this);
         player.init();
