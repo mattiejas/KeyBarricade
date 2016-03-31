@@ -21,6 +21,11 @@ public class Level {
     public void init() {
         r = new Random();
         
+        for (int i = 0; i < level.length; i++) {
+            for (int j = 0; j < level[i].length; j++) {
+                level[i][j] = -1;
+            }
+        }
         switch (difficulty) {
             case EASY:
                 generateEasy();
@@ -38,38 +43,58 @@ public class Level {
     }
 
     private void generateEasy() {
-        int keyCount = 0;
         int wallCount = 0;
-        int BarricadeCount = 0;
+        int wallLimit = 30;
         
-        int keyLimit = 3;
-        int wallLimit = 10;
+        int barricadeCount = 0;
         int barricadeLimit = 10;
         
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[i].length; j++) {
-                int random = r.nextInt(4);
-                if (random == KEY) {
-                    keyCount++;
-                    if (keyCount > keyLimit) {
-                        random = replaceBlockType(KEY);
+                int random = r.nextInt(3);
+
+                int randomI = r.nextInt(10);
+                int randomJ = r.nextInt(10);
+
+                if (level[randomI][randomJ] == -1) {
+                    if (random == WALL) {
+                        wallCount++;
+                        if(wallCount > wallLimit) {
+                            random = GROUND;
+                        }
                     }
+                    if (random == BARRICADE) {
+                        barricadeCount++;
+                        if(barricadeCount > barricadeLimit) {
+                            random = GROUND;
+                        }
+                    }                    
+                    level[randomI][randomJ] = random;
                 }
-                if (random == WALL) {
-                    wallCount++;
-                    if(wallCount > wallLimit) {
-                        random = GROUND;
-                    }
-                }
-                if (random == BARRICADE) {
-                    BarricadeCount++;
-                    if(BarricadeCount > barricadeLimit) {
-                        random = GROUND;
-                    }
-                }                
-                level[i][j] = random;
             }
         }
+        
+        int keyCount = 0;
+        int keyLimit = 3;
+        for (int i = 0; i < level.length; i++) {
+            for (int j = 0; j < level[i].length; j++) {
+                keyCount++;
+                int randomI = r.nextInt(10);
+                int randomJ = r.nextInt(10);
+                if (keyCount <= keyLimit) {
+                    level[randomI][randomJ] = KEY;
+                }
+            }   
+        }
+        
+        for (int i = 0; i < level.length; i++) {
+            for (int j = 0; j < level[i].length; j++) {
+                if (level[i][j] == -1) {
+                    level[i][j] = GROUND;
+                }
+            }
+        }        
+       
     }
 
     private void generateNormal() {
