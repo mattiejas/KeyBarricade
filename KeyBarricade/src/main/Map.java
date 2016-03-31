@@ -7,7 +7,6 @@ import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 
 public class Map {
 
@@ -74,7 +73,6 @@ public class Map {
     }
     
     public Tile getTile(int x, int y){
-        System.out.println("x:" + x + " y:" + y);
         return tiles[x][y]; 
     }
 
@@ -122,7 +120,6 @@ public class Map {
         x = x / (Game.BLOCKSIZE);
         y = y / (Game.BLOCKSIZE);
         tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, block);
-        System.out.println(tiles[x][y].getSolid());
         this.render(g);
     }
 }

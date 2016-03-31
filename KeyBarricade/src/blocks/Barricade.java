@@ -22,8 +22,7 @@ public class Barricade extends BlockType {
         this.points = points;
     }
 
-    public void unlock() {
-        this.isSolid = false;
-        this.setSprite(Sprite.BARRICADE_UNLOCKED);
+    public boolean isUnlocked() {
+        return !isSolid;
     }
 }

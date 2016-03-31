@@ -23,14 +23,11 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-        System.out.println(handler.getPreviousState());
         if (handler.getPreviousState() instanceof MenuState) {
-            System.out.println("true");
             MenuState ms = (MenuState) handler.getPreviousState();
             map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, ms.getDifficulty());
             map.init();
         } else {
-            System.out.println("false");
             map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, Difficulty.EASY);
             map.init();
         }

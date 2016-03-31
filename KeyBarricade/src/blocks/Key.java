@@ -11,20 +11,4 @@ public class Key extends BlockType {
         this.isSolid = false;
     }
 
-    public void openBarricade(Barricade b) {
-        if (points == b.getPoints()) {
-            b.unlock();
-        } else {
-            this.showWarning();
-        }
-    }
-
-    public void disappear() {
-        this.isSolid = false;
-        this.setSprite(Sprite.GROUND);
-    }
-
-    private void showWarning() {
-
-    }
 }
