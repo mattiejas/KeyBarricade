@@ -122,6 +122,7 @@ public class Map {
         x = x / (Game.BLOCKSIZE);
         y = y / (Game.BLOCKSIZE);
         tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, block);
+        System.out.println(tiles[x][y].getClass());
         this.render(g);
     }
 }
