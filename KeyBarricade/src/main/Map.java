@@ -25,8 +25,8 @@ public class Map {
     private final int BARRICADE = 2;
     private final int KEY = 3;
 
-    public Map(int width, int height) {
-        level = new Level(Difficulty.EASY);
+    public Map(int width, int height, Difficulty difficulty) {
+        level = new Level(difficulty);
         tiles = new Tile[10][10];
         this.width = width;
         this.height = height;

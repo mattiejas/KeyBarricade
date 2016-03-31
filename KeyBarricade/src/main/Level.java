@@ -26,18 +26,19 @@ public class Level {
                 level[i][j] = -1;
             }
         }
+        
         switch (difficulty) {
             case EASY:
                 generateEasy();
                 break;
             case NORMAL:
-                generateNormal();
+                generateEasy();
                 break;
             case HARD:
-                generateHard();
+                generateEasy();
                 break;
             case IMPOSSIBLE:
-                generateImpossible();
+                generateEasy();
                 break;
         }
     }

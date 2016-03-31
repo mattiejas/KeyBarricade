@@ -8,6 +8,7 @@ import main.Game;
 import assets.ResourceLoader;
 import assets.Sprite;
 import java.awt.image.BufferedImage;
+import main.Difficulty;
 
 public class MenuState extends GameState {
 
@@ -30,6 +31,8 @@ public class MenuState extends GameState {
     private int height;
 
     private BufferedImage[][] backGround;
+
+    private Difficulty selectedDifficulty;
 
     public MenuState(GameStateHandler handler) {
         super(handler);
@@ -143,10 +146,14 @@ public class MenuState extends GameState {
             } else if (!difficultySelection) {
                 switch (currentSelection) {
                     case 0:
-                        handler.setPreviousState();
+                        for (int i = 0; i < handler.getTotalPreviousStates(); i++) {
+                            if (handler.getPreviousState(i) instanceof PlayState) {
+                                handler.setPreviousState(i);
+                            }
+                        }
                         break;
                     case 1:
-                        handler.setState(PLAYSTATE);
+                        difficultySelection = true;
                         break;
                     case 2:
                         handler.setState(HELPSTATE);
@@ -160,9 +167,28 @@ public class MenuState extends GameState {
                 switch (currentSelection) {
                     default:
                     case 0:
+                        selectedDifficulty = Difficulty.EASY;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
                     case 1:
+                        selectedDifficulty = Difficulty.NORMAL;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
                     case 2:
+                        selectedDifficulty = Difficulty.HARD;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
                     case 3:
+                        selectedDifficulty = Difficulty.IMPOSSIBLE;
                         difficultySelection = false;
                         menuLength = options.length;
                         handler.setState(PLAYSTATE);
@@ -185,6 +211,10 @@ public class MenuState extends GameState {
         } else if (!firstStart && !difficultySelection && k == KeyEvent.VK_ESCAPE) {
             handler.setPreviousState();
         }
+    }
+
+    public Difficulty getDifficulty() {
+        return selectedDifficulty;
     }
 
     @Override
