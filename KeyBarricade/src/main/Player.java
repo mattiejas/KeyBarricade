@@ -18,6 +18,7 @@ public class Player {
     private int x, y;
 
     private Key inventory;
+    private boolean hasItem;
 
     private BufferedImage image;
     private Map map;
@@ -34,6 +35,7 @@ public class Player {
         this.x = 0;
         this.y = 0;
         this.lastMove = 1;
+        this.hasItem = false;
     }
 
     public void init() {
@@ -43,23 +45,44 @@ public class Player {
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
 
-        switch (lastMove) {
-            case UP:
-                this.image = ResourceLoader.getSprite(Sprite.PLAYER_UP);
-                break;
-            default:
-            case DOWN:
-                this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
-                break;
-            case LEFT:
-                this.image = ResourceLoader.getSprite(Sprite.PLAYER_LEFT);
-                break;
-            case RIGHT:
-                this.image = ResourceLoader.getSprite(Sprite.PLAYER_RIGHT);
-                break;
+        if (hasItem) {
+            switch (lastMove) {
+                case UP:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_ITEM_UP);
+                    break;
+                default:
+                case DOWN:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_ITEM_DOWN);
+                    break;
+                case LEFT:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_ITEM_LEFT);
+                    break;
+                case RIGHT:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_ITEM_RIGHT);
+                    break;
+            }
+        } else {
+            switch (lastMove) {
+                case UP:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_UP);
+                    break;
+                default:
+                case DOWN:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
+                    break;
+                case LEFT:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_LEFT);
+                    break;
+                case RIGHT:
+                    this.image = ResourceLoader.getSprite(Sprite.PLAYER_RIGHT);
+                    break;
+            }
         }
 
         g.drawImage(image, x - 11, y - 22, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
+        if (hasItem) {
+            g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), x + 10, y - (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), null);
+        }
     }
 
     public void keyPressed(int k) {
@@ -143,9 +166,9 @@ public class Player {
                     break;
                 case LEFT:
                     block = map.getTile(x / Game.BLOCKSIZE - 1, y / Game.BLOCKSIZE).getBlockType();
-                        if (block instanceof Barricade) {
-                    Barricade b = (Barricade) block;
-                    if (!b.isUnlocked()) {
+                    if (block instanceof Barricade) {
+                        Barricade b = (Barricade) block;
+                        if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
                             }
@@ -154,9 +177,9 @@ public class Player {
                     break;
                 case RIGHT:
                     block = map.getTile(x / Game.BLOCKSIZE + 1, y / Game.BLOCKSIZE).getBlockType();
-                        if (block instanceof Barricade) {
-                            Barricade b = (Barricade) block;
-                            if (!b.isUnlocked()) {
+                    if (block instanceof Barricade) {
+                        Barricade b = (Barricade) block;
+                        if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
                             }
@@ -217,6 +240,7 @@ public class Player {
         if (block instanceof Key) {
             Key key = (Key) block;
             this.inventory = key;
+            this.hasItem = true;
             System.out.println("Grabbed a key!");
             map.replaceTile(x, y, new Ground());
         }
