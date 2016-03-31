@@ -166,6 +166,10 @@ public class MenuState extends GameState {
             } else {
                 switch (currentSelection) {
                     default:
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
                         difficultySelection = false;
                         menuLength = options.length;
                         handler.setState(PLAYSTATE);
