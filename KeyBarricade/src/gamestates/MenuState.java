@@ -83,7 +83,7 @@ public class MenuState extends GameState {
         g.setFont(titleFontShadow);
         g.setColor(Color.DARK_GRAY);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 124);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
 
         g.setFont(titleFont);
         g.setColor(Color.WHITE);
@@ -92,12 +92,15 @@ public class MenuState extends GameState {
 
         // Draws options perfectly in the middle (width) of the screen
         g.setFont(defaultFont);
-        int spacing = 50;
-        int j = (Game.WINDOW_HEIGHT / Game.BLOCKSIZE);
+//        int spacing = 50;
+//        int j = (Game.WINDOW_HEIGHT / Game.BLOCKSIZE);
+        int spacing = g.getFontMetrics().getHeight();
+        int j = (Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 2));
         if (difficultySelection) {
+            g.setFont(smallFont);
+            spacing = g.getFontMetrics().getHeight() + 30;
             for (int i = 0; i < difficulty.length; i++) {
                 j += spacing;
-                g.setFont(smallFont);
                 g.setColor(Color.WHITE);
                 height = g.getFontMetrics().getHeight();
                 if (i == currentSelection) {
@@ -210,6 +213,8 @@ public class MenuState extends GameState {
             }
         } else if (!firstStart && !difficultySelection && k == KeyEvent.VK_ESCAPE) {
             handler.setPreviousState();
+        } else if (difficultySelection && k == KeyEvent.VK_ESCAPE) {
+            difficultySelection = false;
         }
     }
 

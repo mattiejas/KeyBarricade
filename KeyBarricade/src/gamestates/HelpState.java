@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gamestates;
 
 import assets.ResourceLoader;
@@ -14,10 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import main.Game;
 
-/**
- *
- * @author Ewoud
- */
 public class HelpState extends GameState {
 
     private BufferedImage[][] backGround;
@@ -26,43 +17,14 @@ public class HelpState extends GameState {
     private String[] text;
 
     private Font titleFont;
-    private Font titleFont2;
+    private Font titleFontShadow;
     private Font textFont;
     private Font textFont2;
 
+    private int width, height;
+
     public HelpState(GameStateHandler handler) {
         super(handler);
-    }
-
-    @Override
-    public void render(Graphics2D g) {
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 10; x++) {
-                if (i == 1 && (x == 0 || x == 1 || x == 2 || x == 6 || x == 7 || x == 8 || x == 9)) {
-                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
-                } else {
-                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
-                }
-            }
-        }
-
-        g.setFont(titleFont2);
-        g.setColor(Color.BLACK);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - 115, 110);
-
-        g.setFont(titleFont);
-        g.setColor(Color.GREEN);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - 113, 115);
-
-        for (int i = 0; i < text.length; i++) {
-            g.setColor(Color.BLACK);
-            g.setFont(textFont2);
-            g.drawString(text[i], 10, 160 + (i * 30));
-
-            g.setColor(Color.GREEN);
-            g.setFont(textFont);
-            g.drawString(text[i], 9, 160 + (i * 30) + 1);
-        }
     }
 
     @Override
@@ -81,7 +43,7 @@ public class HelpState extends GameState {
         }
 
         titleFont = new Font("Joystix Monospace", Font.PLAIN, 50);
-        titleFont2 = new Font("Joystix Monospace", Font.PLAIN, 51);
+        titleFontShadow = new Font("Joystix Monospace", Font.PLAIN, 51);
         textFont = new Font("Joystix Monospace", Font.PLAIN, 19);
         textFont2 = new Font("Joystix Monospace", Font.PLAIN, 19);
 
@@ -102,7 +64,33 @@ public class HelpState extends GameState {
         text[13] = "- Spatie om een sleutel op te pakken";
         text[14] = "en om een barricade mee te openen";
         text[15] = "- Escape om terug naar het menu te gaan";
+    }
 
+    @Override
+    public void render(Graphics2D g) {
+        for (int i = 0; i < 10; i++) {
+            for (int x = 0; x < 10; x++) {
+                g.drawImage(backGround[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+            }
+        }
+        g.setFont(titleFontShadow);
+        g.setColor(Color.DARK_GRAY);
+        width = g.getFontMetrics().stringWidth(title);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
+
+        g.setFont(titleFont);
+        g.setColor(Color.WHITE);
+        width = g.getFontMetrics().stringWidth(title);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 125);
+
+        g.setFont(textFont);
+        g.setColor(Color.WHITE);
+        int spacing = g.getFontMetrics().getHeight();
+        int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.length / 2)) + 50;
+        for (int i = 0; i < text.length; i++, j += spacing) {
+            width = g.getFontMetrics().stringWidth(text[i]);
+            g.drawString(text[i], Game.WINDOW_WIDTH / 2 - width / 2, j);
+        }
     }
 
     @Override
