@@ -16,7 +16,6 @@ public class MenuState extends GameState {
     private String title;
 
     private int currentSelection;
-    private int currentDifficulty;
     private int menuLength;
 
     private Font titleFont;
@@ -35,7 +34,6 @@ public class MenuState extends GameState {
     public MenuState(GameStateHandler handler) {
         super(handler);
 
-        this.currentDifficulty = 0;
         this.firstStart = true;
     }
 
@@ -127,7 +125,7 @@ public class MenuState extends GameState {
     @Override
     public void keyPressed(int k
     ) {
-        if (k == KeyEvent.VK_ENTER) {
+        if (k == KeyEvent.VK_ENTER || k == KeyEvent.VK_SPACE) {
             if (firstStart && !difficultySelection) {
                 switch (currentSelection) {
                     case 0:
@@ -172,18 +170,20 @@ public class MenuState extends GameState {
                         break;
                 }
             }
-        } else if (k == KeyEvent.VK_S) {
+        } else if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
             if (currentSelection < menuLength - 1) {
                 currentSelection++;
             } else {
                 currentSelection = 0;
             }
-        } else if (k == KeyEvent.VK_W) {
+        } else if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
             if (currentSelection > 0) {
                 currentSelection--;
             } else {
                 currentSelection = menuLength - 1;
             }
+        } else if (!firstStart && !difficultySelection && k == KeyEvent.VK_ESCAPE) {
+            handler.setPreviousState();
         }
     }
 
