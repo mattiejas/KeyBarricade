@@ -8,6 +8,7 @@ public class GameStateHandler {
 
     private GameState currentState;
     private GameState previousGameState;
+    private GameState previousPlayState;
     private ArrayList<GameState> states;
 
     public GameStateHandler() {
@@ -28,9 +29,12 @@ public class GameStateHandler {
     }
 
     public void setState(int gameState) {
+        previousGameState = currentState;
+        
         if(currentState instanceof PlayState){
-            previousGameState = currentState;
+            previousPlayState = currentState;
         }
+        
         currentState = states.get(gameState);
         this.init();
     }
@@ -44,6 +48,10 @@ public class GameStateHandler {
     
     public void setPreviousGameState(){
         currentState = previousGameState;
+    }
+    
+    public void setPreviousPlayState(){
+        currentState = previousPlayState;
     }
     
     public GameState getState() {

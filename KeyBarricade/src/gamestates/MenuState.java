@@ -129,7 +129,7 @@ public class MenuState extends GameState {
             } else if (!firstStart) {
                 switch (currentSelection) {
                     case 0:
-                        handler.setPreviousGameState();
+                        handler.setPreviousPlayState();
                         break;
                     case 1:
                         handler.setState(DIFFICULTYSTATE);
