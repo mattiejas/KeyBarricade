@@ -96,17 +96,14 @@ public class MenuState extends GameState {
         if (difficultySelection) {
             for (int i = 0; i < difficulty.length; i++) {
                 j += spacing;
+                g.setFont(smallFont);
+                g.setColor(Color.WHITE);
+                height = g.getFontMetrics().getHeight();
                 if (i == currentSelection) {
-                    g.setFont(smallFont);
-                    g.setColor(Color.WHITE);
                     width = g.getFontMetrics().stringWidth("> " + difficulty[i] + " <");
-                    height = g.getFontMetrics().getHeight();
                     g.drawString("> " + difficulty[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
                 } else {
-                    g.setFont(smallFont);
-                    g.setColor(Color.WHITE);
                     width = g.getFontMetrics().stringWidth(difficulty[i]);
-                    height = g.getFontMetrics().getHeight();
                     g.drawString(difficulty[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
                 }
             }
@@ -136,8 +133,6 @@ public class MenuState extends GameState {
                     case 0:
                         difficultySelection = true;
                         menuLength = difficulty.length;
-//                        handler.setState(PLAYSTATE);
-//                        firstStart = false;
                         break;
                     case 1:
                         handler.setState(HELPSTATE);
@@ -193,23 +188,10 @@ public class MenuState extends GameState {
     }
 
     @Override
-    public void keyReleased(int k
-    ) {
-        //     ------       -------
-        //     | O   |      |    O |
-        //            ------
-        //                  |
-        //                  |
-        //            ------
-        //
-        //    ___/\__________/\____
-
+    public void keyReleased(int k) {
     }
 
     @Override
-    public void keyTyped(int k
-    ) {
-
+    public void keyTyped(int k) {
     }
-
 }
