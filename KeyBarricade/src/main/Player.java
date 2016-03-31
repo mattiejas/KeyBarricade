@@ -113,7 +113,7 @@ public class Player {
                 if(block instanceof Barricade){
                     System.out.println("Instance of");
                     if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x, y - 1, new Ground());
+                        map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
                         System.out.println("New ground");
                     }
                     
@@ -126,7 +126,7 @@ public class Player {
                 if(block instanceof Barricade){
                     System.out.println("Instance of");
                     if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x, y + 1, new Ground());
+                        map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
                         System.out.println("New ground");
                     }
                     
@@ -139,7 +139,7 @@ public class Player {
                 if(block instanceof Barricade){
                     System.out.println("Instance of");
                     if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x - 1, y, new Ground());
+                        map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
                         System.out.println("New ground");
                     }
                     
@@ -152,7 +152,7 @@ public class Player {
                 if(block instanceof Barricade){
                     System.out.println("Instance of");
                     if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x + 1, y, new Ground());
+                        map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
                         System.out.println("New ground");
                     }
                     
