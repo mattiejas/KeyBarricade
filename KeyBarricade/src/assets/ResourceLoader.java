@@ -58,6 +58,12 @@ public class ResourceLoader {
                 return image.getSubimage(32, 64, 32, 32);
             case PLAYER_DOWN:
                 return image.getSubimage(0, 96, 32, 32);
+            case PLAYER_UP:
+                return image.getSubimage(32, 96, 32, 32);
+            case PLAYER_LEFT:
+                return image.getSubimage(64, 96, 32, 32);
+            case PLAYER_RIGHT:
+                return image.getSubimage(96, 96, 32, 32);
         }
     }
 

@@ -33,6 +33,7 @@ public class Player {
         this.map = map;
         this.x = 0;
         this.y = 0;
+        this.lastMove = 1;
     }
 
     public void init() {
@@ -41,6 +42,23 @@ public class Player {
 
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
+        
+        switch(lastMove) {
+            case UP:
+                this.image = ResourceLoader.getSprite(Sprite.PLAYER_UP);
+                break;
+            default:
+            case DOWN:
+                this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
+                break;
+            case LEFT:
+                this.image = ResourceLoader.getSprite(Sprite.PLAYER_LEFT);
+                break;
+            case RIGHT:
+                this.image = ResourceLoader.getSprite(Sprite.PLAYER_RIGHT);
+                break;
+        }
+        
         g.drawImage(image, x - 11, y - 22, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
     }
 
