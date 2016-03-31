@@ -23,7 +23,7 @@ public class ResourceLoader {
 
     private static void loadSpriteSheet() {
         try {
-            image = ImageIO.read(new File("./assets/spritesheet.png"));
+            image = ImageIO.read(new File("./assets/sprites.png"));
         } catch (IOException ex) {
             Logger.getLogger(ResourceLoader.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -43,19 +43,21 @@ public class ResourceLoader {
             default:
                 return null;
             case GROUND:
-                return getGround();
+                return image.getSubimage(0, 32, 32, 32);
             case KEY:
-                return image.getSubimage(64, 0, 16, 16);
+                return image.getSubimage(64, 0, 32, 32);
             case WALL:
-                return image.getSubimage(80, 0, 16, 16);
+                return image.getSubimage(0, 0, 32, 32);
             case BARRICADE:
-                return image.getSubimage(96, 0, 16, 16);
+                return image.getSubimage(32, 0, 32, 32);
+            case BARRICADE_UNLOCKED:
+                return image.getSubimage(32, 32, 32, 32);
             case START:
-                return image.getSubimage(16, 16, 16, 16);
+                return image.getSubimage(0, 64, 32, 32);
             case FINISH:
-                return image.getSubimage(0, 16, 16, 16);
+                return image.getSubimage(32, 64, 32, 32);
             case PLAYER_DOWN:
-                return image.getSubimage(32, 16, 16, 16);
+                return image.getSubimage(0, 96, 32, 32);
         }
     }
 

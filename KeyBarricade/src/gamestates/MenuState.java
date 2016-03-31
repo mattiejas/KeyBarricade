@@ -8,104 +8,135 @@ import main.Game;
 import assets.ResourceLoader;
 import assets.Sprite;
 import java.awt.image.BufferedImage;
+import main.Difficulty;
 
 public class MenuState extends GameState {
 
     private String[] options;
+    private String[] difficulty;
     private String title;
 
     private int currentSelection;
+    private int menuLength;
 
     private Font titleFont;
-    private Font titleFont2;
-    private Font optionFont;
-    private Font optionFont2;
+    private Font titleFontShadow;
+    private Font defaultFont;
+    private Font smallFont;
 
     private boolean firstStart;
-    private int optionPlacement;
-    
+    private boolean difficultySelection;
+
+    private int width;
+    private int height;
+
     private BufferedImage[][] backGround;
+
+    private Difficulty selectedDifficulty;
 
     public MenuState(GameStateHandler handler) {
         super(handler);
-        
-        firstStart = true;
-        optionPlacement = 2;
-    }
 
-    @Override
-    public void render(Graphics2D g) {
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 10; x++) {
-                if (i == 1 && (x == 8 || x == 9)) {
-                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
-                } else {
-                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
-                }
-            }
-        }
-        g.setFont(titleFont2);
-        g.setColor(Color.BLACK);
-        g.drawString(title, 7, 120);
-
-        g.setFont(titleFont);
-        g.setColor(Color.CYAN);
-        g.drawString(title, 11, 125);
-        
-        for (int i = 0; i < options.length; i++) {
-            if (i == currentSelection) {
-                g.setColor(Color.BLACK);
-                g.setFont(optionFont2);
-                g.drawString(options[i], Game.WINDOW_WIDTH / optionPlacement - 65, (i + 7) * 45 + 3);
-
-                g.setColor(Color.CYAN);
-                g.setFont(optionFont);
-                g.drawString(options[i], Game.WINDOW_WIDTH / optionPlacement - 65 - 4, (i + 7) * 45 + 3 - 5);
-                g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_DOWN), Game.WINDOW_WIDTH / optionPlacement - 125, (i + 7) * 45 - 50, Game.BLOCKSIZE , Game.BLOCKSIZE , null);
-                
-            } else {
-                g.setFont(optionFont);
-                g.drawString(options[i], Game.WINDOW_WIDTH / optionPlacement - 65, (i + 7) * 45 + 3);
-            }
-        }
+        this.firstStart = true;
     }
 
     @Override
     public void init() {
         backGround = new BufferedImage[10][10];
-        for (int i = 0; i < 10; i++) {
+
+        // Initialize array with GROUND sprites.
+        for (int y = 0; y < 10; y++) {
             for (int x = 0; x < 10; x++) {
-                if (i == 1 && (x == 8 || x == 9)) {
-                    backGround[i][x] = ResourceLoader.getSprite(Sprite.KEY);
-                } else {
-                    backGround[i][x] = ResourceLoader.getSprite(Sprite.GROUND);
+                backGround[y][x] = ResourceLoader.getSprite(Sprite.GROUND);
+                if (y == 3 && x == 5) {
+                    backGround[y][x] = ResourceLoader.getSprite(Sprite.KEY);
                 }
             }
         }
-        
+
         if (firstStart == true) {
+            difficulty = new String[]{"Easy", "Normal", "Hard", "Impossible"};
             options = new String[]{"Start", "Help", "Exit"};
         } else {
-            options = new String[]{"Resume game", "Start new game", "Help", "Exit"};
+            options = new String[]{"Resume Game", "Start New Game", "Help", "Exit"};
         }
 
         title = "KeyBarricade";
         currentSelection = 0;
-        titleFont = new Font("Joystix Monospace", Font.PLAIN, 50);
-        titleFont2 = new Font("Joystix Monospace", Font.PLAIN, 51);
-        optionFont = new Font("Joystix Monospace", Font.PLAIN, 35);
-        optionFont2 = new Font("Joystix Monospace", Font.PLAIN, 36);
+        menuLength = options.length;
+
+        titleFont = new Font("Joystix Monospace", Font.PLAIN, 52);
+        titleFontShadow = new Font("Joystix Monospace", Font.PLAIN, 53);
+        defaultFont = new Font("Joystix Monospace", Font.PLAIN, 36);
+        smallFont = new Font("Joystix Monospace", Font.PLAIN, 24);
     }
 
     @Override
-    public void keyPressed(int k) {
-        if (k == KeyEvent.VK_ENTER) {
-            if (firstStart) {
+    public void render(Graphics2D g) {
+        for (int y = 0; y < 10; y++) {
+            for (int x = 0; x < 10; x++) {
+                g.drawImage(backGround[y][x], x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+            }
+        }
+        g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_DOWN), 4 * Game.BLOCKSIZE, 3 * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+
+        g.setFont(titleFontShadow);
+        g.setColor(Color.DARK_GRAY);
+        width = g.getFontMetrics().stringWidth(title);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
+
+        g.setFont(titleFont);
+        g.setColor(Color.WHITE);
+        width = g.getFontMetrics().stringWidth(title);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 125);
+
+        // Draws options perfectly in the middle (width) of the screen
+        g.setFont(defaultFont);
+//        int spacing = 50;
+//        int j = (Game.WINDOW_HEIGHT / Game.BLOCKSIZE);
+        int spacing = g.getFontMetrics().getHeight();
+        int j = (Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 2));
+        if (difficultySelection) {
+            g.setFont(smallFont);
+            spacing = g.getFontMetrics().getHeight() + 30;
+            for (int i = 0; i < difficulty.length; i++) {
+                j += spacing;
+                g.setColor(Color.WHITE);
+                height = g.getFontMetrics().getHeight();
+                if (i == currentSelection) {
+                    width = g.getFontMetrics().stringWidth("> " + difficulty[i] + " <");
+                    g.drawString("> " + difficulty[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
+                } else {
+                    width = g.getFontMetrics().stringWidth(difficulty[i]);
+                    g.drawString(difficulty[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
+                }
+            }
+        } else {
+            for (int i = 0; i < options.length; i++) {
+                j += spacing;
+                g.setFont(defaultFont);
+                height = g.getFontMetrics().getHeight();
+                g.setColor(Color.WHITE);
+                if (i == currentSelection) {
+                    width = g.getFontMetrics().stringWidth("> " + options[i] + " <");
+                    g.drawString("> " + options[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
+                } else {
+                    width = g.getFontMetrics().stringWidth(options[i]);
+                    g.drawString(options[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
+                }
+            }
+        }
+    }
+
+    @Override
+    public void keyPressed(int k
+    ) {
+        if (k == KeyEvent.VK_ENTER || k == KeyEvent.VK_SPACE) {
+            if (firstStart && !difficultySelection) {
                 switch (currentSelection) {
                     case 0:
-                        handler.setState(PLAYSTATE);
-                        firstStart = false;
-                        optionPlacement = 3;
+                        difficultySelection = true;
+                        menuLength = difficulty.length;
                         break;
                     case 1:
                         handler.setState(HELPSTATE);
@@ -115,13 +146,17 @@ public class MenuState extends GameState {
                     default:
                         break;
                 }
-            }else{
+            } else if (!difficultySelection) {
                 switch (currentSelection) {
                     case 0:
-                        handler.setPreviousState();
+                        for (int i = 0; i < handler.getTotalPreviousStates(); i++) {
+                            if (handler.getPreviousState(i) instanceof PlayState) {
+                                handler.setPreviousState(i);
+                            }
+                        }
                         break;
                     case 1:
-                        handler.setState(PLAYSTATE);
+                        difficultySelection = true;
                         break;
                     case 2:
                         handler.setState(HELPSTATE);
@@ -131,40 +166,67 @@ public class MenuState extends GameState {
                     default:
                         break;
                 }
-                
+            } else {
+                switch (currentSelection) {
+                    default:
+                    case 0:
+                        selectedDifficulty = Difficulty.EASY;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
+                    case 1:
+                        selectedDifficulty = Difficulty.NORMAL;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
+                    case 2:
+                        selectedDifficulty = Difficulty.HARD;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
+                    case 3:
+                        selectedDifficulty = Difficulty.IMPOSSIBLE;
+                        difficultySelection = false;
+                        menuLength = options.length;
+                        handler.setState(PLAYSTATE);
+                        firstStart = false;
+                        break;
+                }
             }
-
-        } else if (k == KeyEvent.VK_S) {
-            if (currentSelection < options.length - 1) {
+        } else if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
+            if (currentSelection < menuLength - 1) {
                 currentSelection++;
             } else {
                 currentSelection = 0;
             }
-        } else if (k == KeyEvent.VK_W) {
+        } else if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
             if (currentSelection > 0) {
                 currentSelection--;
             } else {
-                currentSelection = options.length - 1;
+                currentSelection = menuLength - 1;
             }
+        } else if (!firstStart && !difficultySelection && k == KeyEvent.VK_ESCAPE) {
+            handler.setPreviousState();
+        } else if (difficultySelection && k == KeyEvent.VK_ESCAPE) {
+            difficultySelection = false;
         }
+    }
+
+    public Difficulty getDifficulty() {
+        return selectedDifficulty;
     }
 
     @Override
     public void keyReleased(int k) {
-        //     ------       -------
-        //     | O   |      |    O |
-        //            ------
-        //                  |
-        //                  |
-        //            ------
-        //
-        //    ___/\__________/\____
-        
     }
 
     @Override
     public void keyTyped(int k) {
-
     }
-
 }

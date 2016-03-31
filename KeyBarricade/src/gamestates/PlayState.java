@@ -3,6 +3,7 @@ package gamestates;
 import assets.ResourceLoader;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import main.Difficulty;
 import main.Game;
 import main.Map;
 
@@ -22,15 +23,23 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-        map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
-        map.init();
+        System.out.println(handler.getPreviousState());
+        if (handler.getPreviousState() instanceof MenuState) {
+            System.out.println("true");
+            MenuState ms = (MenuState) handler.getPreviousState();
+            map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, ms.getDifficulty());
+            map.init();
+        } else {
+            System.out.println("false");
+            map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, Difficulty.EASY);
+            map.init();
+        }
     }
 
     @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ESCAPE) {
             handler.setState(MENUSTATE);
-            
         } else {
             map.keyPressed(k);
         }

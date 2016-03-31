@@ -25,8 +25,8 @@ public class Map {
     private final int BARRICADE = 2;
     private final int KEY = 3;
 
-    public Map(int width, int height) {
-        level = new Level(Difficulty.EASY);
+    public Map(int width, int height, Difficulty difficulty) {
+        level = new Level(difficulty);
         tiles = new Tile[10][10];
         this.width = width;
         this.height = height;
@@ -72,21 +72,14 @@ public class Map {
 
         player.render(g);
     }
+    
+    public Tile getTile(int x, int y){
+        System.out.println("x:" + x + " y:" + y);
+        return tiles[x][y]; 
+    }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_SPACE) {
-            BlockType block = tiles[player.getPositionX() / (Game.BLOCKSIZE)][player.getPositionY() / (Game.BLOCKSIZE)].getBlockType();
-            System.out.println(block);
-            if (block instanceof Key) {
-                Key key = (Key) block;
-                player.grabKey(key);
-                System.out.println(key);
-            }
-        } else if (k == KeyEvent.VK_G) {
-            player.useKey();
-        } else {
-            player.keyPressed(k);
-        }
+        player.keyPressed(k);
     }
 
     public boolean playerAllowedToMoveUp() {
@@ -129,6 +122,7 @@ public class Map {
         x = x / (Game.BLOCKSIZE);
         y = y / (Game.BLOCKSIZE);
         tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, block);
+        System.out.println(tiles[x][y].getSolid());
         this.render(g);
     }
 }
