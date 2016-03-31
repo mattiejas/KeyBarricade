@@ -52,7 +52,7 @@ public class Level {
         
         for (int i = 0; i < level.length; i++) {
             for (int j = 0; j < level[i].length; j++) {
-                int random = r.nextInt(3);
+                int random = r.nextInt(2) + 1;
 
                 int randomI = r.nextInt(10);
                 int randomJ = r.nextInt(10);
@@ -83,7 +83,7 @@ public class Level {
                 int randomI = r.nextInt(10);
                 int randomJ = r.nextInt(10);
                 if (keyCount <= keyLimit) {
-                    level[randomI][randomJ] = KEY;
+                    level[randomI][0] = KEY;
                 }
             }   
         }
