@@ -72,21 +72,14 @@ public class Map {
 
         player.render(g);
     }
+    
+    public Tile getTile(int x, int y){
+        System.out.println("x:" + x + " y:" + y);
+        return tiles[x][y]; 
+    }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_SPACE) {
-            BlockType block = tiles[player.getPositionX() / (Game.BLOCKSIZE)][player.getPositionY() / (Game.BLOCKSIZE)].getBlockType();
-            System.out.println(block);
-            if (block instanceof Key) {
-                Key key = (Key) block;
-                player.grabKey(key);
-                System.out.println(key);
-            }
-        } else if (k == KeyEvent.VK_G) {
-            player.useKey();
-        } else {
-            player.keyPressed(k);
-        }
+        player.keyPressed(k);
     }
 
     public boolean playerAllowedToMoveUp() {
