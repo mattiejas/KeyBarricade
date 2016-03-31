@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import main.Game;
 import assets.ResourceLoader;
 import assets.Sprite;
-import main.Map;
+import java.awt.image.BufferedImage;
 
 public class MenuState extends GameState {
 
@@ -23,6 +23,8 @@ public class MenuState extends GameState {
 
     private boolean firstStart;
     private int optionPlacement;
+    
+    private BufferedImage[][] backGround;
 
     public MenuState(GameStateHandler handler) {
         super(handler);
@@ -36,9 +38,9 @@ public class MenuState extends GameState {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 10; x++) {
                 if (i == 1 && (x == 8 || x == 9)) {
-                    g.drawImage(ResourceLoader.getSprite(Sprite.KEY), x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
+                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
                 } else {
-                    g.drawImage(ResourceLoader.getSprite(Sprite.GROUND), x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
+                    g.drawImage(backGround[i][x], x * Game.BLOCKSIZE , i * Game.BLOCKSIZE , Game.BLOCKSIZE , Game.BLOCKSIZE , null);
                 }
             }
         }
@@ -49,7 +51,7 @@ public class MenuState extends GameState {
         g.setFont(titleFont);
         g.setColor(Color.CYAN);
         g.drawString(title, 11, 125);
-
+        
         for (int i = 0; i < options.length; i++) {
             if (i == currentSelection) {
                 g.setColor(Color.BLACK);
@@ -59,6 +61,8 @@ public class MenuState extends GameState {
                 g.setColor(Color.CYAN);
                 g.setFont(optionFont);
                 g.drawString(options[i], Game.WINDOW_WIDTH / optionPlacement - 65 - 4, (i + 7) * 45 + 3 - 5);
+                g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_DOWN), Game.WINDOW_WIDTH / optionPlacement - 125, (i + 7) * 45 - 50, Game.BLOCKSIZE , Game.BLOCKSIZE , null);
+                
             } else {
                 g.setFont(optionFont);
                 g.drawString(options[i], Game.WINDOW_WIDTH / optionPlacement - 65, (i + 7) * 45 + 3);
@@ -68,6 +72,17 @@ public class MenuState extends GameState {
 
     @Override
     public void init() {
+        backGround = new BufferedImage[10][10];
+        for (int i = 0; i < 10; i++) {
+            for (int x = 0; x < 10; x++) {
+                if (i == 1 && (x == 8 || x == 9)) {
+                    backGround[i][x] = ResourceLoader.getSprite(Sprite.KEY);
+                } else {
+                    backGround[i][x] = ResourceLoader.getSprite(Sprite.GROUND);
+                }
+            }
+        }
+        
         if (firstStart == true) {
             options = new String[]{"Start", "Help", "Exit"};
         } else {
@@ -93,6 +108,7 @@ public class MenuState extends GameState {
                         optionPlacement = 3;
                         break;
                     case 1:
+                        handler.setState(HELPSTATE);
                         break;
                     case 2:
                         System.exit(0);
@@ -108,6 +124,9 @@ public class MenuState extends GameState {
                         handler.setState(PLAYSTATE);
                         break;
                     case 2:
+                        handler.setState(HELPSTATE);
+                        break;
+                    case 3:
                         System.exit(0);
                     default:
                         break;
@@ -132,7 +151,15 @@ public class MenuState extends GameState {
 
     @Override
     public void keyReleased(int k) {
-
+        //     ------       -------
+        //     | O   |      |    O |
+        //            ------
+        //                  |
+        //                  |
+        //            ------
+        //
+        //    ___/\__________/\____
+        
     }
 
     @Override
