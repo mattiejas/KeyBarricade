@@ -16,12 +16,12 @@ public class Player {
 
     private final int WIDTH = Game.BLOCKSIZE, HEIGHT = Game.BLOCKSIZE;
     private int x, y;
-    
+
     private Key inventory;
 
     private BufferedImage image;
     private Map map;
-    
+
     private int lastMove;
     private final int UP = 0;
     private final int DOWN = 1;
@@ -71,8 +71,7 @@ public class Player {
             System.out.println(getPositionX() / Game.BLOCKSIZE + " " + getPositionY() / Game.BLOCKSIZE);
         }
         lastMove = UP;
-        
-        
+
     }
 
     private void moveDown() {
@@ -81,8 +80,7 @@ public class Player {
             System.out.println(getPositionX() / Game.BLOCKSIZE + " " + getPositionY() / Game.BLOCKSIZE);
         }
         lastMove = DOWN;
-        
-        
+
     }
 
     private void moveLeft() {
@@ -91,8 +89,7 @@ public class Player {
             System.out.println(getPositionX() / Game.BLOCKSIZE + " " + getPositionY() / Game.BLOCKSIZE);
         }
         lastMove = LEFT;
-        
-        
+
     }
 
     private void moveRight() {
@@ -101,68 +98,71 @@ public class Player {
             System.out.println(getPositionX() / Game.BLOCKSIZE + " " + getPositionY() / Game.BLOCKSIZE);
         }
         lastMove = RIGHT;
-        
-        
+
     }
-    
-    public void useKey(){
+
+    public void useKey() {
         BlockType block;
-        switch (lastMove) {
-            case UP:
-                block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE - 1).getBlockType();
-                if(block instanceof Barricade){
-                    System.out.println("Instance of");
-                    if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
-                        System.out.println("New ground");
+        try {
+            switch (lastMove) {
+                case UP:
+                    block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE - 1).getBlockType();
+                    if (block instanceof Barricade) {
+                        System.out.println("Instance of");
+                        if (block.getPoints() == inventory.getPoints()) {
+                            map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
+                            System.out.println("New ground");
+                        }
+
                     }
-                    
-                }
-                System.out.println(block.getPoints());
-                System.out.println("Move up");
-                break;
-            case DOWN:
-                block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE + 1).getBlockType();
-                if(block instanceof Barricade){
-                    System.out.println("Instance of");
-                    if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
-                        System.out.println("New ground");
+                    System.out.println(block.getPoints());
+                    System.out.println("Move up");
+                    break;
+                case DOWN:
+                    block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE + 1).getBlockType();
+                    if (block instanceof Barricade) {
+                        System.out.println("Instance of");
+                        if (block.getPoints() == inventory.getPoints()) {
+                            map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
+                            System.out.println("New ground");
+                        }
+
                     }
-                    
-                }
-                System.out.println(block.getPoints());
-                System.out.println("Move down");
-                break;
-            case LEFT:
-                block = map.getTile(x / Game.BLOCKSIZE - 1, y / Game.BLOCKSIZE).getBlockType();
-                if(block instanceof Barricade){
-                    System.out.println("Instance of");
-                    if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
-                        System.out.println("New ground");
+                    System.out.println(block.getPoints());
+                    System.out.println("Move down");
+                    break;
+                case LEFT:
+                    block = map.getTile(x / Game.BLOCKSIZE - 1, y / Game.BLOCKSIZE).getBlockType();
+                    if (block instanceof Barricade) {
+                        System.out.println("Instance of");
+                        if (block.getPoints() == inventory.getPoints()) {
+                            map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
+                            System.out.println("New ground");
+                        }
+
                     }
-                    
-                }
-                System.out.println(block.getPoints());
-                System.out.println("Move left");
-                break;
-            case RIGHT:
-                block = map.getTile(x / Game.BLOCKSIZE + 1, y / Game.BLOCKSIZE).getBlockType();
-                if(block instanceof Barricade){
-                    System.out.println("Instance of");
-                    if(block.getPoints() == inventory.getPoints()){
-                        map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
-                        System.out.println("New ground");
+                    System.out.println(block.getPoints());
+                    System.out.println("Move left");
+                    break;
+                case RIGHT:
+                    block = map.getTile(x / Game.BLOCKSIZE + 1, y / Game.BLOCKSIZE).getBlockType();
+                    if (block instanceof Barricade) {
+                        System.out.println("Instance of");
+                        if (block.getPoints() == inventory.getPoints()) {
+                            map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
+                            System.out.println("New ground");
+                        }
+
                     }
-                    
-                }
-                System.out.println(block.getPoints());
-                System.out.println("Move right");
-                break;
-            default:
-                // chill the fuck down
-                break;
+                    System.out.println(block.getPoints());
+                    System.out.println("Move right");
+                    break;
+                default:
+                    // chill the fuck down
+                    break;
+            }
+        } catch (Exception e) {
+
         }
     }
 
@@ -206,17 +206,16 @@ public class Player {
 //        }
 //        
 //    }
-
     public void grabKey() {
         BlockType block = map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE)).getBlockType();
-            System.out.println(block);
-            if (block instanceof Key) {
-                Key key = (Key) block;
-                this.inventory = key;
-                System.out.println(key);
-                System.out.println("Grabbed a key!");
-                map.replaceTile(x, y, new Ground());
-            }
+        System.out.println(block);
+        if (block instanceof Key) {
+            Key key = (Key) block;
+            this.inventory = key;
+            System.out.println(key);
+            System.out.println("Grabbed a key!");
+            map.replaceTile(x, y, new Ground());
+        }
     }
 
     public int getPositionX() {
