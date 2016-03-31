@@ -78,10 +78,12 @@ public class Player {
                     break;
             }
         }
-
-        g.drawImage(image, x - 11, y - 22, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
+        Color c = new Color(0, 0, 0, (float) 0.4);
+        g.setColor(c);
+        g.fillOval(x, y + 48, Game.BLOCKSIZE, 16);
+        g.drawImage(image, x - 10, y - 24, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
         if (hasItem) {
-            g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), x + 10, y - (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), null);
+            g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), x + 10, y - (int) (Game.BLOCKSIZE * 0.6), (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), null);
         }
     }
 
