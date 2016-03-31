@@ -7,6 +7,7 @@ import blocks.Key;
 import blocks.Tile;
 import blocks.Wall;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 public class Map {
 
@@ -41,19 +42,21 @@ public class Map {
     }
 
     public void loadLevel() {
+        Random r = new Random();
         for (int x = 0; x < generatedLevel.length; x++) {
             for (int y = 0; y < generatedLevel[x].length; y++) {
+                int rand = (r.nextInt(3) + 1) * 100;
                 if (generatedLevel[y][x] == GROUND) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Ground());
                 }
                 if (generatedLevel[y][x] == KEY) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Key(100));
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Key(rand));
                 }
                 if (generatedLevel[y][x] == WALL) {
                     tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Wall());
                 }
                 if (generatedLevel[y][x] == BARRICADE) {
-                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Barricade(100));
+                    tiles[x][y] = new Tile(x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Barricade(rand));
                 }
                 tiles[0][0] = new Tile(0, 0, Game.BLOCKSIZE, Game.BLOCKSIZE, new Ground(true, false));
                 tiles[9][9] = new Tile(9 * Game.BLOCKSIZE, 9 * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, new Ground(false, true));
