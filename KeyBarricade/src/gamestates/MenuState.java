@@ -152,6 +152,8 @@ public class MenuState extends GameState {
             } else {
                 currentSelection = menuLength - 1;
             }
+        } else if (!firstStart && k == KeyEvent.VK_ESCAPE) {
+            handler.setPreviousPlayState();
         }
     }
 
