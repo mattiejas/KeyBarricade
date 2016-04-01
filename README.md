@@ -17,10 +17,9 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + Genoeg JUnit testen maken
 + ~~Level class afmaken~~
 + ~~Message voor het winnen van het spel~~
-+ Totale code optimaliseren
-+ Design aanpassen indien klaar
++ ~~Totale code optimaliseren~~
++ ~~Design aanpassen indien klaar~~
 + ArrayOutOfBounds bij gebruik van key voorkomen
 + Restart zelfde leven
-+ Static aangeven in Design
-+ Vertical en horizontal attribuut omdraaien (losah)
-+ Check private in DESIGN
++ Vertical en horizontal attribuut omdraaien
++ Check private, static en relaties in design
