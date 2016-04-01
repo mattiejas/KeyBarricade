@@ -5,7 +5,7 @@ import java.util.Random;
 public class Level {
 
     private final int[][] LEVEL;
-    private Difficulty DIFFICULTY;
+    private final Difficulty DIFFICULTY;
     private Random r;
     
     private final int GROUND = 0;
