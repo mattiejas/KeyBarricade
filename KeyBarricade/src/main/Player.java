@@ -87,6 +87,10 @@ public class Player {
         if (hasItem) {
             g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), x + 10, y - (int) (Game.BLOCKSIZE * 0.6), (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), null);
         }
+
+        if ((x / Game.BLOCKSIZE == (Game.WINDOW_WIDTH / Game.BLOCKSIZE) - 1) && (y / Game.BLOCKSIZE == (Game.WINDOW_HEIGHT / Game.BLOCKSIZE) - 1)) {
+            hud.winGame();
+        }
     }
 
     public void keyPressed(int k) {
@@ -115,7 +119,6 @@ public class Player {
             y -= BLOCKSIZE;
         }
         lastMove = UP;
-
     }
 
     private void moveDown() {
@@ -123,7 +126,6 @@ public class Player {
             y += BLOCKSIZE;
         }
         lastMove = DOWN;
-
     }
 
     private void moveLeft() {
@@ -131,7 +133,6 @@ public class Player {
             x -= BLOCKSIZE;
         }
         lastMove = LEFT;
-
     }
 
     private void moveRight() {
@@ -139,7 +140,6 @@ public class Player {
             x += BLOCKSIZE;
         }
         lastMove = RIGHT;
-
     }
 
     public void useKey() {
@@ -155,7 +155,7 @@ public class Player {
                                 map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
                                 hud.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.", false);
+                                hud.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
@@ -169,7 +169,7 @@ public class Player {
                                 map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
                                 hud.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.", false);
+                                hud.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
@@ -183,7 +183,7 @@ public class Player {
                                 map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
                                 hud.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.", false);
+                                hud.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
@@ -197,7 +197,7 @@ public class Player {
                                 map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
                                 hud.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.", false);
+                                hud.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
@@ -217,7 +217,7 @@ public class Player {
             Key key = (Key) block;
             this.inventory = key;
             this.hasItem = true;
-            hud.setNewMessage("Grabbed a key!", false);
+            hud.setNewMessage("Grabbed a key!");
             hud.setItem(hasItem, "Key", key.getPoints());
             map.replaceTile(x, y, new Ground());
         }

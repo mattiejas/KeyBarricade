@@ -73,12 +73,11 @@ public class Map {
                 tiles[x][y].render(g);
             }
         }
-
         player.render(g);
     }
-    
-    public Tile getTile(int x, int y){
-        return tiles[x][y]; 
+
+    public Tile getTile(int x, int y) {
+        return tiles[x][y];
     }
 
     public void keyPressed(int k) {
