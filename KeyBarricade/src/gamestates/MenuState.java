@@ -17,10 +17,8 @@ public class MenuState extends GameState {
     private int currentSelection;
     private int menuLength;
 
-    private Font titleFont;
-    private Font titleFontShadow;
-    private Font defaultFont;
-
+    private Font[] fonts;
+    
     private boolean firstStart;
 
     private int width;
@@ -59,9 +57,10 @@ public class MenuState extends GameState {
         currentSelection = 0;
         menuLength = options.length;
 
-        titleFont = new Font("Joystix Monospace", Font.PLAIN, 52);
-        titleFontShadow = new Font("Joystix Monospace", Font.PLAIN, 53);
-        defaultFont = new Font("Joystix Monospace", Font.PLAIN, 36);
+        fonts = new Font[3];
+        fonts[0] = new Font("Joystix Monospace", Font.PLAIN, 52); // title
+        fonts[1] = new Font("Joystix Monospace", Font.PLAIN, 53); // title shadow
+        fonts[2] = new Font("Joystix Monospace", Font.PLAIN, 36); // default font
     }
 
     @Override
@@ -73,23 +72,23 @@ public class MenuState extends GameState {
         }
         g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_DOWN), 4 * Game.BLOCKSIZE, 3 * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
 
-        g.setFont(titleFontShadow);
+        g.setFont(fonts[1]);
         g.setColor(Color.DARK_GRAY);
         width = g.getFontMetrics().stringWidth(title);
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
 
-        g.setFont(titleFont);
+        g.setFont(fonts[0]);
         g.setColor(Color.WHITE);
         width = g.getFontMetrics().stringWidth(title);
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 125);
 
         // Draws options perfectly in the middle (width) of the screen
-        g.setFont(defaultFont);
+        g.setFont(fonts[2]);
         int spacing = g.getFontMetrics().getHeight();
         int j = (Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 2));
         for (int i = 0; i < options.length; i++) {
             j += spacing;
-            g.setFont(defaultFont);
+            g.setFont(fonts[2]);
             height = g.getFontMetrics().getHeight();
             g.setColor(Color.WHITE);
             if (i == currentSelection) {
