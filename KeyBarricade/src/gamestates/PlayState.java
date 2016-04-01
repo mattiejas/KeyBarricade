@@ -5,30 +5,36 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Difficulty;
 import main.Game;
+import main.HUD;
 import main.Map;
 
 public class PlayState extends GameState {
 
     private Map map;
-private Difficulty diff;
+    private HUD hud;
+    private Difficulty diff;
 
     public PlayState(GameStateHandler handler) {
         super(handler);
     }
 
     @Override
+    public void init() {
+        hud = new HUD();
+        map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, diff, hud);
+        map.init();
+        hud.init();
+    }
+    
+    @Override
     public void render(Graphics2D g) {
         g.setFont(ResourceLoader.getFont());
         map.render(g);
+        hud.render(g);
     }
 
-    @Override
-    public void init() {
-	map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, diff);
-        map.init();
-    }
 
-    public void setDifficulty(Difficulty d){
+    public void setDifficulty(Difficulty d) {
         this.diff = d;
     }
 

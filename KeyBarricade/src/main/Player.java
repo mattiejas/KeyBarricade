@@ -22,6 +22,7 @@ public class Player {
 
     private BufferedImage image;
     private Map map;
+    private HUD hud;
 
     private int lastMove;
     private final int UP = 0;
@@ -29,13 +30,14 @@ public class Player {
     private final int LEFT = 2;
     private final int RIGHT = 3;
 
-    public Player(Map map) {
+    public Player(Map map, HUD hud) {
         this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
         this.map = map;
         this.x = 0;
         this.y = 0;
         this.lastMove = 1;
         this.hasItem = false;
+        this.hud = hud;
     }
 
     public void init() {
@@ -151,6 +153,9 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
+                                hud.setNewMessage(true);
+                            } else {
+                                hud.setNewMessage("That key doesn't fit.", false);
                             }
                         }
                     }
@@ -162,6 +167,9 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
+                                hud.setNewMessage(true);
+                            } else {
+                                hud.setNewMessage("That key doesn't fit.", false);
                             }
                         }
                     }
@@ -173,6 +181,9 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
+                                hud.setNewMessage(true);
+                            } else {
+                                hud.setNewMessage("That key doesn't fit.", false);
                             }
                         }
                     }
@@ -184,6 +195,9 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
+                                hud.setNewMessage(true);
+                            } else {
+                                hud.setNewMessage("That key doesn't fit.", false);
                             }
                         }
                     }
@@ -197,53 +211,14 @@ public class Player {
         }
     }
 
-//    public void useKey() {
-//        BlockType block;
-//        switch (lastMove) {
-//            case 0:
-//                block = map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) - 1).getBlockType();
-//                if(block instanceof Barricade){
-//                    if(block.getPoints() == inventory.getPoints()){
-//                        map.replaceTile(getPositionX() , getPositionY() - 1, new Ground());
-//                        System.out.println(map.getTile(getPositionX() , getPositionY() + 1).getPositionX() + map.getTile(getPositionX() , getPositionY() + 1).getPositionY());
-//                    }
-//                }   break;
-//            case 1:
-//                block = map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getBlockType();
-//                if(block instanceof Barricade){
-//                    if(block.getPoints() == inventory.getPoints()){
-//                        map.replaceTile(getPositionX() , getPositionY() + 1, new Ground());
-//                        System.out.println(map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionX() + "Test " +map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionY());
-//                    }
-//                }   break;
-//            case 2:
-//                block = map.getTile(getPositionX() / (Game.BLOCKSIZE) - 1, getPositionY() / (Game.BLOCKSIZE)).getBlockType();
-//                if(block instanceof Barricade){
-//                    if(block.getPoints() == inventory.getPoints()){
-//                        map.replaceTile(getPositionX() - 1, getPositionY(), new Ground());
-//                        System.out.println(map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionX() + "Test " + map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionY());
-//                    }
-//                }   break;
-//            case 3:
-//                block = map.getTile(getPositionX() / (Game.BLOCKSIZE) + 1, getPositionY() / (Game.BLOCKSIZE)).getBlockType();
-//                if(block instanceof Barricade){
-//                    if(block.getPoints() == inventory.getPoints()){
-//                        map.replaceTile(getPositionX() + 1, getPositionY(), new Ground());
-//                        System.out.println(map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionX() + "Test " + map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE) + 1).getPositionY());
-//                    }
-//                }   break;
-//            default:
-//                break;
-//        }
-//        
-//    }
     public void grabKey() {
         BlockType block = map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE)).getBlockType();
         if (block instanceof Key) {
             Key key = (Key) block;
             this.inventory = key;
             this.hasItem = true;
-            System.out.println("Grabbed a key!");
+            hud.setNewMessage("Grabbed a key!", false);
+            hud.setItem(hasItem, "Key", key.getPoints());
             map.replaceTile(x, y, new Ground());
         }
     }
