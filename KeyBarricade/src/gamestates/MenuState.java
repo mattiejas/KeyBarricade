@@ -8,12 +8,10 @@ import main.Game;
 import assets.ResourceLoader;
 import assets.Sprite;
 import java.awt.image.BufferedImage;
-import main.Difficulty;
 
 public class MenuState extends GameState {
 
     private String[] options;
-    private String[] difficulty;
     private String title;
 
     private int currentSelection;
@@ -22,17 +20,14 @@ public class MenuState extends GameState {
     private Font titleFont;
     private Font titleFontShadow;
     private Font defaultFont;
-    private Font smallFont;
 
     private boolean firstStart;
-    private boolean difficultySelection;
 
     private int width;
     private int height;
 
     private BufferedImage[][] backGround;
 
-    private Difficulty selectedDifficulty;
 
     public MenuState(GameStateHandler handler) {
         super(handler);
@@ -55,7 +50,6 @@ public class MenuState extends GameState {
         }
 
         if (firstStart == true) {
-            difficulty = new String[]{"Easy", "Normal", "Hard", "Impossible"};
             options = new String[]{"Start", "Help", "Exit"};
         } else {
             options = new String[]{"Resume Game", "Start New Game", "Help", "Exit"};
@@ -68,7 +62,6 @@ public class MenuState extends GameState {
         titleFont = new Font("Joystix Monospace", Font.PLAIN, 52);
         titleFontShadow = new Font("Joystix Monospace", Font.PLAIN, 53);
         defaultFont = new Font("Joystix Monospace", Font.PLAIN, 36);
-        smallFont = new Font("Joystix Monospace", Font.PLAIN, 24);
     }
 
     @Override
@@ -92,38 +85,19 @@ public class MenuState extends GameState {
 
         // Draws options perfectly in the middle (width) of the screen
         g.setFont(defaultFont);
-//        int spacing = 50;
-//        int j = (Game.WINDOW_HEIGHT / Game.BLOCKSIZE);
         int spacing = g.getFontMetrics().getHeight();
         int j = (Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 2));
-        if (difficultySelection) {
-            g.setFont(smallFont);
-            spacing = g.getFontMetrics().getHeight() + 30;
-            for (int i = 0; i < difficulty.length; i++) {
-                j += spacing;
-                g.setColor(Color.WHITE);
-                height = g.getFontMetrics().getHeight();
-                if (i == currentSelection) {
-                    width = g.getFontMetrics().stringWidth("> " + difficulty[i] + " <");
-                    g.drawString("> " + difficulty[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
-                } else {
-                    width = g.getFontMetrics().stringWidth(difficulty[i]);
-                    g.drawString(difficulty[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
-                }
-            }
-        } else {
-            for (int i = 0; i < options.length; i++) {
-                j += spacing;
-                g.setFont(defaultFont);
-                height = g.getFontMetrics().getHeight();
-                g.setColor(Color.WHITE);
-                if (i == currentSelection) {
-                    width = g.getFontMetrics().stringWidth("> " + options[i] + " <");
-                    g.drawString("> " + options[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
-                } else {
-                    width = g.getFontMetrics().stringWidth(options[i]);
-                    g.drawString(options[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
-                }
+        for (int i = 0; i < options.length; i++) {
+            j += spacing;
+            g.setFont(defaultFont);
+            height = g.getFontMetrics().getHeight();
+            g.setColor(Color.WHITE);
+            if (i == currentSelection) {
+                width = g.getFontMetrics().stringWidth("> " + options[i] + " <");
+                g.drawString("> " + options[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
+            } else {
+                width = g.getFontMetrics().stringWidth(options[i]);
+                g.drawString(options[i], (Game.WINDOW_WIDTH / 2) - (width / 2), (Game.WINDOW_HEIGHT / 2) - (height / 2) + j);
             }
         }
     }
@@ -136,7 +110,7 @@ public class MenuState extends GameState {
     public void keyPressed(int k
     ) {
         if (k == KeyEvent.VK_ENTER || k == KeyEvent.VK_SPACE) {
-               if (firstStart) {
+            if (firstStart) {
                 switch (currentSelection) {
                     case 0:
                         handler.setState(DIFFICULTYSTATE);
@@ -178,13 +152,7 @@ public class MenuState extends GameState {
             } else {
                 currentSelection = menuLength - 1;
             }
-        } else if (difficultySelection && k == KeyEvent.VK_ESCAPE) {
-            difficultySelection = false;
         }
-    }
-
-    public Difficulty getDifficulty() {
-        return selectedDifficulty;
     }
 
     @Override
