@@ -95,7 +95,7 @@ public class HelpState extends GameState {
 
     @Override
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_ESCAPE) {
+        if (k == KeyEvent.VK_ESCAPE || k == KeyEvent.VK_SPACE) {
             handler.setState(MENUSTATE);
         }
     }
