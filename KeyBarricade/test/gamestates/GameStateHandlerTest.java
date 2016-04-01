@@ -107,7 +107,7 @@ public class GameStateHandlerTest {
         
         instance.setPreviousGameState();
         
-        assertTrue(isMenuState(instance.getState()));
+        assertTrue(isDifficultyState(instance.getState()));
         
     }
     
