@@ -136,6 +136,7 @@ public class MenuState extends GameState {
                 switch (currentSelection) {
                     case 0:
                         handler.setState(DIFFICULTYSTATE);
+                        firstStart = false;
                         break;
                     case 1:
                         handler.setState(HELPSTATE);
@@ -174,8 +175,6 @@ public class MenuState extends GameState {
             } else {
                 currentSelection = menuLength - 1;
             }
-        } else if (!firstStart && !difficultySelection && k == KeyEvent.VK_ESCAPE) {
-            handler.setPreviousState();
         } else if (difficultySelection && k == KeyEvent.VK_ESCAPE) {
             difficultySelection = false;
         }
