@@ -105,22 +105,22 @@ public class DifficultyState extends GameState {
                     case 0:
                         handler.setState(PLAYSTATE, Difficulty.EASY);
                         ms = handler.getMenuState();
-                        ms.setFirstStartFalse();
+                        ms.setFirstStart(false);
                         break;
                     case 1:
                         handler.setState(PLAYSTATE, Difficulty.NORMAL);
                         ms = handler.getMenuState();
-                        ms.setFirstStartFalse();
+                        ms.setFirstStart(false);
                         break;
                     case 2:
                         handler.setState(PLAYSTATE, Difficulty.HARD);
                         ms = handler.getMenuState();
-                        ms.setFirstStartFalse();
+                        ms.setFirstStart(false);
                         break;
                     case 3:
                         handler.setState(PLAYSTATE, Difficulty.IMPOSSIBLE);
                         ms = handler.getMenuState();
-                        ms.setFirstStartFalse();
+                        ms.setFirstStart(false);
                         break;
                 }
         }else if(k == KeyEvent.VK_ESCAPE){

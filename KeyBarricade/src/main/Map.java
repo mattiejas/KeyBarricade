@@ -17,6 +17,7 @@ public class Map {
 
     private Player player;
     private Level level;
+    private HUD hud;
 
     private Graphics2D g;
 
@@ -25,11 +26,12 @@ public class Map {
     private final int BARRICADE = 2;
     private final int KEY = 3;
 
-    public Map(int width, int height, Difficulty difficulty) {
-        level = new Level(difficulty);
-        tiles = new Tile[10][10];
+    public Map(int width, int height, Difficulty difficulty, HUD hud) {
+        this.level = new Level(difficulty);
+        this.tiles = new Tile[10][10];
         this.width = width;
         this.height = height;
+        this.hud = hud;
     }
 
     public void init() {
@@ -37,7 +39,7 @@ public class Map {
         generatedLevel = level.getLevel();
         int i = 0;
         loadLevel();
-        player = new Player(this);
+        player = new Player(this, hud);
         player.init();
     }
 
@@ -71,12 +73,11 @@ public class Map {
                 tiles[x][y].render(g);
             }
         }
-
         player.render(g);
     }
-    
-    public Tile getTile(int x, int y){
-        return tiles[x][y]; 
+
+    public Tile getTile(int x, int y) {
+        return tiles[x][y];
     }
 
     public void keyPressed(int k) {
