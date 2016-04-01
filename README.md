@@ -15,7 +15,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 ###### Reminders (because we will forget)
 + ~~MenuState Font array maken!~~
 + Genoeg JUnit testen maken
-+ Level class afmaken
-+ Message voor het winnen van het spel
++ ~~Level class afmaken~~
++ ~Message voor het winnen van het spel~
 + Totale code optimaliseren
 + Design aanpassen indien klaar
