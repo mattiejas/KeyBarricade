@@ -7,21 +7,18 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import main.Game;
 
 public class HelpState extends GameState {
 
-    private BufferedImage[][] backGround;
+    private BufferedImage[][] background;
 
     private String title;
-    private String[] text;
+    private ArrayList<String> text;
+    private Font[] fonts;
 
-    private Font titleFont;
-    private Font titleFontShadow;
-    private Font textFont;
-    private Font textFont2;
-
-    private int width, height;
+    private int width;
 
     public HelpState(GameStateHandler handler) {
         super(handler);
@@ -29,67 +26,68 @@ public class HelpState extends GameState {
 
     @Override
     public void init() {
-        backGround = new BufferedImage[10][10];
-        text = new String[16];
+        background = new BufferedImage[10][10];
+        fonts = new Font[3];
+        text = new ArrayList<>();
+        
+        fonts[0] = new Font("Joystix Monospace", Font.PLAIN, 50);
+        fonts[1] = new Font("Joystix Monospace", Font.PLAIN, 51);
+        fonts[2] = new Font("Joystix Monospace", Font.PLAIN, 19);
+
+        title = "Help";
+        text.add("Welkom bij het spel KeyBarricade.");
+        text.add("Het is de bedoeling om met je speler");
+        text.add("de finish te bereiken. Op weg naar");
+        text.add("de finish zul je de juiste sleutels");
+        text.add("moeten oppakken om de juiste");
+        text.add("barricades te openen. Muren kunnen");
+        text.add("niet geopent worden. De speler mag");
+        text.add("maar 1 sleutel bij zich houden.");
+        text.add("Als er een nieuwe sleutel wordt");
+        text.add("gepakt zal de oude sleutel verdwijnen.");
+        
+        text.add("\nControls:");
+        text.add("- W, A, S, D op met de speler te lopen");
+        text.add("- Spatie om een sleutel op te pakken");
+        text.add("en om een barricade mee te openen");
+        text.add("- Escape om terug naar het menu te gaan");        
 
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 10; x++) {
-                if (i == 1 && (x == 0 || x == 1 || x == 2 || x == 6 || x == 7 || x == 8 || x == 9)) {
-                    backGround[i][x] = ResourceLoader.getSprite(Sprite.BARRICADE);
+                if (i == 1 && (x == 0 || x == 1 || x == 2 || x == 7 || x == 8 || x == 9)) {
+                    background[i][x] = ResourceLoader.getSprite(Sprite.BARRICADE);
                 } else {
-                    backGround[i][x] = ResourceLoader.getSprite(Sprite.WALL);
+                    background[i][x] = ResourceLoader.getSprite(Sprite.GROUND);
                 }
             }
         }
-
-        titleFont = new Font("Joystix Monospace", Font.PLAIN, 50);
-        titleFontShadow = new Font("Joystix Monospace", Font.PLAIN, 51);
-        textFont = new Font("Joystix Monospace", Font.PLAIN, 19);
-        textFont2 = new Font("Joystix Monospace", Font.PLAIN, 19);
-
-        title = "Help";
-        text[0] = "Welkom bij het spel KeyBarricade.";
-        text[1] = "Het is de bedoeling om met je speler";
-        text[2] = "de finish te bereiken. Op weg naar";
-        text[3] = "de finish zul je de juiste sleutels";
-        text[4] = "moeten oppakken om de juiste";
-        text[5] = "barricades te openen. Muren kunnen";
-        text[6] = "niet geopent worden. De speler mag";
-        text[7] = "maar 1 sleutel bij zich houden.";
-        text[8] = "Als er een nieuwe sleutel wordt";
-        text[9] = "gepakt zal de oude sleutel verdwijnen";
-        text[10] = "";
-        text[11] = "Controls:";
-        text[12] = "- W, A, S, D op met de speler te lopen";
-        text[13] = "- Spatie om een sleutel op te pakken";
-        text[14] = "en om een barricade mee te openen";
-        text[15] = "- Escape om terug naar het menu te gaan";
     }
 
     @Override
     public void render(Graphics2D g) {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 10; x++) {
-                g.drawImage(backGround[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+                g.drawImage(background[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
             }
         }
-        g.setFont(titleFontShadow);
+        
+        g.setFont(fonts[1]);
         g.setColor(Color.DARK_GRAY);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
-
-        g.setFont(titleFont);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 115);
+        
+        g.setFont(fonts[0]);
         g.setColor(Color.WHITE);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 125);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 112);        
 
-        g.setFont(textFont);
+        g.setFont(fonts[2]);
         g.setColor(Color.WHITE);
         int spacing = g.getFontMetrics().getHeight();
-        int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.length / 2)) + 50;
-        for (int i = 0; i < text.length; i++, j += spacing) {
-            width = g.getFontMetrics().stringWidth(text[i]);
-            g.drawString(text[i], Game.WINDOW_WIDTH / 2 - width / 2, j);
+        int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
+        for (int i = 0; i < text.size(); i++, j += spacing) {
+            width = g.getFontMetrics().stringWidth(text.get(i));
+            g.drawString(text.get(i), Game.WINDOW_WIDTH / 2 - width / 2, j);
         }
     }
 
