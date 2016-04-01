@@ -10,19 +10,18 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import static main.Game.BLOCKSIZE;
+import static main.Game.BLOCK_SIZE;
 
 public class Player {
 
-    private final int WIDTH = Game.BLOCKSIZE, HEIGHT = Game.BLOCKSIZE;
     private int x, y;
 
     private Key inventory;
     private boolean hasItem;
 
     private BufferedImage image;
-    private Map map;
-    private HUD hud;
+    private final Map MAP;
+    private final HUD HUD;
 
     private int lastMove;
     private final int UP = 0;
@@ -32,16 +31,12 @@ public class Player {
 
     public Player(Map map, HUD hud) {
         this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
-        this.map = map;
+        this.MAP = map;
         this.x = 0;
         this.y = 0;
         this.lastMove = 1;
         this.hasItem = false;
-        this.hud = hud;
-    }
-
-    public void init() {
-
+        this.HUD = hud;
     }
 
     public void render(Graphics2D g) {
@@ -80,64 +75,73 @@ public class Player {
                     break;
             }
         }
+
         Color c = new Color(0, 0, 0, (float) 0.4);
         g.setColor(c);
-        g.fillOval(x + 3, y + 48, Game.BLOCKSIZE - 6, 16);
-        g.drawImage(image, x - 10, y - 24, (int) (Game.BLOCKSIZE * 1.3), (int) (Game.BLOCKSIZE * 1.3), null);
+        g.fillOval(x + 3, y + 48, Game.BLOCK_SIZE - 6, 16);
+        g.drawImage(image, x - 10, y - 24, (int) (Game.BLOCK_SIZE * 1.3), (int) (Game.BLOCK_SIZE * 1.3), null);
+
         if (hasItem) {
-            g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), x + 10, y - (int) (Game.BLOCKSIZE * 0.6), (int) (Game.BLOCKSIZE * 0.7), (int) (Game.BLOCKSIZE * 0.7), null);
+            g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY),
+                    x + 10, y - (int) (Game.BLOCK_SIZE * 0.6), (int) (Game.BLOCK_SIZE * 0.7), (int) (Game.BLOCK_SIZE * 0.7), null);
         }
 
-        if ((x / Game.BLOCKSIZE == (Game.WINDOW_WIDTH / Game.BLOCKSIZE) - 1) && (y / Game.BLOCKSIZE == (Game.WINDOW_HEIGHT / Game.BLOCKSIZE) - 1)) {
-            hud.winGame();
+        if ((getArrayX() == Game.VERTICAL_AMOUNT - 1) && (getArrayY() == Game.HORIZONTAL_AMOUNT - 1)) {
+            HUD.winGame();
         }
     }
 
     public void keyPressed(int k) {
-        if (k == KeyEvent.VK_W || k == KeyEvent.VK_UP) {
-            moveUp();
-        }
-        if (k == KeyEvent.VK_S || k == KeyEvent.VK_DOWN) {
-            moveDown();
-        }
-        if (k == KeyEvent.VK_A || k == KeyEvent.VK_LEFT) {
-            moveLeft();
-        }
-        if (k == KeyEvent.VK_D || k == KeyEvent.VK_RIGHT) {
-            moveRight();
-        }
-        if (k == KeyEvent.VK_SPACE) {
-            grabKey();
-        }
-        if (k == KeyEvent.VK_G) {
-            useKey();
+        switch (k) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_UP:
+                moveUp();
+                break;
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_DOWN:
+                moveDown();
+                break;
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_LEFT:
+                moveLeft();
+                break;
+            case KeyEvent.VK_D:
+            case KeyEvent.VK_RIGHT:
+                moveRight();
+                break;
+            case KeyEvent.VK_SPACE:
+                grabKey();
+                break;
+            case KeyEvent.VK_K:
+                useKey();
+                break;
         }
     }
 
     private void moveUp() {
-        if (map.playerAllowedToMoveUp()) {
-            y -= BLOCKSIZE;
+        if (MAP.playerAllowedToMoveUp()) {
+            y -= BLOCK_SIZE;
         }
         lastMove = UP;
     }
 
     private void moveDown() {
-        if (map.playerAllowedToMoveDown()) {
-            y += BLOCKSIZE;
+        if (MAP.playerAllowedToMoveDown()) {
+            y += BLOCK_SIZE;
         }
         lastMove = DOWN;
     }
 
     private void moveLeft() {
-        if (map.playerAllowedToMoveLeft()) {
-            x -= BLOCKSIZE;
+        if (MAP.playerAllowedToMoveLeft()) {
+            x -= BLOCK_SIZE;
         }
         lastMove = LEFT;
     }
 
     private void moveRight() {
-        if (map.playerAllowedToMoveRight()) {
-            x += BLOCKSIZE;
+        if (MAP.playerAllowedToMoveRight()) {
+            x += BLOCK_SIZE;
         }
         lastMove = RIGHT;
     }
@@ -147,79 +151,74 @@ public class Player {
         try {
             switch (lastMove) {
                 case UP:
-                    block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE - 1).getBlockType();
+                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                map.replaceTile(x, y - Game.BLOCKSIZE, new Barricade(0, true));
-                                hud.setNewMessage(true);
+                                MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
+                                HUD.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.");
+                                HUD.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
                     break;
                 case DOWN:
-                    block = map.getTile(x / Game.BLOCKSIZE, y / Game.BLOCKSIZE + 1).getBlockType();
+                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                map.replaceTile(x, y + Game.BLOCKSIZE, new Barricade(0, true));
-                                hud.setNewMessage(true);
+                                MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
+                                HUD.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.");
+                                HUD.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
                     break;
                 case LEFT:
-                    block = map.getTile(x / Game.BLOCKSIZE - 1, y / Game.BLOCKSIZE).getBlockType();
+                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                map.replaceTile(x - Game.BLOCKSIZE, y, new Barricade(0, true));
-                                hud.setNewMessage(true);
+                                MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
+                                HUD.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.");
+                                HUD.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
                     break;
                 case RIGHT:
-                    block = map.getTile(x / Game.BLOCKSIZE + 1, y / Game.BLOCKSIZE).getBlockType();
+                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                map.replaceTile(x + Game.BLOCKSIZE, y, new Barricade(0, true));
-                                hud.setNewMessage(true);
+                                MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
+                                HUD.setNewMessage(true);
                             } else {
-                                hud.setNewMessage("That key doesn't fit.");
+                                HUD.setNewMessage("That key doesn't fit.");
                             }
                         }
                     }
                     break;
-                default:
-                    // chill the fuck down
-                    break;
             }
-        } catch (Exception e) {
-
-        }
+        } catch (Exception e) {}
     }
 
     public void grabKey() {
-        BlockType block = map.getTile(getPositionX() / (Game.BLOCKSIZE), getPositionY() / (Game.BLOCKSIZE)).getBlockType();
+        BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
         if (block instanceof Key) {
             Key key = (Key) block;
             this.inventory = key;
             this.hasItem = true;
-            hud.setNewMessage("Grabbed a key!");
-            hud.setItem(hasItem, "Key", key.getPoints());
-            map.replaceTile(x, y, new Ground());
+            HUD.setNewMessage("Grabbed a key!");
+            HUD.setItem(hasItem, "Key", key.getPoints());
+            MAP.replaceTile(getArrayX(), getArrayY(), new Ground());
         }
     }
 
@@ -229,6 +228,14 @@ public class Player {
 
     public int getPositionY() {
         return y;
+    }
+
+    public int getArrayX() {
+        return getPositionX() / Game.BLOCK_SIZE;
+    }
+
+    public int getArrayY() {
+        return getPositionY() / Game.BLOCK_SIZE;
     }
 
 }

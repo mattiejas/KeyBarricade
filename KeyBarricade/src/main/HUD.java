@@ -11,14 +11,15 @@ import javax.swing.Timer;
 
 public class HUD implements ActionListener {
 
-    private Font font[];
+    private final Font FONT[];
 
-    private Timer messageTimer;
-    private Timer pressKeyTimer;
+    private final Timer MESSAGE_TIMER;
+    private final Timer PRESS_KEY_TIMER;
 
     private boolean newMessage;
     private boolean hasItem;
     private boolean startNewGame;
+    private boolean winGame;
 
     private Color blink;
     private Color none;
@@ -28,33 +29,32 @@ public class HUD implements ActionListener {
 
     private int itemCount;
 
-    private ArrayList<String> motivationalMessages;
-    private boolean winGame;
+    private final ArrayList<String> MOTIVATIONAL_MESSAGES;
 
     public HUD() {
-        messageTimer = new Timer(4000, this);
-        pressKeyTimer = new Timer(700, this);
+        MESSAGE_TIMER = new Timer(4000, this);
+        PRESS_KEY_TIMER = new Timer(700, this);
 
-        font = new Font[2];
-        motivationalMessages = new ArrayList<>();
+        FONT = new Font[2];
+        MOTIVATIONAL_MESSAGES = new ArrayList<>();
     }
 
     public void init() {
-        font[0] = new Font("Joystix Monospace", Font.PLAIN, 36);
-        font[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
+        FONT[0] = new Font("Joystix Monospace", Font.PLAIN, 36);
+        FONT[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
 
         blink = Color.WHITE;
         none = new Color(0, 0, 0, 0f);
 
-        motivationalMessages.add("Good work!");
-        motivationalMessages.add("You're doing great, my friend.");
-        motivationalMessages.add("Keep up the good work!");
-        motivationalMessages.add("What the hell?");
-        motivationalMessages.add("Oh my..");
-        motivationalMessages.add("Really?");
-        motivationalMessages.add("Very well then..");
-        motivationalMessages.add("Uh, okay?");
-        motivationalMessages.add("Great..");
+        MOTIVATIONAL_MESSAGES.add("Good work!");
+        MOTIVATIONAL_MESSAGES.add("You're doing great, my friend.");
+        MOTIVATIONAL_MESSAGES.add("Keep up the good work!");
+        MOTIVATIONAL_MESSAGES.add("What the hell?");
+        MOTIVATIONAL_MESSAGES.add("Oh my..");
+        MOTIVATIONAL_MESSAGES.add("Really?");
+        MOTIVATIONAL_MESSAGES.add("Very well then..");
+        MOTIVATIONAL_MESSAGES.add("Uh, okay?");
+        MOTIVATIONAL_MESSAGES.add("Great..");
     }
 
     public void render(Graphics2D g) {
@@ -64,33 +64,33 @@ public class HUD implements ActionListener {
             g.setColor(new Color(0, 0, 0, 1f));
             g.fillRect(0, 0, Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
             g.setColor(new Color(0, 0, 0, 0.7f));
-            g.fillRect((int) (Game.BLOCKSIZE * 0.5), (int) (Game.BLOCKSIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCKSIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCKSIZE));
+            g.fillRect((int) (Game.BLOCK_SIZE * 0.5), (int) (Game.BLOCK_SIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCK_SIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCK_SIZE));
             g.setColor(Color.WHITE);
-            g.drawRect((int) (Game.BLOCKSIZE * 0.5), (int) (Game.BLOCKSIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCKSIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCKSIZE));
+            g.drawRect((int) (Game.BLOCK_SIZE * 0.5), (int) (Game.BLOCK_SIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCK_SIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCK_SIZE));
             
-            g.setFont(font[0]);
+            g.setFont(FONT[0]);
             int width = g.getFontMetrics().stringWidth("Congratulations!");
             g.setColor(Color.BLACK);
-            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 2);
+            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 2);
             g.setColor(Color.WHITE);
-            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE);
+            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE);
            
-            g.setFont(font[1]);
+            g.setFont(FONT[1]);
             width = g.getFontMetrics().stringWidth("You won the game");
             g.setColor(Color.BLACK);
-            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 22);
+            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 22);
             g.setColor(Color.WHITE);
-            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 20);
+            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 20);
             
-            g.setFont(font[1]);
+            g.setFont(FONT[1]);
             width = g.getFontMetrics().stringWidth("Press any key to continue..");
-            pressKeyTimer.start();
+            PRESS_KEY_TIMER.start();
             g.setColor(blink);
-            g.drawString("Press any key to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCKSIZE);
+            g.drawString("Press any key to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCK_SIZE);
         }
 
         if (hasItem) {
-            g.setFont(font[1]);
+            g.setFont(FONT[1]);
             int width = g.getFontMetrics().stringWidth(itemName + ": " + itemCount);
 
             g.setColor(Color.BLACK);
@@ -100,7 +100,7 @@ public class HUD implements ActionListener {
         }
 
         if (newMessage) {
-            g.setFont(font[1]);
+            g.setFont(FONT[1]);
 
             g.setColor(Color.BLACK);
             g.drawString(message, 21, Game.WINDOW_HEIGHT - 28);
@@ -113,15 +113,15 @@ public class HUD implements ActionListener {
     public void setNewMessage(String s) {
         message = s;
         newMessage = true;
-        messageTimer.start();
+        MESSAGE_TIMER.start();
         System.out.println(message);
     }
 
     public void setNewMessage(boolean motivation) {
         if (motivation) {
-            message = motivationalMessages.get(new Random().nextInt(motivationalMessages.size()));
+            message = MOTIVATIONAL_MESSAGES.get(new Random().nextInt(MOTIVATIONAL_MESSAGES.size()));
             newMessage = true;
-            messageTimer.start();
+            MESSAGE_TIMER.start();
         }
     }
 
@@ -143,7 +143,7 @@ public class HUD implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (newMessage) {
             newMessage = false;
-            messageTimer.stop();
+            MESSAGE_TIMER.stop();
         }
 
         if (blink == none) {

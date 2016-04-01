@@ -51,7 +51,7 @@ public class GameStateHandlerTest {
         
         int gameState = 0;
         instance.setState(gameState);
-        assertTrue(isMenuState(instance.getState()));
+        assertTrue(isMenuState(instance.getCurrentState()));
     }
     
     @Test
@@ -62,7 +62,7 @@ public class GameStateHandlerTest {
         
         int gameState = 1;
         instance.setState(gameState, Difficulty.EASY);
-        assertTrue(isPlayState(instance.getState()));
+        assertTrue(isPlayState(instance.getCurrentState()));
     }
     
     
@@ -74,7 +74,7 @@ public class GameStateHandlerTest {
         
         int gameState = 2;
         instance.setState(gameState);
-        assertTrue(isHelpState(instance.getState()));
+        assertTrue(isHelpState(instance.getCurrentState()));
     }
     
     @Test
@@ -85,7 +85,7 @@ public class GameStateHandlerTest {
         
         int gameState = 3;
         instance.setState(gameState);
-        assertTrue(isDifficultyState(instance.getState()));
+        assertTrue(isDifficultyState(instance.getCurrentState()));
     }
     
     @Test
@@ -107,7 +107,7 @@ public class GameStateHandlerTest {
         
         instance.setPreviousGameState();
         
-        assertTrue(isDifficultyState(instance.getState()));
+        assertTrue(isDifficultyState(instance.getCurrentState()));
         
     }
     
@@ -127,7 +127,7 @@ public class GameStateHandlerTest {
         
         instance.setPreviousPlayState();
         
-        assertTrue(isPlayState(instance.getState()));
+        assertTrue(isPlayState(instance.getCurrentState()));
         
     }
     

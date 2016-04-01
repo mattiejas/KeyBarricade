@@ -6,10 +6,10 @@ public abstract class GameState {
 
     protected GameStateHandler handler;
 
-    protected final int MENUSTATE = 0;
-    protected final int PLAYSTATE = 1;
-    protected final int HELPSTATE = 2;
-    protected final int DIFFICULTYSTATE = 3;
+    protected static final int MENU_STATE = 0;
+    protected static final int PLAY_STATE = 1;
+    protected static final int HELP_STATE = 2;
+    protected static final int DIFFICULTY_STATE = 3;
 
     public GameState(GameStateHandler handler) {
         this.handler = handler;

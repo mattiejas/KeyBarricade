@@ -2,7 +2,6 @@ package blocks;
 
 import assets.ResourceLoader;
 import assets.Sprite;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
 public abstract class BlockType {

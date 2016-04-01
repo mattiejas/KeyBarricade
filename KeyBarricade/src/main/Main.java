@@ -12,11 +12,10 @@ public class Main {
     
     public static void main(String[] args) throws IOException {
         icon = ImageIO.read(new File("./assets/icon.png"));
-        
         JFrame frame = new JFrame();
 
-        frame.setTitle("KeyBarricade");
-        frame.setResizable(false);
+        frame.setTitle("KeyBarricade: The Game");
+        frame.setResizable(true);
         frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

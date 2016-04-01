@@ -19,5 +19,5 @@ public enum Sprite {
     PLAYER_ITEM_LEFT,
     PLAYER_ITEM_RIGHT,
     
-    ITEM_KEY,
+    ITEM_KEY
 }

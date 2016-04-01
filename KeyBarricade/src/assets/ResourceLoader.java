@@ -6,7 +6,6 @@ import java.awt.GraphicsEnvironment;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -14,7 +13,6 @@ import javax.imageio.ImageIO;
 public class ResourceLoader {
 
     private static BufferedImage image;
-    private static final Font FONT = new Font("Joystix Monospace", Font.PLAIN, 18);
 
     public static void init() {
         loadSpriteSheet();
@@ -74,27 +72,6 @@ public class ResourceLoader {
                 return image.getSubimage(96, 128, 32, 32);
             case ITEM_KEY:
                 return image.getSubimage(64, 32, 16, 16);
-        }
-    }
-
-    public static Font getFont() {
-        return FONT;
-    }
-    
-    private static BufferedImage getGround() {
-        Random r = new Random();
-        int rand = r.nextInt(4);
-        
-        switch(rand) {
-            default: 
-            case 0:
-                return image.getSubimage(0, 0, 16, 16);
-            case 1:
-                return image.getSubimage(16, 0, 16, 16);
-            case 2:
-                return image.getSubimage(32, 0, 16, 16);
-            case 3:
-                return image.getSubimage(48, 0, 16, 16);
         }
     }
 }

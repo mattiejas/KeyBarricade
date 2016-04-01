@@ -16,7 +16,7 @@ public class HelpState extends GameState {
 
     private String title;
     private ArrayList<String> text;
-    private Font[] fonts;
+    private Font[] font;
 
     private int width;
 
@@ -26,13 +26,13 @@ public class HelpState extends GameState {
 
     @Override
     public void init() {
-        background = new BufferedImage[10][10];
-        fonts = new Font[3];
+        background = new BufferedImage[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
+        font = new Font[3];
         text = new ArrayList<>();
         
-        fonts[0] = new Font("Joystix Monospace", Font.PLAIN, 50);
-        fonts[1] = new Font("Joystix Monospace", Font.PLAIN, 51);
-        fonts[2] = new Font("Joystix Monospace", Font.PLAIN, 19);
+        font[0] = new Font("Joystix Monospace", Font.PLAIN, 50);
+        font[1] = new Font("Joystix Monospace", Font.PLAIN, 51);
+        font[2] = new Font("Joystix Monospace", Font.PLAIN, 19);
 
         title = "Help";
         text.add("Welkom bij het spel KeyBarricade.");
@@ -67,21 +67,21 @@ public class HelpState extends GameState {
     public void render(Graphics2D g) {
         for (int i = 0; i < 10; i++) {
             for (int x = 0; x < 10; x++) {
-                g.drawImage(background[i][x], x * Game.BLOCKSIZE, i * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+                g.drawImage(background[i][x], x * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
             }
         }
         
-        g.setFont(fonts[1]);
+        g.setFont(font[1]);
         g.setColor(Color.DARK_GRAY);
         width = g.getFontMetrics().stringWidth(title);
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 115);
         
-        g.setFont(fonts[0]);
+        g.setFont(font[0]);
         g.setColor(Color.WHITE);
         width = g.getFontMetrics().stringWidth(title);
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 112);        
 
-        g.setFont(fonts[2]);
+        g.setFont(font[2]);
         g.setColor(Color.WHITE);
         int spacing = g.getFontMetrics().getHeight();
         int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
@@ -94,7 +94,7 @@ public class HelpState extends GameState {
     @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ESCAPE || k == KeyEvent.VK_SPACE) {
-            handler.setState(MENUSTATE);
+            handler.setPreviousGameState();
         }
     }
 

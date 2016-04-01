@@ -1,15 +1,12 @@
 package gamestates;
 
-import assets.ResourceLoader;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Difficulty;
-import main.Game;
 import main.HUD;
 import main.Map;
 
 public class PlayState extends GameState {
-
     private Map map;
     private HUD hud;
     private Difficulty diff;
@@ -21,14 +18,13 @@ public class PlayState extends GameState {
     @Override
     public void init() {
         hud = new HUD();
-        map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, diff, hud);
+        map = new Map(diff, hud);
         map.init();
         hud.init();
     }
 
     @Override
     public void render(Graphics2D g) {
-        g.setFont(ResourceLoader.getFont());
         map.render(g);
         hud.render(g);
     }
@@ -40,7 +36,7 @@ public class PlayState extends GameState {
     @Override
     public void keyPressed(int k) {
         if (k == KeyEvent.VK_ESCAPE) {
-            handler.setState(MENUSTATE);
+            handler.setState(MENU_STATE);
         } else {
             map.keyPressed(k);
             hud.keyPressed(k);
@@ -48,7 +44,7 @@ public class PlayState extends GameState {
             if (hud.isReady()) {
                 MenuState ms = handler.getMenuState();
                 ms.setFirstStart(true);
-                handler.setState(MENUSTATE);
+                handler.setState(MENU_STATE);
             }
 
         }

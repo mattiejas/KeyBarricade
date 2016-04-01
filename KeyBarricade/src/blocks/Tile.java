@@ -7,42 +7,44 @@ import main.Game;
 
 public class Tile {
 
-    private int width, height;
-    private int x, y;
-    private BlockType block;
+    private final int WIDTH, HEIGHT;
+    private final int X, Y;
+    private final BlockType BLOCK;
+    private final int MARGIN;
 
     public Tile(int x, int y, int width, int height, BlockType block) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.block = block;
+        this.X = x;
+        this.Y = y;
+        this.WIDTH = width;
+        this.HEIGHT = height;
+        this.BLOCK = block;
+        this.MARGIN = 2;
     }
 
     public void render(Graphics2D g) {
-        g.drawImage(block.getSprite(), x, y, width, height, null);
+        g.drawImage(BLOCK.getSprite(), X, Y, WIDTH, HEIGHT, null);
         
-        if (block.getPoints() > 0) {
+        if (BLOCK.getPoints() > 0) {
             Font font = new Font("Joystix Monospace", Font.PLAIN, 12);
             g.setFont(font);
             g.setColor(Color.WHITE);
-            g.drawString(block.getPoints() + "", x + 2, y + Game.BLOCKSIZE - 2);
+            g.drawString(BLOCK.getPoints() + "", X + MARGIN, Y + Game.BLOCK_SIZE - MARGIN);
         }
     }
 
     public int getPositionX() {
-        return this.x;
+        return this.X;
     }
 
     public int getPositionY() {
-        return this.y;
+        return this.Y;
     }
 
     public BlockType getBlockType() {
-        return block;
+        return BLOCK;
     }
 
     public boolean getSolid() {
-        return block.getSolid();
+        return BLOCK.getSolid();
     }
 }

@@ -15,11 +15,13 @@ import javax.swing.Timer;
 public class Game extends JPanel implements KeyListener, ActionListener {
 
     public static final int SCALE = 2;
-    public static final int BLOCKSIZE = 32 * SCALE;
-    public static final int WINDOW_WIDTH = BLOCKSIZE * 10, WINDOW_HEIGHT = BLOCKSIZE * 10;
+    public static final int BLOCK_SIZE = 32 * SCALE;
+    public static final int WINDOW_WIDTH = BLOCK_SIZE * 10;
+    public static final int WINDOW_HEIGHT = BLOCK_SIZE * 10;
+    public static final int HORIZONTAL_AMOUNT = WINDOW_WIDTH / BLOCK_SIZE;
+    public static final int VERTICAL_AMOUNT = WINDOW_HEIGHT / BLOCK_SIZE;
 
     private GameStateHandler handler;
-
     private Graphics2D g;
     private Timer t;
 
@@ -30,6 +32,14 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
         this.startGame();
     }
+    
+    private void startGame() {
+        this.init();
+        this.addKeyListener(this);
+        
+        t = new Timer(10, this);
+        t.start();
+    }    
 
     private void init() {
         ResourceLoader.init();
@@ -38,7 +48,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         handler.init();
     }
 
-    private void render(Graphics2D g) {
+    private void render() {
         handler.render(g);
     }
 
@@ -46,9 +56,14 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.g = (Graphics2D) g;
-        this.render(this.g);
+        this.render();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        this.repaint();
+    }    
+    
     @Override
     public void keyPressed(KeyEvent e) {
         handler.keyPressed(e.getKeyCode());
@@ -62,19 +77,5 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyTyped(KeyEvent e) {
         handler.keyTyped(e.getKeyCode());
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-    }
-
-    private void startGame() {
-        this.init();
-        this.addKeyListener(this);
-        
-
-        t = new Timer(10, this);
-        t.start();
     }
 }
