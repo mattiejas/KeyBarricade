@@ -21,3 +21,5 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + Design aanpassen indien klaar
 + ArrayOutOfBounds bij gebruik van key voorkomen
 + Restart zelfde leven
++ Static aangeven in Design
++ Vertical en horizontal attribuut omdraaien (losah)
