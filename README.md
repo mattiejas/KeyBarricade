@@ -13,7 +13,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + Hoe moeten we de Game.WIDTH en Game.HEIGHT modelleren?
 
 ###### Reminders (because we will forget)
-+ MenuState Font array maken!
++ ~~MenuState Font array maken!~~
 + Genoeg JUnit testen maken
 + Level class afmaken
 + Message voor het winnen van het spel
