@@ -132,11 +132,10 @@ public class MenuState extends GameState {
     public void keyPressed(int k
     ) {
         if (k == KeyEvent.VK_ENTER || k == KeyEvent.VK_SPACE) {
-            if (firstStart && !difficultySelection) {
+               if (firstStart) {
                 switch (currentSelection) {
                     case 0:
-                        difficultySelection = true;
-                        menuLength = difficulty.length;
+                        handler.setState(DIFFICULTYSTATE);
                         break;
                     case 1:
                         handler.setState(HELPSTATE);
@@ -146,17 +145,13 @@ public class MenuState extends GameState {
                     default:
                         break;
                 }
-            } else if (!difficultySelection) {
+            } else if (!firstStart) {
                 switch (currentSelection) {
                     case 0:
-                        for (int i = 0; i < handler.getTotalPreviousStates(); i++) {
-                            if (handler.getPreviousState(i) instanceof PlayState) {
-                                handler.setPreviousState(i);
-                            }
-                        }
+                        handler.setPreviousPlayState();
                         break;
                     case 1:
-                        difficultySelection = true;
+                        handler.setState(DIFFICULTYSTATE);
                         break;
                     case 2:
                         handler.setState(HELPSTATE);
@@ -164,38 +159,6 @@ public class MenuState extends GameState {
                     case 3:
                         System.exit(0);
                     default:
-                        break;
-                }
-            } else {
-                switch (currentSelection) {
-                    default:
-                    case 0:
-                        selectedDifficulty = Difficulty.EASY;
-                        difficultySelection = false;
-                        menuLength = options.length;
-                        handler.setState(PLAYSTATE);
-                        firstStart = false;
-                        break;
-                    case 1:
-                        selectedDifficulty = Difficulty.NORMAL;
-                        difficultySelection = false;
-                        menuLength = options.length;
-                        handler.setState(PLAYSTATE);
-                        firstStart = false;
-                        break;
-                    case 2:
-                        selectedDifficulty = Difficulty.HARD;
-                        difficultySelection = false;
-                        menuLength = options.length;
-                        handler.setState(PLAYSTATE);
-                        firstStart = false;
-                        break;
-                    case 3:
-                        selectedDifficulty = Difficulty.IMPOSSIBLE;
-                        difficultySelection = false;
-                        menuLength = options.length;
-                        handler.setState(PLAYSTATE);
-                        firstStart = false;
                         break;
                 }
             }

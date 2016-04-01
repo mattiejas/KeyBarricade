@@ -10,6 +10,7 @@ import main.Map;
 public class PlayState extends GameState {
 
     private Map map;
+private Difficulty diff;
 
     public PlayState(GameStateHandler handler) {
         super(handler);
@@ -23,14 +24,12 @@ public class PlayState extends GameState {
 
     @Override
     public void init() {
-        if (handler.getPreviousState() instanceof MenuState) {
-            MenuState ms = (MenuState) handler.getPreviousState();
-            map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, ms.getDifficulty());
-            map.init();
-        } else {
-            map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, Difficulty.EASY);
-            map.init();
-        }
+	map = new Map(Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT, diff);
+        map.init();
+    }
+
+    public void setDifficulty(Difficulty d){
+        this.diff = d;
     }
 
     @Override

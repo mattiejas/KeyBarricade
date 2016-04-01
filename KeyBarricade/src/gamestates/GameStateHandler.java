@@ -1,12 +1,15 @@
+
 package gamestates;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import main.Difficulty;
 
 public class GameStateHandler {
 
     private GameState currentState;
-    private ArrayList<GameState> previousStates;
+    private GameState previousGameState;
+    private GameState previousPlayState;
     private ArrayList<GameState> states;
 
     public GameStateHandler() {
@@ -14,9 +17,8 @@ public class GameStateHandler {
         states.add(new MenuState(this));
         states.add(new PlayState(this));
         states.add(new HelpState(this));
+        states.add(new DifficultyState(this));
         currentState = states.get(0);
-
-        previousStates = new ArrayList<>();
     }
 
     public void init() {
@@ -28,35 +30,39 @@ public class GameStateHandler {
     }
 
     public void setState(int gameState) {
-        previousStates.add(currentState);
+        previousGameState = currentState;
+        
+        if(currentState instanceof PlayState){
+            previousPlayState = currentState;
+        }
+        
         currentState = states.get(gameState);
         this.init();
     }
-
-    public void setPreviousState() {
-        currentState = previousStates.get(previousStates.size() - 1);
+    
+    public void setState(int gameState, Difficulty d){
+        currentState = states.get(gameState);
+        PlayState state = (PlayState)currentState;
+        state.setDifficulty(d);
+        this.init();
     }
-
-    public void setPreviousState(int previous) {
-        currentState = previousStates.get(previousStates.size() - (previous + 1));
+    
+    public void setPreviousGameState(){
+        currentState = previousGameState;
     }
-
-    public GameState getPreviousState() {
-        return previousStates.get(previousStates.size() - 1);
+    
+    public void setPreviousPlayState(){
+        currentState = previousPlayState;
     }
-
-    public GameState getPreviousState(int previous) {
-        return previousStates.get(previousStates.size() - (previous + 1));
-    }
-
+    
     public GameState getState() {
         return currentState;
     }
-
-    public int getTotalPreviousStates() {
-        return previousStates.size();
+    
+    public MenuState getMenuState(){
+        return (MenuState)states.get(0);
     }
-
+    
     public void keyPressed(int k) {
         currentState.keyPressed(k);
     }
