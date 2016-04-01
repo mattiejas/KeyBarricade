@@ -19,3 +19,4 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + ~~Message voor het winnen van het spel~~
 + Totale code optimaliseren
 + Design aanpassen indien klaar
++ ArrayOutOfBounds bij gebruik van key voorkomen
