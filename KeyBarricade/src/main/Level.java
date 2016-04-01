@@ -21,7 +21,7 @@ public class Level {
     public void init() {
         r = new Random();
         
-        // Insert the whole array with value -1 in order to track the 'empty' level tiles.
+        // Insert the entire array with value -1 in order to track the 'empty' level tiles.
         for (int i = 0; i < LEVEL.length; i++) {
             for (int j = 0; j < LEVEL[i].length; j++) {
                 LEVEL[i][j] = -1;
