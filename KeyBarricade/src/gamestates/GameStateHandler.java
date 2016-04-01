@@ -1,3 +1,4 @@
+
 package gamestates;
 
 import java.awt.Graphics2D;
@@ -56,6 +57,10 @@ public class GameStateHandler {
     
     public GameState getState() {
         return currentState;
+    }
+    
+    public MenuState getMenuState(){
+        return (MenuState)states.get(0);
     }
     
     public void keyPressed(int k) {

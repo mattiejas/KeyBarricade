@@ -107,6 +107,10 @@ public class MenuState extends GameState {
         }
 
     }
+    
+    public void setFirstStartFalse(){
+        this.firstStart = false;
+    }
 
     @Override
     public void keyPressed(int k
@@ -116,7 +120,6 @@ public class MenuState extends GameState {
                 switch (currentSelection) {
                     case 0:
                         handler.setState(DIFFICULTYSTATE);
-                        firstStart = false;
                         break;
                     case 1:
                         handler.setState(HELPSTATE);
