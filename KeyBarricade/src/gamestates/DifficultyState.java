@@ -11,6 +11,8 @@ import main.Difficulty;
 import main.Game;
 
 public class DifficultyState extends GameState {
+    
+    private MenuState ms;
 
     private String[] options;
     private String title;
@@ -102,15 +104,23 @@ public class DifficultyState extends GameState {
                     default:
                     case 0:
                         handler.setState(PLAYSTATE, Difficulty.EASY);
+                        ms = handler.getMenuState();
+                        ms.setFirstStartFalse();
                         break;
                     case 1:
                         handler.setState(PLAYSTATE, Difficulty.NORMAL);
+                        ms = handler.getMenuState();
+                        ms.setFirstStartFalse();
                         break;
                     case 2:
                         handler.setState(PLAYSTATE, Difficulty.HARD);
+                        ms = handler.getMenuState();
+                        ms.setFirstStartFalse();
                         break;
                     case 3:
                         handler.setState(PLAYSTATE, Difficulty.IMPOSSIBLE);
+                        ms = handler.getMenuState();
+                        ms.setFirstStartFalse();
                         break;
                 }
         }else if(k == KeyEvent.VK_ESCAPE){
