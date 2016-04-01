@@ -70,7 +70,7 @@ public class MenuState extends GameState {
                 g.drawImage(backGround[y][x], x * Game.BLOCKSIZE, y * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
             }
         }
-        g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_DOWN), 4 * Game.BLOCKSIZE, 3 * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
+        g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_RIGHT), 4 * Game.BLOCKSIZE, 3 * Game.BLOCKSIZE, Game.BLOCKSIZE, Game.BLOCKSIZE, null);
 
         g.setFont(fonts[1]);
         g.setColor(Color.DARK_GRAY);
