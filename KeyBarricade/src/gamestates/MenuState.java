@@ -102,8 +102,8 @@ public class MenuState extends GameState {
         }
     }
     
-    public void setFirstStartFalse(){
-        this.firstStart = false;
+    public void setFirstStart(boolean firstStart){
+        this.firstStart = firstStart;
     }
 
     @Override

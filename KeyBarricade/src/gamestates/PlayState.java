@@ -25,14 +25,13 @@ public class PlayState extends GameState {
         map.init();
         hud.init();
     }
-    
+
     @Override
     public void render(Graphics2D g) {
         g.setFont(ResourceLoader.getFont());
         map.render(g);
         hud.render(g);
     }
-
 
     public void setDifficulty(Difficulty d) {
         this.diff = d;
@@ -44,6 +43,14 @@ public class PlayState extends GameState {
             handler.setState(MENUSTATE);
         } else {
             map.keyPressed(k);
+            hud.keyPressed(k);
+
+            if (hud.isReady()) {
+                MenuState ms = handler.getMenuState();
+                ms.setFirstStart(true);
+                handler.setState(MENUSTATE);
+            }
+
         }
     }
 

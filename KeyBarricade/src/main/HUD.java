@@ -13,10 +13,15 @@ public class HUD implements ActionListener {
 
     private Font font[];
 
-    private Timer t;
+    private Timer messageTimer;
+    private Timer pressKeyTimer;
 
     private boolean newMessage;
     private boolean hasItem;
+    private boolean startNewGame;
+
+    private Color blink;
+    private Color none;
 
     private String message;
     private String itemName;
@@ -27,14 +32,19 @@ public class HUD implements ActionListener {
     private boolean winGame;
 
     public HUD() {
-        t = new Timer(4000, this);
+        messageTimer = new Timer(4000, this);
+        pressKeyTimer = new Timer(700, this);
+
         font = new Font[2];
         motivationalMessages = new ArrayList<>();
     }
 
     public void init() {
-        font[0] = new Font("Joystix Monospace", Font.PLAIN, 46);
+        font[0] = new Font("Joystix Monospace", Font.PLAIN, 36);
         font[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
+
+        blink = Color.WHITE;
+        none = new Color(0, 0, 0, 0f);
 
         motivationalMessages.add("Good work!");
         motivationalMessages.add("You're doing great, my friend.");
@@ -49,35 +59,52 @@ public class HUD implements ActionListener {
 
     public void render(Graphics2D g) {
         if (winGame) {
+            hasItem = false;
+
+            g.setColor(new Color(0, 0, 0, 1f));
+            g.fillRect(0, 0, Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
             g.setColor(new Color(0, 0, 0, 0.7f));
-            g.fillRect(Game.BLOCKSIZE, Game.BLOCKSIZE, Game.WINDOW_WIDTH - (2 * Game.BLOCKSIZE), Game.WINDOW_HEIGHT - (2 * Game.BLOCKSIZE));
-            
-            int width = g.getFontMetrics().stringWidth("Congratulations!");
-            g.setFont(font[0]);
-            g.setColor(Color.BLACK);
-            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 30);
-            System.out.println((Game.WINDOW_WIDTH / 2) - (width / 2));
-            
-            g.setFont(font[0]);
+            g.fillRect((int) (Game.BLOCKSIZE * 0.5), (int) (Game.BLOCKSIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCKSIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCKSIZE));
             g.setColor(Color.WHITE);
-            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 28);
+            g.drawRect((int) (Game.BLOCKSIZE * 0.5), (int) (Game.BLOCKSIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCKSIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCKSIZE));
+            
+            g.setFont(font[0]);
+            int width = g.getFontMetrics().stringWidth("Congratulations!");
+            g.setColor(Color.BLACK);
+            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 2);
+            g.setColor(Color.WHITE);
+            g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE);
+           
+            g.setFont(font[1]);
+            width = g.getFontMetrics().stringWidth("You won the game");
+            g.setColor(Color.BLACK);
+            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 22);
+            g.setColor(Color.WHITE);
+            g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCKSIZE + 20);
+            
+            g.setFont(font[1]);
+            width = g.getFontMetrics().stringWidth("Press any key to continue..");
+            pressKeyTimer.start();
+            g.setColor(blink);
+            g.drawString("Press any key to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCKSIZE);
         }
-        
-//        if (hasItem) {
-//            int width = g.getFontMetrics().stringWidth(itemName + ": " + itemCount);
-//            g.setFont(font[1]);
-//            g.setColor(Color.BLACK);
-//            g.drawString(itemName + ": " + itemCount, Game.WINDOW_WIDTH - width / 2, 30);
-//            g.setFont(font[1]);
-//            g.setColor(Color.WHITE);
-//            g.drawString(itemName + ": " + itemCount, Game.WINDOW_WIDTH - width / 2, 28);
-//        }
+
+        if (hasItem) {
+            g.setFont(font[1]);
+            int width = g.getFontMetrics().stringWidth(itemName + ": " + itemCount);
+
+            g.setColor(Color.BLACK);
+            g.drawString(itemName + ": " + itemCount, Game.WINDOW_WIDTH - width - 10, 30);
+            g.setColor(Color.WHITE);
+            g.drawString(itemName + ": " + itemCount, Game.WINDOW_WIDTH - width - 10, 28);
+        }
 
         if (newMessage) {
             g.setFont(font[1]);
+
             g.setColor(Color.BLACK);
             g.drawString(message, 21, Game.WINDOW_HEIGHT - 28);
-            g.setFont(font[1]);
+
             g.setColor(Color.WHITE);
             g.drawString(message, 20, Game.WINDOW_HEIGHT - 30);
         }
@@ -86,7 +113,7 @@ public class HUD implements ActionListener {
     public void setNewMessage(String s) {
         message = s;
         newMessage = true;
-        t.start();
+        messageTimer.start();
         System.out.println(message);
     }
 
@@ -94,7 +121,7 @@ public class HUD implements ActionListener {
         if (motivation) {
             message = motivationalMessages.get(new Random().nextInt(motivationalMessages.size()));
             newMessage = true;
-            t.start();
+            messageTimer.start();
         }
     }
 
@@ -107,7 +134,7 @@ public class HUD implements ActionListener {
     public void setItem(boolean hasItem) {
         this.hasItem = hasItem;
     }
-    
+
     public void winGame() {
         this.winGame = true;
     }
@@ -116,7 +143,23 @@ public class HUD implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (newMessage) {
             newMessage = false;
-            t.stop();
+            messageTimer.stop();
         }
+
+        if (blink == none) {
+            blink = Color.WHITE;
+        } else {
+            blink = none;
+        }
+    }
+
+    public void keyPressed(int k) {
+        if (winGame) {
+            startNewGame = true;
+        }
+    }
+
+    public boolean isReady() {
+        return startNewGame;
     }
 }
