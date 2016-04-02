@@ -148,9 +148,13 @@ public class Player {
 
     public void useKey() {
         BlockType block;
-        try {
+        if (inventory != null) {
+            System.out.println("Yo!");
             switch (lastMove) {
                 case UP:
+                    if ((getArrayY() - 1) < 0) {
+                        break; // avoid ArrayIndexOutOfBoundsException
+                    }
                     block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -165,6 +169,9 @@ public class Player {
                     }
                     break;
                 case DOWN:
+                   if (getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1) {
+                        break; // avoid ArrayIndexOutOfBoundsException
+                    }                    
                     block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -179,6 +186,9 @@ public class Player {
                     }
                     break;
                 case LEFT:
+                    if ((getArrayX() - 1) < 0) {
+                        break; // avoid ArrayIndexOutOfBoundsException
+                    }
                     block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -193,6 +203,9 @@ public class Player {
                     }
                     break;
                 case RIGHT:
+                    if (getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1) {
+                        break; // avoid ArrayIndexOutOfBoundsException
+                    }
                     block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -206,8 +219,8 @@ public class Player {
                         }
                     }
                     break;
-            }
-        } catch (Exception e) {}
+            }            
+        }
     }
 
     public void grabKey() {
