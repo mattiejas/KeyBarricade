@@ -24,8 +24,6 @@ public class Map {
     private final Level LEVEL;
     private final HUD HUD;
 
-    private Graphics2D g;
-
     protected static final int GROUND = 0;
     protected static final int WALL = 1;
     protected static final int BARRICADE = 2;

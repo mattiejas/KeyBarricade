@@ -12,7 +12,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import static main.Game.BLOCK_SIZE;
-import map.Coordinate;
 
 public class Player {
 
@@ -88,7 +87,7 @@ public class Player {
                     x + 10, y - (int) (Game.BLOCK_SIZE * 0.6), (int) (Game.BLOCK_SIZE * 0.7), (int) (Game.BLOCK_SIZE * 0.7), null);
         }
 
-        if ((getArrayX() == Game.VERTICAL_AMOUNT - 1) && (getArrayY() == Game.HORIZONTAL_AMOUNT - 1)) {
+        if ((getArrayX() == Game.HORIZONTAL_AMOUNT - 1) && (getArrayY() == Game.VERTICAL_AMOUNT - 1)) {
             HUD.winGame();
         }
     }

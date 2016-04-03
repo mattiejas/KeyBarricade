@@ -16,7 +16,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     public static final int SCALE = 2;
     public static final int BLOCK_SIZE = 32 * SCALE;
-    public static final int WINDOW_WIDTH = BLOCK_SIZE * 10;
+    public static final int WINDOW_WIDTH = BLOCK_SIZE * 15;
     public static final int WINDOW_HEIGHT = BLOCK_SIZE * 10;
     public static final int HORIZONTAL_AMOUNT = WINDOW_WIDTH / BLOCK_SIZE;
     public static final int VERTICAL_AMOUNT = WINDOW_HEIGHT / BLOCK_SIZE;

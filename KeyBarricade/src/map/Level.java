@@ -14,7 +14,7 @@ public class Level {
 
     public Level(Difficulty diff) {
         this.DIFFICULTY = diff;
-        this.LEVEL = new int[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
+        this.LEVEL = new int[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
         this.coordinates = new ArrayList();
     }
 
@@ -90,14 +90,14 @@ public class Level {
         int wallCount = 0;
         int barricadeCount = 0;
 
-        for (int i = 0; i < LEVEL.length; i++) {
-            for (int j = 0; j < LEVEL[i].length; j++) {
+        for (int y = 0; y < LEVEL.length; y++) {
+            for (int x = 0; x < LEVEL[y].length; x++) {
                 int random = r.nextInt(2) + 1; // Set random number between WALL and BARRICADE
 
-                int randomY = r.nextInt(10);
-                int randomX = r.nextInt(10);
+                int randomX = r.nextInt(Game.HORIZONTAL_AMOUNT);
+                int randomY = r.nextInt(Game.VERTICAL_AMOUNT);
 
-                if (LEVEL[randomY][randomX] == -1) {
+                if (LEVEL[randomX][randomY] == -1) {
                     if (random == Map.WALL) {
                         wallCount++;
                         if (wallCount > wallLimit) {
@@ -110,7 +110,7 @@ public class Level {
                             random = Map.GROUND;
                         }
                     }
-                    LEVEL[randomY][randomX] = random;
+                    LEVEL[randomX][randomY] = random;
                 }
             }
         }
