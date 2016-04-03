@@ -1,5 +1,6 @@
 package main;
 
+import map.Map;
 import assets.ResourceLoader;
 import assets.Sprite;
 import blocks.Barricade;
@@ -151,75 +152,75 @@ public class Player {
         try {
             switch (lastMove) {
                 case UP:
-                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
-                            }
-                        }
-                    }
+//                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
+//                    if (block instanceof Barricade) {
+//                        Barricade b = (Barricade) block;
+//                        if (!b.isUnlocked()) {
+//                            if (block.getPoints() == inventory.getPoints()) {
+//                                MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
+//                                HUD.setNewMessage(true);
+//                            } else {
+//                                HUD.setNewMessage("That key doesn't fit.");
+//                            }
+//                        }
+//                    }
                     break;
                 case DOWN:
-                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
-                            }
-                        }
-                    }
+//                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
+//                    if (block instanceof Barricade) {
+//                        Barricade b = (Barricade) block;
+//                        if (!b.isUnlocked()) {
+//                            if (block.getPoints() == inventory.getPoints()) {
+//                                MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
+//                                HUD.setNewMessage(true);
+//                            } else {
+//                                HUD.setNewMessage("That key doesn't fit.");
+//                            }
+//                        }
+//                    }
                     break;
                 case LEFT:
-                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
-                            }
-                        }
-                    }
+//                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
+//                    if (block instanceof Barricade) {
+//                        Barricade b = (Barricade) block;
+//                        if (!b.isUnlocked()) {
+//                            if (block.getPoints() == inventory.getPoints()) {
+//                                MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
+//                                HUD.setNewMessage(true);
+//                            } else {
+//                                HUD.setNewMessage("That key doesn't fit.");
+//                            }
+//                        }
+//                    }
                     break;
                 case RIGHT:
-                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
-                            }
-                        }
-                    }
+//                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
+//                    if (block instanceof Barricade) {
+//                        Barricade b = (Barricade) block;
+//                        if (!b.isUnlocked()) {
+//                            if (block.getPoints() == inventory.getPoints()) {
+//                                MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
+//                                HUD.setNewMessage(true);
+//                            } else {
+//                                HUD.setNewMessage("That key doesn't fit.");
+//                            }
+//                        }
+//                    }
                     break;
             }
         } catch (Exception e) {}
     }
 
     public void grabKey() {
-        BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
-        if (block instanceof Key) {
-            Key key = (Key) block;
-            this.inventory = key;
-            this.hasItem = true;
-            HUD.setNewMessage("Grabbed a key!");
-            HUD.setItem(hasItem, "Key", key.getPoints());
-            MAP.replaceTile(getArrayX(), getArrayY(), new Ground());
-        }
+//        BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
+//        if (block instanceof Key) {
+//            Key key = (Key) block;
+//            this.inventory = key;
+//            this.hasItem = true;
+//            HUD.setNewMessage("Grabbed a key!");
+//            HUD.setItem(hasItem, "Key", key.getPoints());
+//            MAP.replaceTile(getArrayX(), getArrayY(), new Ground());
+//        }
     }
 
     public int getPositionX() {
