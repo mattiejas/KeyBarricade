@@ -74,8 +74,21 @@ public class DifficultyState extends GameState {
         g.setFont(font[1]);
         int spacing = g.getFontMetrics().getHeight();
         int j = 100;
-        g.setColor(Color.WHITE);
+
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < option.length; i++, j += spacing) {
+            height = g.getFontMetrics().getHeight();
+            if (i == currentSelection) {
+                width = g.getFontMetrics().stringWidth("> " + option[i] + " <");
+                g.drawString("> " + option[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2) + 2, (Game.WINDOW_HEIGHT / 2) - (height / 2) + j + 2);
+            } else {
+                width = g.getFontMetrics().stringWidth(option[i]);
+                g.drawString(option[i], (Game.WINDOW_WIDTH / 2) - (width / 2) + 2, (Game.WINDOW_HEIGHT / 2) - (height / 2) + j + 2);
+            }
+        }
         
+        j = 100;
+        g.setColor(Color.WHITE);
         for (int i = 0; i < option.length; i++, j += spacing) {
             height = g.getFontMetrics().getHeight();
             if (i == currentSelection) {

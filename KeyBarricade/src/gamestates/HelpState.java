@@ -81,9 +81,16 @@ public class HelpState extends GameState {
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 112);        
 
         g.setFont(font[1]);
-        g.setColor(Color.WHITE);
         int spacing = g.getFontMetrics().getHeight();
         int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < text.size(); i++, j += spacing) {
+            width = g.getFontMetrics().stringWidth(text.get(i));
+            g.drawString(text.get(i), Game.WINDOW_WIDTH / 2 - width / 2 + 1, j + 1);
+        }
+
+        j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
+        g.setColor(Color.WHITE);
         for (int i = 0; i < text.size(); i++, j += spacing) {
             width = g.getFontMetrics().stringWidth(text.get(i));
             g.drawString(text.get(i), Game.WINDOW_WIDTH / 2 - width / 2, j);
