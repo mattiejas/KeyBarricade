@@ -7,6 +7,7 @@ import main.HUD;
 import main.Map;
 
 public class PlayState extends GameState {
+
     private Map map;
     private HUD hud;
     private Difficulty diff;
@@ -40,13 +41,11 @@ public class PlayState extends GameState {
         } else {
             map.keyPressed(k);
             hud.keyPressed(k);
-
             if (hud.isReady()) {
                 MenuState ms = handler.getMenuState();
                 ms.setFirstStart(true);
                 handler.setState(MENU_STATE);
             }
-
         }
     }
 
