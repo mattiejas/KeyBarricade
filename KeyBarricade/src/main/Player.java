@@ -152,74 +152,74 @@ public class Player {
             System.out.println("Yo!");
             switch (lastMove) {
                 case UP:
-                    if ((getArrayY() - 1) < 0) {
-                        break; // avoid ArrayIndexOutOfBoundsException
-                    }
-                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
+                    if (!((getArrayY() - 1) < 0)) {
+                        //break; // avoid ArrayIndexOutOfBoundsException
+                        block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
+                        if (block instanceof Barricade) {
+                            Barricade b = (Barricade) block;
+                            if (!b.isUnlocked()) {
+                                if (block.getPoints() == inventory.getPoints()) {
+                                    MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
+                                    HUD.setNewMessage(true);
+                                } else {
+                                    HUD.setNewMessage("That key doesn't fit.");
+                                }
                             }
                         }
                     }
                     break;
                 case DOWN:
-                   if (getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1) {
-                        break; // avoid ArrayIndexOutOfBoundsException
-                    }                    
-                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
+                    if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) {
+                        //break; // avoid ArrayIndexOutOfBoundsException
+                        block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
+                        if (block instanceof Barricade) {
+                            Barricade b = (Barricade) block;
+                            if (!b.isUnlocked()) {
+                                if (block.getPoints() == inventory.getPoints()) {
+                                    MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
+                                    HUD.setNewMessage(true);
+                                } else {
+                                    HUD.setNewMessage("That key doesn't fit.");
+                                }
                             }
                         }
                     }
                     break;
                 case LEFT:
-                    if ((getArrayX() - 1) < 0) {
-                        break; // avoid ArrayIndexOutOfBoundsException
-                    }
-                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
+                    if (!((getArrayX() - 1) < 0)) {
+                        //break; // avoid ArrayIndexOutOfBoundsException
+                        block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
+                        if (block instanceof Barricade) {
+                            Barricade b = (Barricade) block;
+                            if (!b.isUnlocked()) {
+                                if (block.getPoints() == inventory.getPoints()) {
+                                    MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
+                                    HUD.setNewMessage(true);
+                                } else {
+                                    HUD.setNewMessage("That key doesn't fit.");
+                                }
                             }
                         }
                     }
                     break;
                 case RIGHT:
-                    if (getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1) {
-                        break; // avoid ArrayIndexOutOfBoundsException
-                    }
-                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
-                    if (block instanceof Barricade) {
-                        Barricade b = (Barricade) block;
-                        if (!b.isUnlocked()) {
-                            if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
-                            } else {
-                                HUD.setNewMessage("That key doesn't fit.");
+                    if (!(getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) {
+                        //break; // avoid ArrayIndexOutOfBoundsException
+                        block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
+                        if (block instanceof Barricade) {
+                            Barricade b = (Barricade) block;
+                            if (!b.isUnlocked()) {
+                                if (block.getPoints() == inventory.getPoints()) {
+                                    MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
+                                    HUD.setNewMessage(true);
+                                } else {
+                                    HUD.setNewMessage("That key doesn't fit.");
+                                }
                             }
                         }
                     }
                     break;
-            }            
+            }
         }
     }
 
