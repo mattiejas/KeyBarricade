@@ -11,13 +11,13 @@ public class GameStateHandler {
     private final GameState[] STATES;
 
     public GameStateHandler() {
-        STATES = new GameState[4];
+        STATES = new GameState[5];
         STATES[0] = new MenuState(this);
-        STATES[1] = new PlayState(this);
+        STATES[1] = new PlayState(this, false);
         STATES[2] = new HelpState(this);
         STATES[3] = new DifficultyState(this);
+        STATES[4] = new PlayState(this, true);
         currentState = STATES[GameState.MENU_STATE];
-
     }
 
     public void init() {

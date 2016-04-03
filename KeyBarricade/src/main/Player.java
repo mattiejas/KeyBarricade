@@ -149,7 +149,6 @@ public class Player {
     public void useKey() {
         BlockType block;
         if (inventory != null) {
-            System.out.println("Yo!");
             switch (lastMove) {
                 case UP:
                     if (!((getArrayY() - 1) < 0)) {

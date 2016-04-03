@@ -10,10 +10,10 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 public class Map {
-
-    private final Tile[][] TILE;
+    private Tile[][] TILE; 
     private int[][] generatedLevel;
-
+    public static Tile[][] previousGeneratedTile;
+    
     private Player player;
     private final Level LEVEL;
     private final HUD HUD;
@@ -26,16 +26,22 @@ public class Map {
     protected static final int KEY = 3;
 
     public Map(Difficulty difficulty, HUD hud) {
+        this.TILE = new Tile[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];        
         this.LEVEL = new Level(difficulty);
-        this.TILE = new Tile[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
-        this.HUD = hud;
+        this.HUD = hud;              
     }
-
+    
     public void init() {
         LEVEL.init();
         generatedLevel = LEVEL.getLevel();
-        loadLevel();
+        this.loadLevel();
+        this.setPreviousTile();
         player = new Player(this, HUD);
+    }
+    
+    public void restart() {
+        TILE = getPreviousTile();
+        player = new Player(this, HUD);        
     }
 
     public void loadLevel() {
@@ -61,7 +67,7 @@ public class Map {
             }
         }
     }
-
+    
     public void render(Graphics2D g) {
         this.g = g;
         for (int y = 0; y < TILE.length; y++) {
@@ -70,10 +76,14 @@ public class Map {
             }
         }
         player.render(g);
-    }
+    } 
 
     public Tile getTile(int x, int y) {
         return TILE[x][y];
+    }
+    
+    public Tile[][] getTileArray() {
+        return this.TILE;
     }
 
     public void keyPressed(int k) {
@@ -119,5 +129,16 @@ public class Map {
     public void replaceTile(int x, int y, BlockType block) {
         TILE[x][y] = new Tile(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, block);
         this.render(g);
+    }
+
+    private Tile[][] getPreviousTile() {
+        return previousGeneratedTile;
+    }
+    private void setPreviousTile() {
+        for (int y = 0; y < TILE.length; y++) {
+            for (int x = 0; x < TILE[y].length; x++) {
+                previousGeneratedTile[y][x] = TILE[y][x];
+            }
+        }        
     }
 }

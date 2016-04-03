@@ -10,16 +10,22 @@ public class PlayState extends GameState {
     private Map map;
     private HUD hud;
     private Difficulty diff;
+    boolean restart;
 
-    public PlayState(GameStateHandler handler) {
+    public PlayState(GameStateHandler handler, boolean restart) {
         super(handler);
+        this.restart = restart;
     }
 
     @Override
     public void init() {
-        hud = new HUD();
-        map = new Map(diff, hud);
-        map.init();
+        map = new Map(diff, hud);  
+        if (restart) {
+            map.restart();
+        } else {   
+            map.init();
+        }
+        hud = new HUD(); 
         hud.init();
     }
 
