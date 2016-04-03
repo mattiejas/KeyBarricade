@@ -9,7 +9,6 @@ import blocks.Wall;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
 import main.Difficulty;
 import main.Game;
 import main.HUD;
@@ -59,11 +58,6 @@ public class Map {
                 default:
                 case GROUND:
                     map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground()));
-                    if (x == 0 && y == 0) {
-                        map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(true, false)));
-                    } else if (x == Game.HORIZONTAL_AMOUNT - 1 && y == Game.VERTICAL_AMOUNT - 1) {
-                        map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(false, true)));
-                    }
                     break;
                 case WALL:
                     map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Wall()));
@@ -74,6 +68,12 @@ public class Map {
                 case KEY:
                     map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Key(100)));
                     break;
+            }
+
+            if (x == 0 && y == 0) {
+                map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(true, false)));
+            } else if (x == Game.HORIZONTAL_AMOUNT - 1 && y == Game.VERTICAL_AMOUNT - 1) {
+                map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(false, true)));
             }
         }
 
@@ -101,9 +101,8 @@ public class Map {
 
     public boolean playerAllowedToMoveUp() {
         try {
-            return false;
-//            return 
-//                    && player.getPositionY() > 0;
+            return !map.get(new Coordinate(player.getArrayX(), player.getArrayY() - 1)).getSolid()
+                    && player.getPositionY() > 0;
         } catch (Exception e) {
             return false;
         }
@@ -111,9 +110,8 @@ public class Map {
 
     public boolean playerAllowedToMoveDown() {
         try {
-            return false;
-            // return !TILE[player.getArrayX()][player.getArrayY() + 1].getSolid()
-            //       && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
+            return !map.get(new Coordinate(player.getArrayX(), player.getArrayY() + 1)).getSolid()
+                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
         } catch (Exception e) {
             return false;
         }
@@ -121,9 +119,8 @@ public class Map {
 
     public boolean playerAllowedToMoveLeft() {
         try {
-            return false;
-            //return !TILE[player.getArrayX() - 1][player.getArrayY()].getSolid()
-            //      && player.getPositionX() > 0;
+            return !map.get(new Coordinate(player.getArrayX() - 1, player.getArrayY())).getSolid()
+                    && player.getPositionX() > 0;
         } catch (Exception e) {
             return false;
         }
@@ -131,16 +128,15 @@ public class Map {
 
     public boolean playerAllowedToMoveRight() {
         try {
-            return false;
-            //return !TILE[player.getArrayX() + 1][player.getArrayY()].getSolid()
-            //      && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
+            return !map.get(new Coordinate(player.getArrayX() + 1, player.getArrayY())).getSolid()
+                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
         } catch (Exception e) {
             return false;
         }
     }
 
     public void replaceTile(int x, int y, BlockType block) {
-        //TILE[x][y] = new Tile(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, block);
+        map.put(new Coordinate(x, y), new Tile(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, block));
         this.render(g);
     }
 }
