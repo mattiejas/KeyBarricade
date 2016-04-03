@@ -20,14 +20,13 @@ public class PlayState extends GameState {
     @Override
     public void init() {
         map = new Map(diff, hud);  
+        hud = new HUD(); 
+        hud.init();        
         if (restart) {
-            System.out.println("Restart staat op trueeee");
             map.restart();
         } else {   
             map.init();
         }
-        hud = new HUD(); 
-        hud.init();
     }
 
     @Override

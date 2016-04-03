@@ -45,6 +45,7 @@ public class Map {
     }
 
     public void loadLevel() {
+        System.out.println("Maar 1x");
         Random r = new Random();
         System.out.println(generatedLevel.length);
         for (int y = 0; y < generatedLevel.length; y++) {
