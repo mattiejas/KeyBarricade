@@ -33,6 +33,7 @@ public class GameStateHandler {
         
         if (currentState instanceof PlayState) {
             previousPlayState = currentState;
+            System.out.println("PlayState");
         } 
 
         currentState = STATES[gameState];

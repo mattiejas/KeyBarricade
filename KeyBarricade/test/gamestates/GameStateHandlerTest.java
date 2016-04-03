@@ -57,19 +57,7 @@ public class GameStateHandlerTest {
     @Test
     public void testSetState_int2() {
         ResourceLoader.init();
-        System.out.println("setState1");
-        GameStateHandler instance = new GameStateHandler();
-        
-        int gameState = 1;
-        instance.setState(gameState, Difficulty.EASY);
-        assertTrue(isPlayState(instance.getCurrentState()));
-    }
-    
-    
-    @Test
-    public void testSetState_int3() {
-        ResourceLoader.init();
-        System.out.println("setState3");
+        System.out.println("setState2");
         GameStateHandler instance = new GameStateHandler();
         
         int gameState = 2;
@@ -78,14 +66,24 @@ public class GameStateHandlerTest {
     }
     
     @Test
-    public void testSetState_int4() {
+    public void testSetState_int3() {
         ResourceLoader.init();
-        System.out.println("setState4");
+        System.out.println("setState3");
         GameStateHandler instance = new GameStateHandler();
         
         int gameState = 3;
         instance.setState(gameState);
         assertTrue(isDifficultyState(instance.getCurrentState()));
+    }
+    
+    @Test
+    public void testSetPlayState() {
+        ResourceLoader.init();
+        System.out.println("setState1");
+        GameStateHandler instance = new GameStateHandler();
+        
+        instance.setPlayState(Difficulty.EASY);
+        assertTrue(isPlayState(instance.getCurrentState()));
     }
     
     @Test
@@ -117,7 +115,7 @@ public class GameStateHandlerTest {
         GameStateHandler instance = new GameStateHandler();
         
         int gameState = 1;
-        instance.setState(gameState, Difficulty.EASY);
+        instance.setPlayState(Difficulty.EASY);
         
         gameState = 0;
         instance.setState(gameState);
@@ -130,6 +128,9 @@ public class GameStateHandlerTest {
         assertTrue(isPlayState(instance.getCurrentState()));
         
     }
+    
+    @Test 
+    public void 
     
     public boolean isMenuState(Object a){
         return a instanceof MenuState;
