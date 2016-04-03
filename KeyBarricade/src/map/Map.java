@@ -84,15 +84,15 @@ public class Map {
     }
 
     public void render(Graphics2D g) {
-        this.g = g;
         for (Tile tile : map.values()) {
             tile.render(g);
         }
+
         player.render(g);
     }
 
-    public Tile getTile(Coordinate c) {
-        return map.get(c);
+    public Tile getTile(int x, int y) {
+        return map.get(new Coordinate(x, y));
     }
 
     public void keyPressed(int k) {
@@ -100,43 +100,50 @@ public class Map {
     }
 
     public boolean playerAllowedToMoveUp() {
-        try {
-            return !map.get(new Coordinate(player.getArrayX(), player.getArrayY() - 1)).getSolid()
-                    && player.getPositionY() > 0;
-        } catch (Exception e) {
+        int x = player.getArrayX();
+        int y = player.getArrayY();
+
+        if ((x >= 0 && x <= Game.HORIZONTAL_AMOUNT - 1) && (y > 0 && y <= Game.VERTICAL_AMOUNT - 1)) {
+            return !map.get(new Coordinate(x, y - 1)).getSolid();
+        } else {
             return false;
         }
     }
 
     public boolean playerAllowedToMoveDown() {
-        try {
-            return !map.get(new Coordinate(player.getArrayX(), player.getArrayY() + 1)).getSolid()
-                    && player.getPositionY() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
-        } catch (Exception e) {
+        int x = player.getArrayX();
+        int y = player.getArrayY();
+
+        if ((x >= 0 && x <= Game.HORIZONTAL_AMOUNT - 1) && (y >= 0 && y < Game.VERTICAL_AMOUNT - 1)) {
+            return !map.get(new Coordinate(x, y + 1)).getSolid();
+        } else {
             return false;
         }
     }
 
     public boolean playerAllowedToMoveLeft() {
-        try {
-            return !map.get(new Coordinate(player.getArrayX() - 1, player.getArrayY())).getSolid()
-                    && player.getPositionX() > 0;
-        } catch (Exception e) {
+        int x = player.getArrayX();
+        int y = player.getArrayY();
+
+        if ((x > 0 && x <= Game.HORIZONTAL_AMOUNT - 1) && (y >= 0 && y <= Game.VERTICAL_AMOUNT - 1)) {
+            return !map.get(new Coordinate(x - 1, y)).getSolid();
+        } else {
             return false;
         }
     }
 
     public boolean playerAllowedToMoveRight() {
-        try {
-            return !map.get(new Coordinate(player.getArrayX() + 1, player.getArrayY())).getSolid()
-                    && player.getPositionX() < Game.WINDOW_HEIGHT - Game.BLOCK_SIZE;
-        } catch (Exception e) {
+        int x = player.getArrayX();
+        int y = player.getArrayY();
+
+        if ((x >= 0 && x < Game.HORIZONTAL_AMOUNT - 1) && (y >= 0 && y <= Game.VERTICAL_AMOUNT - 1)) {
+            return !map.get(new Coordinate(x + 1, y)).getSolid();
+        } else {
             return false;
         }
     }
 
     public void replaceTile(int x, int y, BlockType block) {
         map.put(new Coordinate(x, y), new Tile(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, block));
-        this.render(g);
     }
 }

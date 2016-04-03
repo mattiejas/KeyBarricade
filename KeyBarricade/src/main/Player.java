@@ -153,7 +153,7 @@ public class Player {
         try {
             switch (lastMove) {
                 case UP:
-                    block = MAP.getTile(new Coordinate(getArrayX(), getArrayY() - 1)).getBlockType();
+                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
@@ -167,7 +167,7 @@ public class Player {
                     }
                     break;
                 case DOWN:
-                    block = MAP.getTile(new Coordinate(getArrayX(), getArrayY() + 1)).getBlockType();
+                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
@@ -181,7 +181,7 @@ public class Player {
                     }
                     break;
                 case LEFT:
-                    block = MAP.getTile(new Coordinate(getArrayX() - 1, getArrayY())).getBlockType();
+                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
@@ -195,7 +195,7 @@ public class Player {
                     }
                     break;
                 case RIGHT:
-                    block = MAP.getTile(new Coordinate(getArrayX() + 1, getArrayY())).getBlockType();
+                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
@@ -214,7 +214,7 @@ public class Player {
     }
 
     public void grabKey() {
-        BlockType block = MAP.getTile(new Coordinate(getArrayX(), getArrayY())).getBlockType();
+        BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
         if (block instanceof Key) {
             Key key = (Key) block;
             this.inventory = key;
