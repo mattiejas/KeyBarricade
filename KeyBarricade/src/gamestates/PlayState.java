@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Difficulty;
 import main.HUD;
-import main.Map;
+import map.Map;
 
 public class PlayState extends GameState {
     private Map map;
