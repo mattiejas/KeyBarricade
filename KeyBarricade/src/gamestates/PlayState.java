@@ -21,6 +21,7 @@ public class PlayState extends GameState {
     public void init() {
         map = new Map(diff, hud);  
         if (restart) {
+            System.out.println("Restart staat op trueeee");
             map.restart();
         } else {   
             map.init();

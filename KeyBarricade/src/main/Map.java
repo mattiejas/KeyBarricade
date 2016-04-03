@@ -12,7 +12,7 @@ import java.util.Random;
 public class Map {
     private Tile[][] TILE; 
     private int[][] generatedLevel;
-    public static Tile[][] previousGeneratedTile;
+    public static Tile[][] previousGeneratedTile = new Tile[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
     
     private Player player;
     private final Level LEVEL;
@@ -26,7 +26,7 @@ public class Map {
     protected static final int KEY = 3;
 
     public Map(Difficulty difficulty, HUD hud) {
-        this.TILE = new Tile[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];        
+        this.TILE = new Tile[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
         this.LEVEL = new Level(difficulty);
         this.HUD = hud;              
     }
@@ -40,7 +40,7 @@ public class Map {
     }
     
     public void restart() {
-        TILE = getPreviousTile();
+        TILE = previousGeneratedTile;
         player = new Player(this, HUD);        
     }
 
@@ -131,14 +131,11 @@ public class Map {
         this.render(g);
     }
 
-    private Tile[][] getPreviousTile() {
-        return previousGeneratedTile;
-    }
     private void setPreviousTile() {
         for (int y = 0; y < TILE.length; y++) {
             for (int x = 0; x < TILE[y].length; x++) {
                 previousGeneratedTile[y][x] = TILE[y][x];
             }
-        }        
+        }
     }
 }
