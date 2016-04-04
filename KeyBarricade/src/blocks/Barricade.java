@@ -6,7 +6,7 @@ import assets.Sprite;
 public class Barricade extends BlockType {
 
     /**
-     * This Barricade recieves 2 parameters. One to set the points
+     * This Barricade receives 2 parameters. One to set the points
      * and one to make it solid or not.
      * 
      * @param points        set the points for the Barricade
