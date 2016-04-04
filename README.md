@@ -7,7 +7,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + **Genoeg JUnit testen maken**
 + **Code voorzien van commentaar**
 + **Analyse aanpassen multipliciteit**
-+ + ~~Help in het Engels zetten~~
++ ~~Help in het Engels zetten~~
 + ~~MenuState Font array maken!~~
 + ~~Level class afmaken~~
 + ~~Message voor het winnen van het spel~~
