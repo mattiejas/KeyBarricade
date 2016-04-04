@@ -149,9 +149,9 @@ public class Player {
 
     public void useKey() {
         BlockType block;
-        try {
-            switch (lastMove) {
-                case UP:
+        switch (lastMove) {
+            case UP:
+                if (!((getArrayY() - 1) < 0)) {
                     block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -164,8 +164,12 @@ public class Player {
                             }
                         }
                     }
-                    break;
-                case DOWN:
+                }
+                break;
+            case DOWN:
+                System.out.println(getArrayY());
+                System.out.println(Game.VERTICAL_AMOUNT);
+                if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) {
                     block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -178,8 +182,10 @@ public class Player {
                             }
                         }
                     }
-                    break;
-                case LEFT:
+                }
+                break;
+            case LEFT:
+                if (!((getArrayX() - 1) < 0)) {
                     block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -192,8 +198,10 @@ public class Player {
                             }
                         }
                     }
-                    break;
-                case RIGHT:
+                }
+                break;
+            case RIGHT:
+                if (!(getArrayX() + 1 > Game.VERTICAL_AMOUNT - 1)) {
                     block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -206,9 +214,8 @@ public class Player {
                             }
                         }
                     }
-                    break;
-            }
-        } catch (Exception e) {
+                }
+                break;
         }
     }
 
