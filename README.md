@@ -4,11 +4,10 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 ***
 
 ###### Reminders (because we will forget)
-+ *Help menu in Engels of de rest in het Nederlands*  
-+ *Genoeg JUnit testen maken*
-+ *Code voorzien van commentaar*
-+ *Help in het Engels zetten*
-+ *Analyse aanpassen multipliciteit*
++ **Genoeg JUnit testen maken**
++ **Code voorzien van commentaar**
++ **Help in het Engels zetten**
++ **Analyse aanpassen multipliciteit**
 + ~~MenuState Font array maken!~~
 + ~~Level class afmaken~~
 + ~~Message voor het winnen van het spel~~
@@ -20,9 +19,9 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + ~~Check private, static en relaties in design~~
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
-+ *Wat doen we met: private final HashMap<Coordinate, Tile> MAP; in het design diagram?*
-+ *Wat doen we met HUD?*
-+ *Hoe uitgebreid moet de design diagram beschrijving zijn voor onze ontwikkeldocumenten?*
++ **Wat doen we met: private final HashMap<Coordinate, Tile> MAP; in het design diagram?**
++ **Wat doen we met HUD?**
++ **Hoe uitgebreid moet de design diagram beschrijving zijn voor onze ontwikkeldocumenten?**
 + ~~Moeten we interfaces zoals KeyListener, actionListener en JPanel implementeren in onze design diagram?~~
 + ~~Hoe moeten we de Game.WIDTH en Game.HEIGHT modelleren?~~
 
