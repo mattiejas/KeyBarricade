@@ -44,6 +44,11 @@ public class GameStateHandler {
         ((PlayState) currentState).setDifficulty(d);
         this.init();
     }
+    
+    public void restartPlayState() {
+        currentState = previousPlayState;
+        ((PlayState) currentState).restart();
+    }
 
     public void setPreviousGameState() {
         currentState = previousGameState;
