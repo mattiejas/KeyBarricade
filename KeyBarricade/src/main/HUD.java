@@ -32,6 +32,9 @@ public class HUD implements ActionListener {
 
     private final ArrayList<String> MOTIVATIONAL_MESSAGES;
 
+    /**
+     * Initialize a Head-up display that draws certain messages to the screen.
+     */
     public HUD() {
         MESSAGE_TIMER = new Timer(4000, this);
         PRESS_KEY_TIMER = new Timer(700, this);
@@ -41,12 +44,15 @@ public class HUD implements ActionListener {
     }
 
     public void init() {
+        // Initialize fonts
         FONT[0] = new Font("Joystix Monospace", Font.PLAIN, 36);
         FONT[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
 
+        // New colors
         blink = Color.WHITE;
         none = new Color(0, 0, 0, 0f);
 
+        // Add some cool messages
         MOTIVATIONAL_MESSAGES.add("Good work!");
         MOTIVATIONAL_MESSAGES.add("You're doing great, my friend.");
         MOTIVATIONAL_MESSAGES.add("Keep up the good work!");
@@ -59,6 +65,7 @@ public class HUD implements ActionListener {
     }
 
     public void render(Graphics2D g) {
+        // If the game is finished draw this..
         if (winGame) {
             hasItem = false;
 
@@ -90,6 +97,7 @@ public class HUD implements ActionListener {
             g.drawString("Press SPACE to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCK_SIZE);
         }
 
+        // If player picked up an item, draw this..
         if (hasItem) {
             g.setFont(FONT[1]);
             int width = g.getFontMetrics().stringWidth(itemName + ": " + itemCount);
@@ -100,6 +108,7 @@ public class HUD implements ActionListener {
             g.drawString(itemName + ": " + itemCount, Game.WINDOW_WIDTH - width - 10, 28);
         }
 
+        // If there is a message ready to be drawn, do it..
         if (newMessage) {
             g.setFont(FONT[1]);
 
@@ -111,30 +120,48 @@ public class HUD implements ActionListener {
         }
     }
 
+    /**
+     * Print a message to the screen.
+     *
+     * @param s String that needs to be printed
+     */
     public void setNewMessage(String s) {
         message = s;
         newMessage = true;
         MESSAGE_TIMER.start();
     }
 
-    public void setNewMessage(boolean motivation) {
-        if (motivation) {
-            message = MOTIVATIONAL_MESSAGES.get(new Random().nextInt(MOTIVATIONAL_MESSAGES.size()));
-            newMessage = true;
-            MESSAGE_TIMER.start();
-        }
+    /**
+     * Print a random motivational message to the screen.
+     */
+    public void setNewMotivationMessage() {
+        message = MOTIVATIONAL_MESSAGES.get(new Random().nextInt(MOTIVATIONAL_MESSAGES.size()));
+        newMessage = true;
+        MESSAGE_TIMER.start();
     }
 
-    public void setItem(boolean hasItem, String itemName, int count) {
-        this.hasItem = hasItem;
+    /**
+     * Sets the item in the upper right corner of the screen.
+     *     
+     * @param itemName  the name of the item
+     * @param count     amount of items
+    */
+    public void setItem(String itemName, int count) {
+        this.hasItem = true;
         this.itemName = itemName;
         this.itemCount = count;
     }
 
-    public void setItem(boolean hasItem) {
-        this.hasItem = hasItem;
+    /**
+     * Clear the item in the upper right corner of the screen.
+     */
+    public void clearItem() {
+        this.hasItem = false;
     }
 
+    /**
+     * Winning mode enabled.
+     */
     public void winGame() {
         this.winGame = true;
     }
@@ -159,10 +186,14 @@ public class HUD implements ActionListener {
                 if (winGame) {
                     startNewGame = true;
                 }
-            break;
+                break;
         }
     }
 
+    /**
+     * Checks whether the game is ready to start a new game.
+     * @return <code>true</code> if ready, otherwise <code>false</code>
+     */
     public boolean isReady() {
         return startNewGame;
     }
