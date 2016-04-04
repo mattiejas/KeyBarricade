@@ -68,4 +68,14 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void keyPressed(KeyEvent e) {
         handler.keyPressed(e.getKeyCode());
     }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // Currently no implementation
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // Currently no implementation
+    }
 }
