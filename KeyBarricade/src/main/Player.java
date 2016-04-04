@@ -43,6 +43,7 @@ public class Player {
     public void render(Graphics2D g) {
         g.setColor(Color.MAGENTA);
 
+        // Checks if player has an item in order to set a different sprite.
         if (hasItem) {
             switch (lastMove) {
                 case UP:
@@ -77,21 +78,29 @@ public class Player {
             }
         }
 
+        // Draw the player and its shadow.
         Color c = new Color(0, 0, 0, (float) 0.4);
         g.setColor(c);
         g.fillOval(x + 3, y + 48, Game.BLOCK_SIZE - 6, 16);
         g.drawImage(image, x - 10, y - 24, (int) (Game.BLOCK_SIZE * 1.3), (int) (Game.BLOCK_SIZE * 1.3), null);
 
+        // Draw the key when the player has an item.
         if (hasItem) {
             g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY),
                     x + 10, y - (int) (Game.BLOCK_SIZE * 0.6), (int) (Game.BLOCK_SIZE * 0.7), (int) (Game.BLOCK_SIZE * 0.7), null);
         }
 
+        // Draws congratulation screen
         if ((getArrayX() == Game.HORIZONTAL_AMOUNT - 1) && (getArrayY() == Game.VERTICAL_AMOUNT - 1)) {
             HUD.winGame();
         }
     }
 
+    /**
+     * Moves the player according to the pressed key.
+     * 
+     * @param k     is the chosen keyCode in Game
+     */
     public void keyPressed(int k) {
         switch (k) {
             case KeyEvent.VK_W:
@@ -119,6 +128,9 @@ public class Player {
         }
     }
 
+    /**
+     * The player moves up and remember its last direction.
+     */
     private void moveUp() {
         if (MAP.playerAllowedToMoveUp()) {
             y -= BLOCK_SIZE;
@@ -126,6 +138,9 @@ public class Player {
         lastMove = UP;
     }
 
+    /**
+     * The player moves down and remember its last direction.
+     */
     private void moveDown() {
         if (MAP.playerAllowedToMoveDown()) {
             y += BLOCK_SIZE;
@@ -133,6 +148,9 @@ public class Player {
         lastMove = DOWN;
     }
 
+    /**
+     * The player moves left and remember its last direction.
+     */
     private void moveLeft() {
         if (MAP.playerAllowedToMoveLeft()) {
             x -= BLOCK_SIZE;
@@ -140,6 +158,9 @@ public class Player {
         lastMove = LEFT;
     }
 
+    /**
+     * The player moves right and remember its last direction.
+     */
     private void moveRight() {
         if (MAP.playerAllowedToMoveRight()) {
             x += BLOCK_SIZE;
@@ -147,11 +168,14 @@ public class Player {
         lastMove = RIGHT;
     }
 
+    /**
+     * The player uses the key, MAP replaces the tile with a new BlockType object and HUD sets a new message.
+     */
     public void useKey() {
         BlockType block;
         switch (lastMove) {
             case UP:
-                if (!((getArrayY() - 1) < 0)) {
+                if (!((getArrayY() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
                     block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -167,7 +191,7 @@ public class Player {
                 }
                 break;
             case DOWN:
-                if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) {
+                if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
                     block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -183,7 +207,7 @@ public class Player {
                 }
                 break;
             case LEFT:
-                if (!((getArrayX() - 1) < 0)) {
+                if (!((getArrayX() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
                     block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -199,7 +223,7 @@ public class Player {
                 }
                 break;
             case RIGHT:
-                if (!(getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) {
+                if (!(getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
                     block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
@@ -217,6 +241,9 @@ public class Player {
         }
     }
 
+    /**
+     * The player grabs the key, HUD sets a new message and MAP replaces the tile.
+     */
     public void grabKey() {
         BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
         if (block instanceof Key) {
@@ -229,20 +256,35 @@ public class Player {
         }
     }
 
+    /**
+     * Get the position of the player.
+     * @return      x
+     */
     public int getPositionX() {
         return x;
     }
 
+    /**
+     * Get the position of the player
+     * @return      y
+     */
     public int getPositionY() {
         return y;
     }
 
+    /**
+     * Calculate the x position of the array.
+     * @return  x
+     */
     public int getArrayX() {
         return getPositionX() / Game.BLOCK_SIZE;
     }
 
+    /**
+     * Calculate the y position of the array.
+     * @return  y
+     */
     public int getArrayY() {
         return getPositionY() / Game.BLOCK_SIZE;
     }
-
 }
