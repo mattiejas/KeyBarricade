@@ -14,6 +14,17 @@ public class ResourceLoader {
 
     private static BufferedImage image;
 
+    /**
+     * This method initializes the images and the font
+     * this games uses by calling loadSpiteSheet and LoadFont
+     * 
+     * loadSprite:
+     * This initializes the image the game uses. The image
+     * contains a spritesheet.
+     * 
+     * loadFont:
+     * This initializes the font the game uses.
+     */
     public static void init() {
         loadSpriteSheet();
         loadFont();
@@ -36,6 +47,14 @@ public class ResourceLoader {
         }
     }
 
+    /**
+     * This method returns an image of a specific item.
+     * The parameter receives a Sprite. With the sprite it determines
+     * what part of the spritesheet it has to return.
+     * 
+     * @param s     give a certain sprite
+     * @return      returns a certain part of the spritesheet.
+     */
     public static BufferedImage getSprite(Sprite s) {
         switch (s) {
             default:
