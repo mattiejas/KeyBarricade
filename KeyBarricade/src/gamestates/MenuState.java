@@ -143,7 +143,7 @@ public class MenuState extends GameState {
                             handler.setPreviousPlayState();
                             break;
                         case 1:
-                            handler.setState(PLAY_STATE);
+                            handler.restartPlayState();
                             break;
                         case 2:
                             handler.setState(DIFFICULTY_STATE);
