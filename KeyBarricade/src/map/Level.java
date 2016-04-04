@@ -8,6 +8,7 @@ import main.Game;
 public class Level {
 
     private final int[][] LEVEL;
+    private final int[][] POINTS;
     private ArrayList<Coordinate> coordinates;
     private final Difficulty DIFFICULTY;
     private Random r;
@@ -15,6 +16,7 @@ public class Level {
     public Level(Difficulty diff) {
         this.DIFFICULTY = diff;
         this.LEVEL = new int[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
+        this.POINTS = new int[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
         this.coordinates = new ArrayList();
     }
 
@@ -46,6 +48,8 @@ public class Level {
                 generateImpossible();
                 break;
         }
+        
+        generatePoints();
     }
 
     private void generateEasy() {
@@ -142,6 +146,23 @@ public class Level {
         }
     }
 
+    private void generatePoints() {
+        Random r = new Random();
+        for (Coordinate c : coordinates) {
+            switch (LEVEL[c.getX()][c.getY()]) {
+                default:
+                    POINTS[c.getX()][c.getY()] = 0;
+                    break;
+                case Map.BARRICADE:
+                    POINTS[c.getX()][c.getY()] = (r.nextInt(3) + 1) * 100;
+                    break;
+                case Map.KEY:
+                    POINTS[c.getX()][c.getY()] = (r.nextInt(3) + 1) * 100;
+                    break;
+            }
+        }
+    }
+
     private void generateGround() {
         for (int y = 0; y < LEVEL.length; y++) {
             for (int x = 0; x < LEVEL[y].length; x++) {
@@ -154,6 +175,10 @@ public class Level {
 
     public int[][] getLevel() {
         return LEVEL;
+    }
+    
+    public int[][] getPoints() {
+        return POINTS;
     }
 
     public ArrayList<Coordinate> getCoordinates() {

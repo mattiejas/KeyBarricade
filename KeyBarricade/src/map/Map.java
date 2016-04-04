@@ -17,6 +17,7 @@ import main.Player;
 public class Map {
 
     private int[][] generatedLevel;
+    private int[][] generatedPoints;
     private HashMap<Coordinate, Tile> map;
     private HashMap<Coordinate, Tile> restartMap;
     private ArrayList<Coordinate> coordinates;
@@ -41,6 +42,7 @@ public class Map {
         level.init();
         coordinates = level.getCoordinates();
         generatedLevel = level.getLevel();
+        generatedPoints = level.getPoints();
         loadLevel();
         player = new Player(this, HUD);
     }
@@ -53,6 +55,8 @@ public class Map {
             int pixelsY = coordinate.getY() * Game.BLOCK_SIZE;
             int x = coordinate.getX();
             int y = coordinate.getY();
+            
+            System.out.println(generatedPoints[x][y]);
 
             switch (generatedLevel[x][y]) {
                 default:
@@ -63,10 +67,10 @@ public class Map {
                     map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Wall()));
                     break;
                 case BARRICADE:
-                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Barricade(100, false)));
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Barricade(generatedPoints[x][y], false)));
                     break;
                 case KEY:
-                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Key(100)));
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Key(generatedPoints[x][y])));
                     break;
             }
 
