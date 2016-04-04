@@ -167,8 +167,6 @@ public class Player {
                 }
                 break;
             case DOWN:
-                System.out.println(getArrayY());
-                System.out.println(Game.VERTICAL_AMOUNT);
                 if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) {
                     block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
                     if (block instanceof Barricade) {
@@ -201,7 +199,7 @@ public class Player {
                 }
                 break;
             case RIGHT:
-                if (!(getArrayX() + 1 > Game.VERTICAL_AMOUNT - 1)) {
+                if (!(getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) {
                     block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
