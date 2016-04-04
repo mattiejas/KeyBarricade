@@ -6,6 +6,8 @@ public abstract class GameState {
 
     protected GameStateHandler handler;
 
+    //These are the numbers of the location of the states
+    //in the array of the GameStateHandler.
     protected static final int MENU_STATE = 0;
     protected static final int PLAY_STATE = 1;
     protected static final int HELP_STATE = 2;
