@@ -1,12 +1,15 @@
 # KeyBarricade
-Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak. De speler moet lopen naar een eindveld. Dat is het doel. In het doolhof zijn vaste muren en barricades. De barricade kan je openen met een passende sleutel. De speler moet daarom ook eerst een sleutel pakken. De sleutel kun je meerdere keren gebruiken maar je kan slechts één sleutel in je “zak” hebben. Als de speler een sleutel oppakt verdwijnt deze uit het doolhof. Hij zit dan namelijk in je “zak” en kun je dit niet meer op het speelveld neerleggen en of terugzetten. Als je een sleutel probeert die niet past, krijg je een melding. Past hij wel dan verdwijnt de barricade. Je kunt de speler verplaatsen door het gebruik van de pijltjestoetsen. 
+Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak. De speler moet lopen naar een eindveld. Dat is het doel. In het doolhof zijn vaste muren en barricades. De barricade kan je openen met een passende sleutel. De speler moet daarom ook eerst een sleutel pakken. De sleutel kun je meerdere keren gebruiken maar je kan slechts één sleutel in je “zak” hebben. Als de speler een sleutel oppakt verdwijnt deze uit het doolhof. Hij zit dan namelijk in je “zak” en kun je dit niet meer op het speelveld neerleggen en of terugzetten. Als je een sleutel probeert die niet past, krijg je een melding. Past hij wel dan verdwijnt de barricade. Je kunt de speler verplaatsen door het gebruik van de pijltjestoetsen.
 
 ***
 
 ###### Reminders (because we will forget)
++ **Ontwikkeldocument opstellen**
 + **Genoeg JUnit testen maken**
 + **Code voorzien van commentaar**
 + **Analyse aanpassen multipliciteit**
++ **Design diagram controleren op relaties**
++ ***Woensdag voor 3 uur mail sturen van status project en eventueel aangepaste design diagram van de uitbreiding**
 + ~~Help in het Engels zetten~~
 + ~~MenuState Font array maken!~~
 + ~~Level class afmaken~~
@@ -20,8 +23,8 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
 + **Wat doen we met: private final HashMap<Coordinate, Tile> MAP; in het design diagram?**
-+ **Wat doen we met HUD?**
-+ **Hoe uitgebreid moet de design diagram beschrijving zijn voor onze ontwikkeldocumenten?**
++ ~~Hoe uitgebreid moet de design diagram beschrijving zijn voor onze ontwikkeldocumenten?~~
++ ~~Wat doen we met HUD?~~
 + ~~Moeten we interfaces zoals KeyListener, actionListener en JPanel implementeren in onze design diagram?~~
 + ~~Hoe moeten we de Game.WIDTH en Game.HEIGHT modelleren?~~
 
