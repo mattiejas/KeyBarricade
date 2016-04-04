@@ -56,16 +56,12 @@ public class Map {
     }    
 
     public void loadLevel() {
-        System.out.println("Level grootte: " + generatedLevel.length);
-
         for (Coordinate coordinate : coordinates) {
             int pixelsX = coordinate.getX() * Game.BLOCK_SIZE;
             int pixelsY = coordinate.getY() * Game.BLOCK_SIZE;
             int x = coordinate.getX();
             int y = coordinate.getY();
             
-            System.out.println(generatedPoints[x][y]);
-
             switch (generatedLevel[x][y]) {
                 default:
                 case GROUND:

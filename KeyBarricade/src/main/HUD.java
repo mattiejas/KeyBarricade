@@ -115,7 +115,6 @@ public class HUD implements ActionListener {
         message = s;
         newMessage = true;
         MESSAGE_TIMER.start();
-        System.out.println(message);
     }
 
     public void setNewMessage(boolean motivation) {
