@@ -182,7 +182,7 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
+                                HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
                             }
@@ -198,7 +198,7 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
-                                HUD.setNewMessage(true);
+                                HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
                             }
@@ -214,7 +214,7 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
+                                HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
                             }
@@ -230,7 +230,7 @@ public class Player {
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
                                 MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
-                                HUD.setNewMessage(true);
+                                HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
                             }
@@ -251,7 +251,7 @@ public class Player {
             this.inventory = key;
             this.hasItem = true;
             HUD.setNewMessage("Grabbed a key!");
-            HUD.setItem(hasItem, "Key", key.getPoints());
+            HUD.setItem("Key", key.getPoints());
             MAP.replaceTile(getArrayX(), getArrayY(), new Ground());
         }
     }
