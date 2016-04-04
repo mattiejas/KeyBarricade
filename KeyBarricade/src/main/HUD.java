@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
@@ -62,31 +63,31 @@ public class HUD implements ActionListener {
             hasItem = false;
 
             g.setColor(new Color(0, 0, 0, 1f));
-            g.fillRect(0, 0, Game.WINDOW_WIDTH, Game.WINDOW_HEIGHT);
+            g.fillRect(0, 0, Game.HORIZONTAL_AMOUNT * Game.BLOCK_SIZE, Game.VERTICAL_AMOUNT * Game.BLOCK_SIZE);
             g.setColor(new Color(0, 0, 0, 0.7f));
             g.fillRect((int) (Game.BLOCK_SIZE * 0.5), (int) (Game.BLOCK_SIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCK_SIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCK_SIZE));
             g.setColor(Color.WHITE);
             g.drawRect((int) (Game.BLOCK_SIZE * 0.5), (int) (Game.BLOCK_SIZE * 0.5), Game.WINDOW_WIDTH - (1 * Game.BLOCK_SIZE), Game.WINDOW_HEIGHT - (1 * Game.BLOCK_SIZE));
-            
+
             g.setFont(FONT[0]);
             int width = g.getFontMetrics().stringWidth("Congratulations!");
             g.setColor(Color.BLACK);
             g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 2);
             g.setColor(Color.WHITE);
             g.drawString("Congratulations!", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE);
-           
+
             g.setFont(FONT[1]);
             width = g.getFontMetrics().stringWidth("You won the game");
             g.setColor(Color.BLACK);
             g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 22);
             g.setColor(Color.WHITE);
             g.drawString("You won the game", (Game.WINDOW_WIDTH / 2) - (width / 2), 3 * Game.BLOCK_SIZE + 20);
-            
+
             g.setFont(FONT[1]);
-            width = g.getFontMetrics().stringWidth("Press any key to continue..");
+            width = g.getFontMetrics().stringWidth("Press SPACE to continue..");
             PRESS_KEY_TIMER.start();
             g.setColor(blink);
-            g.drawString("Press any key to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCK_SIZE);
+            g.drawString("Press SPACE to continue..", (Game.WINDOW_WIDTH / 2) - (width / 2), 6 * Game.BLOCK_SIZE);
         }
 
         if (hasItem) {
@@ -154,8 +155,12 @@ public class HUD implements ActionListener {
     }
 
     public void keyPressed(int k) {
-        if (winGame) {
-            startNewGame = true;
+        switch (k) {
+            case KeyEvent.VK_SPACE:
+                if (winGame) {
+                    startNewGame = true;
+                }
+            break;
         }
     }
 
