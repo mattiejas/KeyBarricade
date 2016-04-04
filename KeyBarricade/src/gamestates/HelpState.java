@@ -33,8 +33,30 @@ public class HelpState extends GameState {
         font[0] = new Font("Joystix Monospace", Font.PLAIN, 50);
         font[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
 
+        
         title = "Help";
-        text.add("Welkom bij het spel KeyBarricade.");
+        text.add("Welcome to the game KeyBarricade!");
+        text.add("The player has to stand on the finish tile");
+        text.add("to complete the level. The map is filled with");
+        text.add("barricades and walls. The player has to find");
+        text.add("a matching key to clear the path to the finish line.");
+        text.add("Walls cannot be unlocked. The player can only");
+        text.add("keep one key in his/her inventory.");
+        text.add("When the player grabs a new key,");
+        text.add("the previous key will ‘magically’ disappear.");
+        
+        text.add("");
+        text.add("Unlocking Barricades is the ‘key’ to success.");
+        
+        text.add("");
+        text.add("Controls");
+        text.add("W/A/S/D   walk around    ");
+        text.add("SPACE     pick up keys   ");
+        text.add("K         open barricades");
+        text.add("ESC       pause the game ");
+        
+        /*
+        text.add("Welcome to the game KeyBarricade.");
         text.add("Het is de bedoeling om met je speler");
         text.add("de finish te bereiken. Op weg naar");
         text.add("de finish zul je de juiste sleutels");
@@ -44,12 +66,8 @@ public class HelpState extends GameState {
         text.add("maar 1 sleutel bij zich houden.");
         text.add("Als er een nieuwe sleutel wordt");
         text.add("gepakt zal de oude sleutel verdwijnen.");
-        text.add("");
-        text.add("Controls");
-        text.add("W/A/S/D   walk around    ");
-        text.add("SPACE     pick up keys   ");
-        text.add("K         open barricades");
-        text.add("ESC       pause the game ");        
+
+        */
 
         for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
             for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
