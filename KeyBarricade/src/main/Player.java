@@ -1,5 +1,6 @@
 package main;
 
+import map.Map;
 import assets.ResourceLoader;
 import assets.Sprite;
 import blocks.Barricade;
@@ -86,7 +87,7 @@ public class Player {
                     x + 10, y - (int) (Game.BLOCK_SIZE * 0.6), (int) (Game.BLOCK_SIZE * 0.7), (int) (Game.BLOCK_SIZE * 0.7), null);
         }
 
-        if ((getArrayX() == Game.VERTICAL_AMOUNT - 1) && (getArrayY() == Game.HORIZONTAL_AMOUNT - 1)) {
+        if ((getArrayX() == Game.HORIZONTAL_AMOUNT - 1) && (getArrayY() == Game.VERTICAL_AMOUNT - 1)) {
             HUD.winGame();
         }
     }
@@ -207,7 +208,8 @@ public class Player {
                     }
                     break;
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
     }
 
     public void grabKey() {
