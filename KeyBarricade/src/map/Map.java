@@ -30,38 +30,53 @@ public class Map {
     protected static final int BARRICADE = 2;
     protected static final int KEY = 3;
 
+    /**
+     * Initialize a new Map with a difficulty and a HUD.
+     *
+     * @param difficulty the difficulty of this Map
+     * @param hud HUD object that outputs to this Map
+     */
     public Map(Difficulty difficulty, HUD hud) {
         this.LEVEL = new Level(difficulty);
         this.MAP = new HashMap();
         this.HUD = hud;
     }
 
+    /**
+     * Initializes everything that Map needs to start fresh.
+     */
     public void init() {
         LEVEL.init();
+        
         coordinates = LEVEL.getCoordinates();
         generatedLevel = LEVEL.getLevel();
         generatedPoints = LEVEL.getPoints();
-        
+
         this.loadLevel();
-        
+
         player = new Player(this, HUD);
     }
-    
+
     public void render(Graphics2D g) {
+        // Render each tile in MAP
         for (Tile tile : MAP.values()) {
             tile.render(g);
         }
-
+        
+        // Render the player
         player.render(g);
-    }    
+    }
 
+    /**
+     * Load the level in that Map draws.
+     */
     public void loadLevel() {
         for (Coordinate coordinate : coordinates) {
             int pixelsX = coordinate.getX() * Game.BLOCK_SIZE;
             int pixelsY = coordinate.getY() * Game.BLOCK_SIZE;
             int x = coordinate.getX();
             int y = coordinate.getY();
-            
+
             switch (generatedLevel[x][y]) {
                 default:
                 case GROUND:
@@ -86,15 +101,30 @@ public class Map {
         }
     }
 
+    /**
+     * Reload the current level that Map draws.
+     */
     public void reloadLevel() {
         this.loadLevel();
         player = new Player(this, HUD);
     }
 
+    /**
+     * Returns an ArrayList with coordinates.
+     *
+     * @return coordinates of this Map
+     */
     public ArrayList<Coordinate> getCoordinates() {
         return coordinates;
     }
 
+    /**
+     * Return a Tile at a specified location
+     *
+     * @param x the location of the x-coordinate
+     * @param y the location of the y-coordinate
+     * @return a Tile at the specified location.
+     */
     public Tile getTile(int x, int y) {
         return MAP.get(new Coordinate(x, y));
     }
@@ -103,6 +133,11 @@ public class Map {
         player.keyPressed(k);
     }
 
+    /**
+     * Checks whether the player is allowed to move up.
+     *
+     * @return <code>true</code> if allowed, otherwise <code>false</code>
+     */
     public boolean playerAllowedToMoveUp() {
         int x = player.getArrayX();
         int y = player.getArrayY();
@@ -114,6 +149,11 @@ public class Map {
         }
     }
 
+    /**
+     * Checks whether the player is allowed to move down.
+     *
+     * @return <code>true</code> if allowed, otherwise <code>false</code>
+     */
     public boolean playerAllowedToMoveDown() {
         int x = player.getArrayX();
         int y = player.getArrayY();
@@ -125,6 +165,11 @@ public class Map {
         }
     }
 
+    /**
+     * Checks whether the player is allowed to move left.
+     *
+     * @return <code>true</code> if allowed, otherwise <code>false</code>
+     */
     public boolean playerAllowedToMoveLeft() {
         int x = player.getArrayX();
         int y = player.getArrayY();
@@ -136,6 +181,11 @@ public class Map {
         }
     }
 
+    /**
+     * Checks whether the player is allowed to move right.
+     *
+     * @return <code>true</code> if allowed, otherwise <code>false</code>
+     */
     public boolean playerAllowedToMoveRight() {
         int x = player.getArrayX();
         int y = player.getArrayY();
@@ -147,6 +197,13 @@ public class Map {
         }
     }
 
+    /**
+     * Replace tile at the specified location.
+     *
+     * @param x location of the x-coordinate
+     * @param y location of the y-coordinate
+     * @param block Tile that replaces the Tile at (x, y)
+     */
     public void replaceTile(int x, int y, BlockType block) {
         MAP.put(new Coordinate(x, y), new Tile(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, block));
     }
