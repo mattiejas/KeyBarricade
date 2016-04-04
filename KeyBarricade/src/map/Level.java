@@ -20,19 +20,19 @@ public class Level {
     }
 
     public void init() {
-        Random r = new Random();
-
+        // Initialize the available coordinates.
         for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
             for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
                 COORDINATES.add(new Coordinate(x, y));
             }
         }
 
-        // Insert the entire array with value -1 in order to track the 'empty' level tiles.
+        // Fill the entire array with the value of -1 in order to track the 'empty' level tiles.
         for (Coordinate c : COORDINATES) {
             LEVEL[c.getX()][c.getY()] = -1;
         }
 
+        // Generate the level according to the difficulty setting.
         switch (DIFFICULTY) {
             case EASY:
                 generateEasy();
@@ -51,6 +51,9 @@ public class Level {
         generatePoints();
     }
 
+    /**
+     * Initialize the preferred settings of the easy difficulty.
+     */
     private void generateEasy() {
         int wallLimit = 30;
         int barricadeLimit = 10;
@@ -61,6 +64,9 @@ public class Level {
         generateGround();
     }
 
+    /**
+     * Initialize the preferred settings of the normal difficulty.
+     */
     private void generateNormal() {
         int wallLimit = 30;
         int barricadeLimit = 20;
@@ -71,6 +77,9 @@ public class Level {
         generateGround();
     }
 
+    /**
+     * Initialize the preferred settings of the hard difficulty.
+     */
     private void generateHard() {
         int wallLimit = 30;
         int barricadeLimit = 30;
@@ -81,6 +90,9 @@ public class Level {
         generateGround();
     }
 
+    /**
+     * Initialize the preferred settings of the impossible difficulty.
+     */
     private void generateImpossible() {
         LEVEL[0][1] = Map.BARRICADE;
         LEVEL[1][1] = Map.WALL;
@@ -89,15 +101,19 @@ public class Level {
         generateGround();
     }
 
+    /**
+     * Generates the level according to the specified settings.
+     * 
+     * @param wallLimit         maximum amount of walls that gets generated.
+     * @param barricadeLimit    maximum amount of barricades that gets generated
+     */
     private void generateLevel(int wallLimit, int barricadeLimit) {
         Random r = new Random();
         int wallCount = 0;
         int barricadeCount = 0;
-
         for (int y = 0; y < LEVEL.length; y++) {
             for (int x = 0; x < LEVEL[y].length; x++) {
                 int random = r.nextInt(2) + 1; // Set random number between WALL and BARRICADE
-
                 int randomX = r.nextInt(Game.HORIZONTAL_AMOUNT);
                 int randomY = r.nextInt(Game.VERTICAL_AMOUNT);
 
@@ -120,6 +136,11 @@ public class Level {
         }
     }
 
+    /**
+     * Generate keys to the level array.
+     * 
+     * @param keyLimit  maximum amount of keys that gets generated
+     */
     private void generateKey(int keyLimit) {
         Random r = new Random();
         int keyCount = 0;
@@ -127,7 +148,7 @@ public class Level {
             for (int j = 0; j < LEVEL[i].length; j++) {
                 keyCount++;
                 if (keyCount == 1) {
-                    // Place to first key close to the user
+                    // Place the first key close to the user
                     int randomY = r.nextInt(3);
                     int randomX = r.nextInt(3);
 
@@ -147,6 +168,9 @@ public class Level {
         }
     }
 
+    /**
+     * Generate grounds to the level array.
+     */
     private void generateGround() {
         for (int y = 0; y < LEVEL.length; y++) {
             for (int x = 0; x < LEVEL[y].length; x++) {
@@ -157,6 +181,9 @@ public class Level {
         }
     }
     
+    /**
+     * Generate the points array
+     */
     private void generatePoints() {
         Random r = new Random();
         for (Coordinate c : COORDINATES) {
@@ -172,16 +199,31 @@ public class Level {
                     break;
             }
         }
-    }    
-
+    }
+    
+    /**
+     * Returns the two-dimensional array existing of integers.
+     * 
+     * @return level
+     */
     public int[][] getLevel() {
         return LEVEL;
     }
     
+    /**
+     * Returns the two-dimensional array existing of integers.
+     * 
+     * @return points
+     */
     public int[][] getPoints() {
         return POINTS;
     }
 
+    /**
+     * Returns the ArrayList of Coordinate object
+     * 
+     * @return coordinates
+     */
     public ArrayList<Coordinate> getCoordinates() {
         return COORDINATES;
     }
