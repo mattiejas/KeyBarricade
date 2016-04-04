@@ -32,6 +32,10 @@ public class PlayState extends GameState {
     public void setDifficulty(Difficulty d) {
         this.diff = d;
     }
+    
+    public void restart() {
+        map.reloadLevel();
+    }
 
     @Override
     public void keyPressed(int k) {

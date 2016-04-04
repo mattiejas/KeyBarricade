@@ -18,10 +18,11 @@ public class Map {
 
     private int[][] generatedLevel;
     private HashMap<Coordinate, Tile> map;
+    private HashMap<Coordinate, Tile> restartMap;
     private ArrayList<Coordinate> coordinates;
 
     private Player player;
-    private final Level LEVEL;
+    private Level level;
     private final HUD HUD;
 
     protected static final int GROUND = 0;
@@ -30,15 +31,16 @@ public class Map {
     protected static final int KEY = 3;
 
     public Map(Difficulty difficulty, HUD hud) {
-        this.LEVEL = new Level(difficulty);
+        this.level = new Level(difficulty);
         this.map = new HashMap();
+        this.restartMap = new HashMap();
         this.HUD = hud;
     }
 
     public void init() {
-        LEVEL.init();
-        coordinates = LEVEL.getCoordinates();
-        generatedLevel = LEVEL.getLevel();
+        level.init();
+        coordinates = level.getCoordinates();
+        generatedLevel = level.getLevel();
         loadLevel();
         player = new Player(this, HUD);
     }
@@ -73,9 +75,12 @@ public class Map {
             } else if (x == Game.HORIZONTAL_AMOUNT - 1 && y == Game.VERTICAL_AMOUNT - 1) {
                 map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(false, true)));
             }
-            
         }
+    }
 
+    public void reloadLevel() {
+        loadLevel();
+        player = new Player(this, HUD);
     }
 
     public ArrayList<Coordinate> getCoordinates() {
