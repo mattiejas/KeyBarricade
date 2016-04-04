@@ -33,23 +33,19 @@ public class MenuState extends GameState {
 
     @Override
     public void init() {
-        background = new BufferedImage[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
+        background = new BufferedImage[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
 
-        font = new Font[3];
-        font[0] = new Font("Joystix Monospace", Font.PLAIN, 52); // title
-        font[1] = new Font("Joystix Monospace", Font.PLAIN, 53); // title shadow
-        font[2] = new Font("Joystix Monospace", Font.PLAIN, 36); // default font        
+        font = new Font[2];
+        font[0] = new Font("Joystix Monospace", Font.PLAIN, 50); // title
+        font[1] = new Font("Joystix Monospace", Font.PLAIN, 36); // default font        
 
         title = "KeyBarricade";
         currentSelection = 0;
-        
+
         // Initialize array with GROUND sprites.
         for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
             for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
-                background[y][x] = ResourceLoader.getSprite(Sprite.GROUND);
-                if (y == 3 && x == 5) {
-                    background[y][x] = ResourceLoader.getSprite(Sprite.KEY);
-                }
+                background[x][y] = ResourceLoader.getSprite(Sprite.GROUND);
             }
         }
 
@@ -65,27 +61,46 @@ public class MenuState extends GameState {
     public void render(Graphics2D g) {
         for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
             for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
-                g.drawImage(background[y][x], x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+                g.drawImage(background[x][y], x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
             }
         }
-        g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_RIGHT), 4 * Game.BLOCK_SIZE, 3 * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+        g.drawImage(ResourceLoader.getSprite(Sprite.BARRICADE), (Game.HORIZONTAL_AMOUNT / 2) * Game.BLOCK_SIZE, 3 * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+        g.drawImage(ResourceLoader.getSprite(Sprite.PLAYER_RIGHT), (Game.HORIZONTAL_AMOUNT / 2 - 1) * Game.BLOCK_SIZE, 3 * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+        g.drawImage(ResourceLoader.getSprite(Sprite.KEY), (Game.HORIZONTAL_AMOUNT / 2 + 1) * Game.BLOCK_SIZE, 3 * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 
-        g.setFont(font[1]);
-        g.setColor(Color.DARK_GRAY);
+        g.setFont(font[0]);
+        g.setColor(Color.BLACK);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 122);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2 + 3, 115);
 
         g.setFont(font[0]);
         g.setColor(Color.WHITE);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 125);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 112);
 
         // Draws options perfectly in the middle (width) of the screen
-        g.setFont(font[2]);
+        g.setFont(font[1]);
         int spacing = g.getFontMetrics().getHeight();
-        int j = (int)(Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 1.25));
-        if (firstStart) {
-            j = (Game.WINDOW_HEIGHT / 2 - (spacing * menuLength * 2));
+        int j = 100;
+        if (!firstStart) {
+            j = 70;
+        }
+        
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < option.length; i++, j += spacing) {
+            height = g.getFontMetrics().getHeight();
+            if (i == currentSelection) {
+                width = g.getFontMetrics().stringWidth("> " + option[i] + " <");
+                g.drawString("> " + option[i] + " <", (Game.WINDOW_WIDTH / 2) - (width / 2) + 2, (Game.WINDOW_HEIGHT / 2) + j + 2);
+            } else {
+                width = g.getFontMetrics().stringWidth(option[i]);
+                g.drawString(option[i], (Game.WINDOW_WIDTH / 2) - (width / 2) + 2, (Game.WINDOW_HEIGHT / 2) + j + 2);
+            }
+        }
+        
+        j = 100;
+        if (!firstStart) {
+            j = 70;
         }
         g.setColor(Color.WHITE);
         for (int i = 0; i < option.length; i++, j += spacing) {

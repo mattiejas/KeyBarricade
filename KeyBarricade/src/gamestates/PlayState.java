@@ -4,10 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import main.Difficulty;
 import main.HUD;
-import main.Map;
+import map.Map;
 
 public class PlayState extends GameState {
-
     private Map map;
     private HUD hud;
     private Difficulty diff;
@@ -41,11 +40,13 @@ public class PlayState extends GameState {
         } else {
             map.keyPressed(k);
             hud.keyPressed(k);
+
             if (hud.isReady()) {
                 MenuState ms = handler.getMenuState();
                 ms.setFirstStart(true);
                 handler.setState(MENU_STATE);
             }
+
         }
     }
 

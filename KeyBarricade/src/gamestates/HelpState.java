@@ -26,13 +26,12 @@ public class HelpState extends GameState {
 
     @Override
     public void init() {
-        background = new BufferedImage[Game.VERTICAL_AMOUNT][Game.HORIZONTAL_AMOUNT];
-        font = new Font[3];
+        background = new BufferedImage[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
+        font = new Font[2];
         text = new ArrayList<>();
         
         font[0] = new Font("Joystix Monospace", Font.PLAIN, 50);
-        font[1] = new Font("Joystix Monospace", Font.PLAIN, 51);
-        font[2] = new Font("Joystix Monospace", Font.PLAIN, 19);
+        font[1] = new Font("Joystix Monospace", Font.PLAIN, 18);
 
         title = "Help";
         text.add("Welkom bij het spel KeyBarricade.");
@@ -45,19 +44,19 @@ public class HelpState extends GameState {
         text.add("maar 1 sleutel bij zich houden.");
         text.add("Als er een nieuwe sleutel wordt");
         text.add("gepakt zal de oude sleutel verdwijnen.");
-        
-        text.add("\nControls:");
-        text.add("- W, A, S, D op met de speler te lopen");
-        text.add("- Spatie om een sleutel op te pakken");
-        text.add("en om een barricade mee te openen");
-        text.add("- Escape om terug naar het menu te gaan");        
+        text.add("");
+        text.add("Controls");
+        text.add("W/A/S/D   walk around    ");
+        text.add("SPACE     pick up keys   ");
+        text.add("K         open barricades");
+        text.add("ESC       pause the game ");        
 
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 10; x++) {
-                if (i == 1 && (x == 0 || x == 1 || x == 2 || x == 7 || x == 8 || x == 9)) {
-                    background[i][x] = ResourceLoader.getSprite(Sprite.BARRICADE);
+        for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
+            for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
+                if (y == 1 && (x == 0 || x == 1 || x == 2 || x == Game.HORIZONTAL_AMOUNT - 3 || x == Game.HORIZONTAL_AMOUNT - 2 || x == Game.HORIZONTAL_AMOUNT - 1)) {
+                    background[x][y] = ResourceLoader.getSprite(Sprite.BARRICADE);
                 } else {
-                    background[i][x] = ResourceLoader.getSprite(Sprite.GROUND);
+                    background[x][y] = ResourceLoader.getSprite(Sprite.GROUND);
                 }
             }
         }
@@ -65,26 +64,33 @@ public class HelpState extends GameState {
 
     @Override
     public void render(Graphics2D g) {
-        for (int i = 0; i < 10; i++) {
-            for (int x = 0; x < 10; x++) {
-                g.drawImage(background[i][x], x * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+        for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
+            for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
+                g.drawImage(background[x][y], x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
             }
         }
         
-        g.setFont(font[1]);
-        g.setColor(Color.DARK_GRAY);
+        g.setFont(font[0]);
+        g.setColor(Color.BLACK);
         width = g.getFontMetrics().stringWidth(title);
-        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 115);
+        g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2 + 3, 115);
         
         g.setFont(font[0]);
         g.setColor(Color.WHITE);
         width = g.getFontMetrics().stringWidth(title);
         g.drawString(title, Game.WINDOW_WIDTH / 2 - width / 2, 112);        
 
-        g.setFont(font[2]);
-        g.setColor(Color.WHITE);
+        g.setFont(font[1]);
         int spacing = g.getFontMetrics().getHeight();
         int j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
+        g.setColor(Color.BLACK);
+        for (int i = 0; i < text.size(); i++, j += spacing) {
+            width = g.getFontMetrics().stringWidth(text.get(i));
+            g.drawString(text.get(i), Game.WINDOW_WIDTH / 2 - width / 2 + 1, j + 1);
+        }
+
+        j = (Game.WINDOW_HEIGHT / 2 - (spacing * text.size() / 2)) + 50;
+        g.setColor(Color.WHITE);
         for (int i = 0; i < text.size(); i++, j += spacing) {
             width = g.getFontMetrics().stringWidth(text.get(i));
             g.drawString(text.get(i), Game.WINDOW_WIDTH / 2 - width / 2, j);
