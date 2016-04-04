@@ -5,6 +5,13 @@ import assets.Sprite;
 
 public class Barricade extends BlockType {
 
+    /**
+     * This Barricade recieves 2 parameters. One to set the points
+     * and one to make it solid or not.
+     * 
+     * @param points        set the points for the Barricade
+     * @param unlocked      make a Barricade solid or not
+     */
     public Barricade(int points, boolean unlocked) {
         if (unlocked) {
             this.isSolid = false;
@@ -16,6 +23,12 @@ public class Barricade extends BlockType {
         this.points = points;
     }
 
+    /**
+     * This method tells you whether the Barricade
+     * is solid or not
+     * 
+     * @return      returns the value of isSolid
+     */
     public boolean isUnlocked() {
         return !isSolid;
     }
