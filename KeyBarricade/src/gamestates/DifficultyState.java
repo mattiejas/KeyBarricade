@@ -151,15 +151,4 @@ public class DifficultyState extends GameState {
                 break;
         }
     }
-
-    @Override
-    public void keyReleased(int k) {
-
-    }
-
-    @Override
-    public void keyTyped(int k) {
-
-    }
-
 }

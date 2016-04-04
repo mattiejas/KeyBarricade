@@ -9,28 +9,27 @@ public class Level {
 
     private final int[][] LEVEL;
     private final int[][] POINTS;
-    private ArrayList<Coordinate> coordinates;
+    private final ArrayList<Coordinate> COORDINATES;
     private final Difficulty DIFFICULTY;
-    private Random r;
 
     public Level(Difficulty diff) {
         this.DIFFICULTY = diff;
         this.LEVEL = new int[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
         this.POINTS = new int[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
-        this.coordinates = new ArrayList();
+        this.COORDINATES = new ArrayList();
     }
 
     public void init() {
-        r = new Random();
+        Random r = new Random();
 
         for (int x = 0; x < Game.HORIZONTAL_AMOUNT; x++) {
             for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
-                coordinates.add(new Coordinate(x, y));
+                COORDINATES.add(new Coordinate(x, y));
             }
         }
 
         // Insert the entire array with value -1 in order to track the 'empty' level tiles.
-        for (Coordinate c : coordinates) {
+        for (Coordinate c : COORDINATES) {
             LEVEL[c.getX()][c.getY()] = -1;
         }
 
@@ -91,6 +90,7 @@ public class Level {
     }
 
     private void generateLevel(int wallLimit, int barricadeLimit) {
+        Random r = new Random();
         int wallCount = 0;
         int barricadeCount = 0;
 
@@ -121,6 +121,7 @@ public class Level {
     }
 
     private void generateKey(int keyLimit) {
+        Random r = new Random();
         int keyCount = 0;
         for (int i = 0; i < LEVEL.length; i++) {
             for (int j = 0; j < LEVEL[i].length; j++) {
@@ -146,9 +147,19 @@ public class Level {
         }
     }
 
+    private void generateGround() {
+        for (int y = 0; y < LEVEL.length; y++) {
+            for (int x = 0; x < LEVEL[y].length; x++) {
+                if (LEVEL[y][x] == -1) {
+                    LEVEL[y][x] = Map.GROUND;
+                }
+            }
+        }
+    }
+    
     private void generatePoints() {
         Random r = new Random();
-        for (Coordinate c : coordinates) {
+        for (Coordinate c : COORDINATES) {
             switch (LEVEL[c.getX()][c.getY()]) {
                 default:
                     POINTS[c.getX()][c.getY()] = 0;
@@ -161,17 +172,7 @@ public class Level {
                     break;
             }
         }
-    }
-
-    private void generateGround() {
-        for (int y = 0; y < LEVEL.length; y++) {
-            for (int x = 0; x < LEVEL[y].length; x++) {
-                if (LEVEL[y][x] == -1) {
-                    LEVEL[y][x] = Map.GROUND;
-                }
-            }
-        }
-    }
+    }    
 
     public int[][] getLevel() {
         return LEVEL;
@@ -182,6 +183,6 @@ public class Level {
     }
 
     public ArrayList<Coordinate> getCoordinates() {
-        return coordinates;
+        return COORDINATES;
     }
 }

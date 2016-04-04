@@ -26,9 +26,9 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     private Timer t;
 
     public Game() {
-        setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
-        setFocusable(true);
-        requestFocus();
+        this.setPreferredSize(new Dimension(WINDOW_WIDTH, WINDOW_HEIGHT));
+        this.setFocusable(true);
+        this.requestFocus();
 
         this.startGame();
     }
@@ -67,15 +67,5 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     @Override
     public void keyPressed(KeyEvent e) {
         handler.keyPressed(e.getKeyCode());
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        handler.keyReleased(e.getKeyCode());
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-        handler.keyTyped(e.getKeyCode());
     }
 }

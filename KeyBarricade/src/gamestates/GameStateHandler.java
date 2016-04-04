@@ -17,7 +17,6 @@ public class GameStateHandler {
         STATES[2] = new HelpState(this);
         STATES[3] = new DifficultyState(this);
         currentState = STATES[GameState.MENU_STATE];
-
     }
 
     public void init() {
@@ -68,13 +67,5 @@ public class GameStateHandler {
 
     public void keyPressed(int k) {
         currentState.keyPressed(k);
-    }
-
-    public void keyTyped(int k) {
-        currentState.keyTyped(k);
-    }
-
-    public void keyReleased(int k) {
-        currentState.keyReleased(k);
     }
 }

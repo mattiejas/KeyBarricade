@@ -181,12 +181,4 @@ public class MenuState extends GameState {
                 break;
         }
     }
-
-    @Override
-    public void keyReleased(int k) {
-    }
-
-    @Override
-    public void keyTyped(int k) {
-    }
 }

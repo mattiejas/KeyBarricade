@@ -53,13 +53,4 @@ public class PlayState extends GameState {
 
         }
     }
-
-    @Override
-    public void keyReleased(int k) {
-    }
-
-    @Override
-    public void keyTyped(int k) {
-    }
-
 }

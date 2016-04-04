@@ -103,15 +103,4 @@ public class HelpState extends GameState {
             handler.setPreviousGameState();
         }
     }
-
-    @Override
-    public void keyReleased(int k) {
-
-    }
-
-    @Override
-    public void keyTyped(int k) {
-
-    }
-
 }
