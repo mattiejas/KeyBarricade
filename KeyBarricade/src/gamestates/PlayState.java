@@ -7,20 +7,32 @@ import main.HUD;
 import map.Map;
 
 public class PlayState extends GameState {
+
     private Map map;
     private HUD hud;
     private Difficulty diff;
 
+    private boolean restart;
+
     public PlayState(GameStateHandler handler) {
         super(handler);
+        this.restart = false;
+    }
+    
+    public PlayState(GameStateHandler handler, boolean restart) {
+        super(handler);
+        this.restart = restart;
     }
 
     @Override
     public void init() {
         hud = new HUD();
         map = new Map(diff, hud);
-        map.init();
-        hud.init();
+
+        if (!restart) {
+            map.init();
+            hud.init();
+        }
     }
 
     @Override

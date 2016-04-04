@@ -18,11 +18,14 @@ public class Map {
 
     private int[][] generatedLevel;
     private HashMap<Coordinate, Tile> map;
+    private HashMap<Coordinate, Tile> restartMap;
     private ArrayList<Coordinate> coordinates;
 
     private Player player;
-    private final Level LEVEL;
+    private Level level;
     private final HUD HUD;
+
+    private boolean restart;
 
     protected static final int GROUND = 0;
     protected static final int WALL = 1;
@@ -30,16 +33,25 @@ public class Map {
     protected static final int KEY = 3;
 
     public Map(Difficulty difficulty, HUD hud) {
-        this.LEVEL = new Level(difficulty);
+        this.level = new Level(difficulty);
         this.map = new HashMap();
+        this.restartMap = new HashMap();
         this.HUD = hud;
+        restart = true;
     }
 
     public void init() {
-        LEVEL.init();
-        coordinates = LEVEL.getCoordinates();
-        generatedLevel = LEVEL.getLevel();
-        loadLevel();
+
+        if (!restart) {
+            level.init();
+            coordinates = level.getCoordinates();
+            generatedLevel = level.getLevel();
+            loadLevel();
+            restart = true;
+        } else {
+            reloadLevel();
+        }
+
         player = new Player(this, HUD);
     }
 
@@ -73,9 +85,40 @@ public class Map {
             } else if (x == Game.HORIZONTAL_AMOUNT - 1 && y == Game.VERTICAL_AMOUNT - 1) {
                 map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(false, true)));
             }
-            
         }
+    }
 
+    private void reloadLevel() {
+        System.out.println("Level grootte: " + generatedLevel.length);
+
+        for (Coordinate coordinate : coordinates) {
+            int pixelsX = coordinate.getX() * Game.BLOCK_SIZE;
+            int pixelsY = coordinate.getY() * Game.BLOCK_SIZE;
+            int x = coordinate.getX();
+            int y = coordinate.getY();
+
+            switch (generatedLevel[x][y]) {
+                default:
+                case GROUND:
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground()));
+                    break;
+                case WALL:
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Wall()));
+                    break;
+                case BARRICADE:
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Barricade(100, false)));
+                    break;
+                case KEY:
+                    map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Key(100)));
+                    break;
+            }
+
+            if (x == 0 && y == 0) {
+                map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(true, false)));
+            } else if (x == Game.HORIZONTAL_AMOUNT - 1 && y == Game.VERTICAL_AMOUNT - 1) {
+                map.put(coordinate, new Tile(pixelsX, pixelsY, Game.BLOCK_SIZE, Game.BLOCK_SIZE, new Ground(false, true)));
+            }
+        }
     }
 
     public ArrayList<Coordinate> getCoordinates() {
