@@ -30,6 +30,9 @@ public class DifficultyState extends GameState {
         super(handler);
     }
 
+    /**
+     * Initializes background, fonts and available options.
+     */
     @Override
     public void init() {
         background = new BufferedImage[Game.HORIZONTAL_AMOUNT][Game.VERTICAL_AMOUNT];
@@ -50,6 +53,10 @@ public class DifficultyState extends GameState {
         }
     }
 
+    /**
+     * Renders the background, images and fonts.
+     * @param g   draws by the given instructions.
+     */
     @Override
     public void render(Graphics2D g) {
         for (int y = 0; y < Game.VERTICAL_AMOUNT; y++) {
@@ -100,7 +107,11 @@ public class DifficultyState extends GameState {
             }
         }
     }
-
+    
+    /**
+     * Sets the chosen difficulty according the pressed key.
+     * @param k the chosen keyCode in Game
+     */
     @Override
     public void keyPressed(int k) {
         switch (k) {
