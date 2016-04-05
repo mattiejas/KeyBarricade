@@ -58,7 +58,6 @@ public class ResourceLoader {
     public static BufferedImage getSprite(Sprite s) {
         switch (s) {
             default:
-                return null;
             case GROUND:
                 return image.getSubimage(0, 32, 32, 32);
             case KEY:
