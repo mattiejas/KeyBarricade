@@ -34,6 +34,9 @@ public class Level {
 
         // Generate the level according to the difficulty setting.
         switch (DIFFICULTY) {
+            case TEST:
+                generateTest();
+                break;
             case EASY:
                 generateEasy();
                 break;
@@ -47,8 +50,21 @@ public class Level {
                 generateImpossible();
                 break;
         }
-        
+
         generatePoints();
+    }
+    
+    /**
+     * Initialize the preferred settings of the test difficulty.
+     */
+    private void generateTest() {
+        int wallLimit = 0;
+        int barricadeLimit = 0;
+        int keyLimit = 0;
+
+        generateLevel(wallLimit, barricadeLimit);
+        generateKey(keyLimit);
+        generateGround();
     }
 
     /**
@@ -103,9 +119,9 @@ public class Level {
 
     /**
      * Generates the level according to the specified settings.
-     * 
-     * @param wallLimit         maximum amount of walls that gets generated.
-     * @param barricadeLimit    maximum amount of barricades that gets generated
+     *
+     * @param wallLimit maximum amount of walls that gets generated.
+     * @param barricadeLimit maximum amount of barricades that gets generated
      */
     private void generateLevel(int wallLimit, int barricadeLimit) {
         Random r = new Random();
@@ -138,8 +154,8 @@ public class Level {
 
     /**
      * Generate keys to the level array.
-     * 
-     * @param keyLimit  maximum amount of keys that gets generated
+     *
+     * @param keyLimit maximum amount of keys that gets generated
      */
     private void generateKey(int keyLimit) {
         Random r = new Random();
@@ -180,7 +196,7 @@ public class Level {
             }
         }
     }
-    
+
     /**
      * Generate the points array
      */
@@ -200,19 +216,19 @@ public class Level {
             }
         }
     }
-    
+
     /**
      * Returns the two-dimensional array existing of integers.
-     * 
+     *
      * @return level
      */
     public int[][] getLevel() {
         return LEVEL;
     }
-    
+
     /**
      * Returns the two-dimensional array existing of integers.
-     * 
+     *
      * @return points
      */
     public int[][] getPoints() {
@@ -221,10 +237,11 @@ public class Level {
 
     /**
      * Returns the ArrayList of Coordinate object
-     * 
+     *
      * @return coordinates
      */
     public ArrayList<Coordinate> getCoordinates() {
         return COORDINATES;
     }
+
 }

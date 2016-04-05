@@ -1,6 +1,8 @@
 package map;
 
+import assets.ResourceLoader;
 import blocks.BlockType;
+import java.awt.event.KeyEvent;
 import main.Difficulty;
 import main.HUD;
 import main.Player;
@@ -12,29 +14,34 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class MapTest {
-    
+
     Map map;
     HUD hud;
     Player player;
-    
+
     public MapTest() {
+        ResourceLoader.init();
+
         map = new Map(Difficulty.EASY, new HUD());
         player = new Player(map, new HUD());
         hud = new HUD();
+
+        hud.init();
+        map.init();
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -42,12 +49,31 @@ public class MapTest {
     /**
      * Test of playerAllowedToMoveUp method, of class Map.
      */
-
     @Test
     public void testPlayerAllowedToMoveUp() {
         System.out.println("Testing playerAllowedToMoveUp() ..");
-        boolean expResult = false;
         System.out.println("Player position: " + player.getArrayX() + ", " + player.getArrayY());
+        System.out.println("Expected position: " + player.getArrayX() + ", " + (player.getArrayY() - 1));
+
+        // Player is at (0, 0), can't move up
+        boolean expResult = false;
+        boolean result = map.playerAllowedToMoveUp();
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testPlayerAllowedToMoveUpCopy() {
+        System.out.println("Testing playerAllowedToMoveUp() for the second time ..");
+        
+        player.keyPressed(KeyEvent.VK_S);
+        player.keyPressed(KeyEvent.VK_S);
+        player.keyPressed(KeyEvent.VK_S);
+        
+        System.out.println("Player position: " + player.getArrayX() + ", " + player.getArrayY());
+        System.out.println("Expected position: " + 0 + ", " + 3);
+        
+        // Player is at (0, 3), can move up
+        boolean expResult = true;
         boolean result = map.playerAllowedToMoveUp();
         assertEquals(expResult, result);
     }
