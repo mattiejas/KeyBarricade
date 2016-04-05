@@ -470,32 +470,5 @@ public class ResourceLoaderTest {
         assertEquals(expResultX, x);
         assertEquals(expResultY, y);
         
-    }  
-    
-    /**
-     * Test of getSprite method, of class ResourceLoader.
-     */
-    @Test
-    public void testGetSpriteDefault() {
-        System.out.println("Testing the position of the DEFAULT (GROUND) sprite method.");
-        
-        Sprite s = null;
-        BufferedImage image = ResourceLoader.getSprite(s);
-        
-        int width = image.getWidth();
-        int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
-        
-        int expResultWidth = 32;
-        int expResultHeight = 32;
-        int expResultX = 0;
-        int expResultY = 32;
-        
-        assertEquals(expResultWidth, width);
-        assertEquals(expResultHeight, height);
-        assertEquals(expResultX, x);
-        assertEquals(expResultY, y);
-        
     }    
 }
