@@ -40,6 +40,7 @@ public class Map {
         this.LEVEL = new Level(difficulty);
         this.MAP = new HashMap();
         this.HUD = hud;
+        this.player = new Player(this, HUD);
     }
 
     /**
@@ -53,8 +54,6 @@ public class Map {
         generatedPoints = LEVEL.getPoints();
 
         this.loadLevel();
-
-        player = new Player(this, HUD);
     }
 
     /**
