@@ -9,7 +9,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + **Code voorzien van commentaar**
 + **Analyse aanpassen multipliciteit**
 + **Design diagram controleren op relaties**
-+ ***Woensdag voor 3 uur mail sturen van status project en eventueel aangepaste design diagram van de uitbreiding**
++ **Woensdag voor 3 uur mail sturen van status project en eventueel aangepaste design diagram van de uitbreiding**
 + ~~Help in het Engels zetten~~
 + ~~MenuState Font array maken!~~
 + ~~Level class afmaken~~
