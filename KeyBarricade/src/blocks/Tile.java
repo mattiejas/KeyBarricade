@@ -10,7 +10,6 @@ public class Tile {
     private final int WIDTH, HEIGHT;
     private final int X, Y;
     private final BlockType BLOCK;
-    private final int MARGIN;
 
     /**
      * This constructor receives multiple ints and one 
@@ -29,7 +28,6 @@ public class Tile {
         this.WIDTH = width;
         this.HEIGHT = height;
         this.BLOCK = block;
-        this.MARGIN = 2;
     }
 
     /**
@@ -45,7 +43,7 @@ public class Tile {
             Font font = new Font("Joystix Monospace", Font.PLAIN, 12);
             g.setFont(font);
             g.setColor(Color.WHITE);
-            g.drawString(BLOCK.getPoints() + "", X + MARGIN, Y + Game.BLOCK_SIZE - MARGIN);
+            g.drawString(BLOCK.getPoints() + "", X + 2, Y + Game.BLOCK_SIZE - 2);
         }
     }
 
