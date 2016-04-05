@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import main.Difficulty;
+import map.Difficulty;
 import main.Game;
 
 public class DifficultyState extends GameState {

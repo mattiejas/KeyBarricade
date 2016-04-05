@@ -5,6 +5,7 @@
  */
 package main;
 
+import map.Difficulty;
 import assets.ResourceLoader;
 import com.sun.glass.events.KeyEvent;
 import java.awt.Graphics2D;

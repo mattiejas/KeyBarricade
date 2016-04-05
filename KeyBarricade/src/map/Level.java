@@ -2,7 +2,6 @@ package map;
 
 import java.util.ArrayList;
 import java.util.Random;
-import main.Difficulty;
 import main.Game;
 
 public class Level {

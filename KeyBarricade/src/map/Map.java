@@ -9,7 +9,6 @@ import blocks.Wall;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
-import main.Difficulty;
 import main.Game;
 import main.HUD;
 import main.Player;

@@ -2,7 +2,7 @@ package gamestates;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import main.Difficulty;
+import map.Difficulty;
 import main.HUD;
 import map.Map;
 

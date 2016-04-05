@@ -2,7 +2,6 @@ package map;
 
 import assets.ResourceLoader;
 import java.awt.event.KeyEvent;
-import main.Difficulty;
 import main.Game;
 import main.HUD;
 import org.junit.After;

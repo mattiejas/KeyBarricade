@@ -23,10 +23,11 @@ import javax.swing.JFrame;
 public class Main {
     
     private static BufferedImage icon;
+    private static JFrame frame;
     
     public static void main(String[] args) throws IOException {
         icon = ImageIO.read(new File("./assets/icon.png"));
-        JFrame frame = new JFrame();
+        frame = new JFrame();
 
         frame.setTitle("KeyBarricade: The Game");
         frame.setResizable(true);

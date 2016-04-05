@@ -1,7 +1,7 @@
 package gamestates;
 
 import java.awt.Graphics2D;
-import main.Difficulty;
+import map.Difficulty;
 
 public class GameStateHandler {
 
