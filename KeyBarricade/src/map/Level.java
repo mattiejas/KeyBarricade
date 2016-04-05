@@ -71,8 +71,8 @@ public class Level {
      */
     private void generateEasy() {
         int wallLimit = 30;
-        int barricadeLimit = 10;
-        int keyLimit = 3;
+        int barricadeLimit = 20;
+        int keyLimit = 5;
 
         generateLevel(wallLimit, barricadeLimit);
         generateKey(keyLimit);
@@ -84,8 +84,8 @@ public class Level {
      */
     private void generateNormal() {
         int wallLimit = 30;
-        int barricadeLimit = 20;
-        int keyLimit = 4;
+        int barricadeLimit = 30;
+        int keyLimit = 3;
 
         generateLevel(wallLimit, barricadeLimit);
         generateKey(keyLimit);
@@ -97,7 +97,7 @@ public class Level {
      */
     private void generateHard() {
         int wallLimit = 30;
-        int barricadeLimit = 30;
+        int barricadeLimit = 40;
         int keyLimit = 5;
 
         generateLevel(wallLimit, barricadeLimit);
@@ -161,23 +161,18 @@ public class Level {
         int keyCount = 0;
         for (int i = 0; i < LEVEL.length; i++) {
             for (int j = 0; j < LEVEL[i].length; j++) {
-                keyCount++;
-                if (keyCount == 1) {
-                    // Place the first key close to the user
-                    int randomY = r.nextInt(3);
-                    int randomX = r.nextInt(3);
-
-                    if (randomY == 0 && randomX == 0) {
-                        randomY = r.nextInt(3);
+                if (keyCount < keyLimit) {
+                    int randomX, randomY;
+                    keyCount++;
+                    if (keyCount == 1) {
+                        // Place the first key close to the user
                         randomX = r.nextInt(3);
-                    }
-                    LEVEL[randomY][randomX] = Map.KEY;
-                } else {
-                    int randomY = r.nextInt(10);
-                    int randomX = r.nextInt(10);
-                    if (keyCount <= keyLimit) {
-                        LEVEL[randomY][randomX] = Map.KEY;
-                    }
+                        randomY = r.nextInt(3);
+                    } else {
+                        randomX = r.nextInt(10);
+                        randomY = r.nextInt(10);
+                    }                    
+                    LEVEL[randomX][randomY] = Map.KEY;      
                 }
             }
         }
@@ -187,10 +182,10 @@ public class Level {
      * Generate grounds to the level array.
      */
     private void generateGround() {
-        for (int y = 0; y < LEVEL.length; y++) {
-            for (int x = 0; x < LEVEL[y].length; x++) {
-                if (LEVEL[y][x] == -1) {
-                    LEVEL[y][x] = Map.GROUND;
+        for (int x = 0; x < LEVEL.length; x++) {
+            for (int y = 0; y < LEVEL[x].length; y++) {
+                if (LEVEL[x][y] == -1) {
+                    LEVEL[x][y] = Map.GROUND;
                 }
             }
         }

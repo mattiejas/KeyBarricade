@@ -52,8 +52,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -79,8 +79,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -106,8 +106,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -133,8 +133,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -160,8 +160,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -187,8 +187,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -214,8 +214,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -241,8 +241,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -268,8 +268,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -295,8 +295,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -322,8 +322,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -349,8 +349,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -376,8 +376,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -403,8 +403,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -430,8 +430,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 32;
         int expResultHeight = 32;
@@ -457,8 +457,8 @@ public class ResourceLoaderTest {
         
         int width = image.getWidth();
         int height = image.getHeight();
-        int x = image.getTileGridXOffset() / -1;
-        int y = image.getTileGridYOffset() / -1;
+        int x = Math.abs(image.getTileGridXOffset());
+        int y = Math.abs(image.getTileGridYOffset());
         
         int expResultWidth = 16;
         int expResultHeight = 16;
