@@ -57,6 +57,11 @@ public class Map {
         player = new Player(this, HUD);
     }
 
+    /**
+     * Renders every Tile that is put into the Map
+     * 
+     * @param g     Graphics2D object
+     */
     public void render(Graphics2D g) {
         // Render each tile in MAP
         for (Tile tile : MAP.values()) {
@@ -102,7 +107,8 @@ public class Map {
     }
 
     /**
-     * Reload the current level that Map draws.
+     * Reload the current level that Map draws 
+     * and create a new instance of the player
      */
     public void reloadLevel() {
         this.loadLevel();
