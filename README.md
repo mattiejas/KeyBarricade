@@ -21,6 +21,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 + ~~Restart zelfde leven~~
 + ~~Vertical en horizontal attribuut omdraaien~~
 + ~~Check private, static en relaties in design~~
++ Aggregatie tussen map en player?
 
 ###### Questions (maar dan zijn de vragen in het Nederlands)
 + ~~Wat doen we met: private final HashMap<Coordinate, Tile> MAP; in het design diagram?~~
