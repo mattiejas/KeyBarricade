@@ -132,6 +132,10 @@ public class Map {
     public Tile getTile(int x, int y) {
         return MAP.get(new Coordinate(x, y));
     }
+    
+    public Player getPlayer(){
+        return this.player;
+    }
 
     public void keyPressed(int k) {
         player.keyPressed(k);
