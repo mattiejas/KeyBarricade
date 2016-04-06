@@ -91,15 +91,15 @@ public class Player {
         }
 
         // Draws congratulation screen
-        if ((getArrayX() == Game.HORIZONTAL_AMOUNT - 1) && (getArrayY() == Game.VERTICAL_AMOUNT - 1)) {
+        if ((getCoordinateX() == Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() == Game.VERTICAL_AMOUNT - 1)) {
             HUD.winGame();
         }
     }
 
     /**
      * Moves the player according to the pressed key.
-     * 
-     * @param k     is the chosen keyCode in Game
+     *
+     * @param k is the chosen keyCode in Game
      */
     public void keyPressed(int k) {
         switch (k) {
@@ -132,8 +132,10 @@ public class Player {
      * The player moves up and remember its last direction.
      */
     private void moveUp() {
-        if (MAP.playerAllowedToMoveUp()) {
-            y -= BLOCK_SIZE;
+        if ((getCoordinateX() >= 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() > 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
+            if (!MAP.getTile(getCoordinateX(), getCoordinateY() - 1).getSolid()) {
+                y -= BLOCK_SIZE;
+            }
         }
         lastMove = UP;
     }
@@ -142,8 +144,10 @@ public class Player {
      * The player moves down and remember its last direction.
      */
     private void moveDown() {
-        if (MAP.playerAllowedToMoveDown()) {
-            y += BLOCK_SIZE;
+        if ((getCoordinateX() >= 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() < Game.VERTICAL_AMOUNT - 1)) {
+            if (!MAP.getTile(getCoordinateX(), getCoordinateY() + 1).getSolid()) {
+                y += BLOCK_SIZE;
+            }
         }
         lastMove = DOWN;
     }
@@ -152,8 +156,10 @@ public class Player {
      * The player moves left and remember its last direction.
      */
     private void moveLeft() {
-        if (MAP.playerAllowedToMoveLeft()) {
-            x -= BLOCK_SIZE;
+        if ((getCoordinateX() > 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
+            if (!MAP.getTile(getCoordinateX() - 1, getCoordinateY()).getSolid()) {
+                x -= BLOCK_SIZE;
+            }
         }
         lastMove = LEFT;
     }
@@ -162,26 +168,29 @@ public class Player {
      * The player moves right and remember its last direction.
      */
     private void moveRight() {
-        if (MAP.playerAllowedToMoveRight()) {
-            x += BLOCK_SIZE;
+        if ((getCoordinateX() >= 0 && getCoordinateX() < Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
+            if (!MAP.getTile(getCoordinateX() + 1, getCoordinateY()).getSolid()) {
+                x += BLOCK_SIZE;
+            }
         }
         lastMove = RIGHT;
     }
 
     /**
-     * The player uses the key, MAP replaces the tile with a new BlockType object and HUD sets a new message.
+     * The player uses the key, MAP replaces the tile with a new BlockType
+     * object and HUD sets a new message.
      */
     public void useKey() {
         BlockType block;
         switch (lastMove) {
             case UP:
-                if (!((getArrayY() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
-                    block = MAP.getTile(getArrayX(), getArrayY() - 1).getBlockType();
+                if (!((getCoordinateY() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
+                    block = MAP.getTile(getCoordinateX(), getCoordinateY() - 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() - 1, new Barricade(0, true));
+                                MAP.replaceTile(getCoordinateX(), getCoordinateY() - 1, new Barricade(0, true));
                                 HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
@@ -191,13 +200,13 @@ public class Player {
                 }
                 break;
             case DOWN:
-                if (!(getArrayY() + 1 > Game.VERTICAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
-                    block = MAP.getTile(getArrayX(), getArrayY() + 1).getBlockType();
+                if (!(getCoordinateY() + 1 > Game.VERTICAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
+                    block = MAP.getTile(getCoordinateX(), getCoordinateY() + 1).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX(), getArrayY() + 1, new Barricade(0, true));
+                                MAP.replaceTile(getCoordinateX(), getCoordinateY() + 1, new Barricade(0, true));
                                 HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
@@ -207,13 +216,13 @@ public class Player {
                 }
                 break;
             case LEFT:
-                if (!((getArrayX() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
-                    block = MAP.getTile(getArrayX() - 1, getArrayY()).getBlockType();
+                if (!((getCoordinateX() - 1) < 0)) { // Prevents ArrayIndexOutOfBoundsException
+                    block = MAP.getTile(getCoordinateX() - 1, getCoordinateY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() - 1, getArrayY(), new Barricade(0, true));
+                                MAP.replaceTile(getCoordinateX() - 1, getCoordinateY(), new Barricade(0, true));
                                 HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
@@ -223,13 +232,13 @@ public class Player {
                 }
                 break;
             case RIGHT:
-                if (!(getArrayX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
-                    block = MAP.getTile(getArrayX() + 1, getArrayY()).getBlockType();
+                if (!(getCoordinateX() + 1 > Game.HORIZONTAL_AMOUNT - 1)) { // Prevents ArrayIndexOutOfBoundsException
+                    block = MAP.getTile(getCoordinateX() + 1, getCoordinateY()).getBlockType();
                     if (block instanceof Barricade) {
                         Barricade b = (Barricade) block;
                         if (!b.isUnlocked()) {
                             if (block.getPoints() == inventory.getPoints()) {
-                                MAP.replaceTile(getArrayX() + 1, getArrayY(), new Barricade(0, true));
+                                MAP.replaceTile(getCoordinateX() + 1, getCoordinateY(), new Barricade(0, true));
                                 HUD.setNewMotivationMessage();
                             } else {
                                 HUD.setNewMessage("That key doesn't fit.");
@@ -242,23 +251,25 @@ public class Player {
     }
 
     /**
-     * The player grabs the key, HUD sets a new message and MAP replaces the tile.
+     * The player grabs the key, HUD sets a new message and MAP replaces the
+     * tile.
      */
     public void grabKey() {
-        BlockType block = MAP.getTile(getArrayX(), getArrayY()).getBlockType();
+        BlockType block = MAP.getTile(getCoordinateX(), getCoordinateY()).getBlockType();
         if (block instanceof Key) {
             Key key = (Key) block;
             this.inventory = key;
             this.hasItem = true;
             HUD.setNewMessage("Grabbed a key!");
             HUD.setItem("Key", key.getPoints());
-            MAP.replaceTile(getArrayX(), getArrayY(), new Ground());
+            MAP.replaceTile(getCoordinateX(), getCoordinateY(), new Ground());
         }
     }
 
     /**
      * Get the position of the player.
-     * @return      x
+     *
+     * @return x
      */
     public int getPositionX() {
         return x;
@@ -266,7 +277,8 @@ public class Player {
 
     /**
      * Get the position of the player
-     * @return      y
+     *
+     * @return y
      */
     public int getPositionY() {
         return y;
@@ -274,17 +286,19 @@ public class Player {
 
     /**
      * Calculate the x position of the array.
-     * @return  x
+     *
+     * @return x
      */
-    public int getArrayX() {
+    public int getCoordinateX() {
         return getPositionX() / Game.BLOCK_SIZE;
     }
 
     /**
      * Calculate the y position of the array.
-     * @return  y
+     *
+     * @return y
      */
-    public int getArrayY() {
+    public int getCoordinateY() {
         return getPositionY() / Game.BLOCK_SIZE;
     }
 }
