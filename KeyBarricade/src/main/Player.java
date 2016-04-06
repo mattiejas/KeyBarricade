@@ -9,11 +9,14 @@ import blocks.Ground;
 import blocks.Key;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import javax.swing.Timer;
 import static main.Game.BLOCK_SIZE;
 
-public class Player {
+public class Player implements ActionListener {
 
     private int x, y;
 
@@ -30,6 +33,9 @@ public class Player {
     private final int LEFT = 2;
     private final int RIGHT = 3;
 
+    private Timer movement;
+    private int moveCount;
+
     public Player(Map map, HUD hud) {
         this.image = ResourceLoader.getSprite(Sprite.PLAYER_DOWN);
         this.MAP = map;
@@ -38,6 +44,7 @@ public class Player {
         this.lastMove = 1;
         this.hasItem = false;
         this.HUD = hud;
+        this.movement = new Timer(3, this);
     }
 
     public void render(Graphics2D g) {
@@ -128,13 +135,31 @@ public class Player {
         }
     }
 
+    private void smoothMovement(int direction) {
+        switch (direction) {
+            case UP:
+                y--;
+                break;
+            case DOWN:
+                y++;
+                break;
+            case LEFT:
+                x--;
+                break;
+            case RIGHT:
+                x++;
+                break;
+        }
+    }
+
     /**
      * The player moves up and remember its last direction.
      */
     private void moveUp() {
         if ((getCoordinateX() >= 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() > 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
             if (!MAP.getTile(getCoordinateX(), getCoordinateY() - 1).getSolid()) {
-                y -= BLOCK_SIZE;
+                //y -= BLOCK_SIZE;
+                movement.start();
             }
         }
         lastMove = UP;
@@ -146,7 +171,8 @@ public class Player {
     private void moveDown() {
         if ((getCoordinateX() >= 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() < Game.VERTICAL_AMOUNT - 1)) {
             if (!MAP.getTile(getCoordinateX(), getCoordinateY() + 1).getSolid()) {
-                y += BLOCK_SIZE;
+                //y += BLOCK_SIZE;
+                movement.start();
             }
         }
         lastMove = DOWN;
@@ -158,7 +184,8 @@ public class Player {
     private void moveLeft() {
         if ((getCoordinateX() > 0 && getCoordinateX() <= Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
             if (!MAP.getTile(getCoordinateX() - 1, getCoordinateY()).getSolid()) {
-                x -= BLOCK_SIZE;
+                //x -= BLOCK_SIZE;
+                movement.start();
             }
         }
         lastMove = LEFT;
@@ -170,7 +197,8 @@ public class Player {
     private void moveRight() {
         if ((getCoordinateX() >= 0 && getCoordinateX() < Game.HORIZONTAL_AMOUNT - 1) && (getCoordinateY() >= 0 && getCoordinateY() <= Game.VERTICAL_AMOUNT - 1)) {
             if (!MAP.getTile(getCoordinateX() + 1, getCoordinateY()).getSolid()) {
-                x += BLOCK_SIZE;
+                //x += BLOCK_SIZE;
+                movement.start();
             }
         }
         lastMove = RIGHT;
@@ -300,5 +328,23 @@ public class Player {
      */
     public int getCoordinateY() {
         return getPositionY() / Game.BLOCK_SIZE;
+    }
+
+    private int move = -1;
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (moveCount == 0) {
+            move = lastMove;
+            smoothMovement(move);
+            moveCount++;
+        } else if (moveCount == Game.BLOCK_SIZE) {
+            moveCount = 0;
+            move = -1;
+            movement.stop();
+        } else {
+            smoothMovement(move);
+            moveCount++;
+        }
     }
 }
