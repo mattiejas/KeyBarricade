@@ -121,6 +121,10 @@ public class Map {
     public ArrayList<Coordinate> getCoordinates() {
         return coordinates;
     }
+    
+    public Player getPlayer(){
+        return this.player;
+    }
 
     /**
      * Return a Tile at a specified location

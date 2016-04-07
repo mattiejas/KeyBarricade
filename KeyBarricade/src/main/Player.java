@@ -301,4 +301,8 @@ public class Player {
     public int getCoordinateY() {
         return getPositionY() / Game.BLOCK_SIZE;
     }
+    
+    public int getLastMove(){
+        return this.lastMove;
+    }
 }
