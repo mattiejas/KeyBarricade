@@ -67,9 +67,16 @@ public class PlayerMovementTest {
 
         int expectedX = 0;
         int expectedY = 2;
-
+        
         assertEquals(actualX, expectedX);
         assertEquals(expectedY, actualY);
+        
+        int actualLastMove = instance.getPlayer().getLastMove();
+        int expectedLastMove = 1;
+        
+        assertEquals(expectedLastMove, actualLastMove);
+
+        
     }
 
     /**
@@ -98,6 +105,11 @@ public class PlayerMovementTest {
 
         assertEquals(actualX, expectedX);
         assertEquals(expectedY, actualY);
+        
+        int actualLastMove = instance.getPlayer().getLastMove();
+        int expectedLastMove = 0;
+        
+        assertEquals(expectedLastMove, actualLastMove);
     }
 
     /**
@@ -123,6 +135,11 @@ public class PlayerMovementTest {
 
         assertEquals(actualX, expectedX);
         assertEquals(expectedY, actualY);
+        
+        int actualLastMove = instance.getPlayer().getLastMove();
+        int expectedLastMove = 3;
+        
+        assertEquals(expectedLastMove, actualLastMove);
     }
 
     /**
@@ -156,6 +173,11 @@ public class PlayerMovementTest {
 
         assertEquals(actualX, expectedX);
         assertEquals(expectedY, actualY);
+        
+        int actualLastMove = instance.getPlayer().getLastMove();
+        int expectedLastMove = 2;
+        
+        assertEquals(expectedLastMove, actualLastMove);
     }
 
     /**
@@ -211,6 +233,11 @@ public class PlayerMovementTest {
 
         assertEquals(actualX, expectedX);
         assertEquals(expectedY, actualY);
+        
+        int actualLastMove = instance.getPlayer().getLastMove();
+        int expectedLastMove = 3;
+        
+        assertEquals(expectedLastMove, actualLastMove);
     }
 
     /**
