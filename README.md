@@ -5,7 +5,7 @@ Het spel “Sleutelbarricade” bestaat uit een speelveld van een vierkant vlak.
 
 ###### Reminders (because we will forget)
 + **Ontwikkeldocument opstellen**
-+ **JUnit test aanpassen**
++ ~~JUnit test aanpassen~~
 + ~~Analyse aanpassen multipliciteit~~
 + ~~Woensdag voor 3 uur mail sturen van status project en eventueel aangepaste design diagram van de uitbreiding~~
 + ~~Design diagram controleren op relaties~~
