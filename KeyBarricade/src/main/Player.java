@@ -302,6 +302,11 @@ public class Player {
         return getPositionY() / Game.BLOCK_SIZE;
     }
     
+    /**
+     * This method is only used in the JUnit test PlayerMovemenTest
+     * 
+     * @return LastMove of this Player.
+     */
     public int getLastMove(){
         return this.lastMove;
     }

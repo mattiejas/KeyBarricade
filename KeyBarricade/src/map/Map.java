@@ -122,6 +122,11 @@ public class Map {
         return coordinates;
     }
     
+    /**
+     * This method is only used for the JUnit test PlayerMovementTest
+     * 
+     * @return      This Maps player
+     */
     public Player getPlayer(){
         return this.player;
     }
