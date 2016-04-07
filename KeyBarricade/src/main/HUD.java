@@ -57,7 +57,7 @@ public class HUD implements ActionListener {
 
         // Add some cool messages
         MOTIVATIONAL_MESSAGES.add("Good work!");
-        MOTIVATIONAL_MESSAGES.add("You're doing great, my friend.");
+        MOTIVATIONAL_MESSAGES.add("You're doing great!");
         MOTIVATIONAL_MESSAGES.add("Keep up the good work!");
         MOTIVATIONAL_MESSAGES.add("What the hell?");
         MOTIVATIONAL_MESSAGES.add("Oh my..");
