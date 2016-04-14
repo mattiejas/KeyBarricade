@@ -6,11 +6,7 @@
 package map;
 
 import assets.ResourceLoader;
-import blocks.BlockType;
-import blocks.Tile;
 import com.sun.glass.events.KeyEvent;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
 import main.HUD;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,7 +21,7 @@ import static org.junit.Assert.*;
  */
 public class PlayerMovementTest {
 
-    private HUD hud;
+    private final HUD hud;
 
     public PlayerMovementTest() {
         hud = new HUD();

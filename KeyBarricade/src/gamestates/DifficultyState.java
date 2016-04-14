@@ -118,7 +118,7 @@ public class DifficultyState extends GameState {
             case KeyEvent.VK_ENTER:
             case KeyEvent.VK_SPACE:
                 switch (currentSelection) {
-                    default:
+                    default:    
                     case 0:
                         handler.setPlayState(Difficulty.EASY);
                         ms = handler.getMenuState();

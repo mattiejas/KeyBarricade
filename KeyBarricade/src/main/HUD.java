@@ -118,14 +118,11 @@ public class HUD implements ActionListener {
             g.drawString(itemCount + "", Game.WINDOW_WIDTH - width + 2, height + 3);
             g.setColor(Color.WHITE);
             g.drawString(itemCount + "", Game.WINDOW_WIDTH - width, height);
-            //g.drawImage(ResourceLoader.getSprite(Sprite.ITEM_KEY), Game.WINDOW_WIDTH - Game.BLOCK_SIZE * 2, 0, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 
             g.setFont(FONT[1]);
             g.setColor(new Color(0, 0, 0, 0.5f));
             width = width + g.getFontMetrics().stringWidth(itemName);
             g.drawString(itemName, Game.WINDOW_WIDTH - width + 3, height + 3);
-//            g.setColor(Color.YELLOW);
-//            g.drawString(itemName, Game.WINDOW_WIDTH - Game.BLOCK_SIZE * 2 - 3, g.getFontMetrics().getHeight() + 11);
             g.setColor(Color.WHITE);
             g.drawString(itemName, Game.WINDOW_WIDTH - width, height);
         }

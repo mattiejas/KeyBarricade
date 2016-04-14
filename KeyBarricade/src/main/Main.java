@@ -30,7 +30,7 @@ public class Main {
         frame = new JFrame();
 
         frame.setTitle("KeyBarricade: The Game");
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setIconImage(icon);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

@@ -169,8 +169,8 @@ public class Level {
                         randomX = r.nextInt(3);
                         randomY = r.nextInt(3);
                     } else {
-                        randomX = r.nextInt(10);
-                        randomY = r.nextInt(10);
+                        randomX = r.nextInt(Game.HORIZONTAL_AMOUNT);
+                        randomY = r.nextInt(Game.VERTICAL_AMOUNT);
                     }                    
                     LEVEL[randomX][randomY] = Map.KEY;      
                 }

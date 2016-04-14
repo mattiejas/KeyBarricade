@@ -35,7 +35,7 @@ public class Player {
         this.MAP = map;
         this.x = 0;
         this.y = 0;
-        this.lastMove = 1;
+        this.lastMove = DOWN;
         this.hasItem = false;
         this.HUD = hud;
     }
