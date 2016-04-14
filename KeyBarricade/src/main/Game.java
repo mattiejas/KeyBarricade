@@ -54,6 +54,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void paintComponent(Graphics g) {
+        super.paintComponent(g);  
         this.g = (Graphics2D) g;
         this.render();
     }
